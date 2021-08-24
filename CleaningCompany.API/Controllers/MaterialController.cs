@@ -1,5 +1,6 @@
 ﻿using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
+using CleaningCompany.Application.UseCases.Materials.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +27,36 @@ namespace CleaningCompany.API.Controllers
             {
                 Name = createMaterialDto.Name,
                 Price = createMaterialDto.Price
+            });
+
+            return Ok(id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MaterialDto>>> Get()
+        {
+            var materials = await _mediator.Send(new GetAllMaterialsQuery());
+
+            return Ok(materials);
+        }
+
+        [HttpGet("id")]
+        public async Task<ActionResult<MaterialDto>> Get(int id)
+        {
+            var material = await _mediator.Send(new GetMaterialByIdQuery()
+            {
+                Id = id
+            });
+
+            return Ok(material);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<int>> Delete(DeleteMaterialDto deleteMaterialDto)
+        {
+            var id = await _mediator.Send(new DeleteMaterialCommand()
+            {
+                Id = deleteMaterialDto.Id
             });
 
             return Ok(id);

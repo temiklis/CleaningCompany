@@ -10,10 +10,10 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Materials\Validation\" />
-    <Folder Include="UseCases\Materials\Queries\" />
     <Folder Include="UseCases\Orders\DTOs\" />
     <Folder Include="UseCases\Orders\Validation\" />
     <Folder Include="UseCases\Orders\Queries\" />
+    <Folder Include="UseCases\Products\Validation\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,9 +3,9 @@ using CleaningCompany.Domain.Interfaces;
 
 namespace CleaningCompany.Infrastructure.Implementations
 {
-    internal class MaterialRepository : Repository<Material>, IMaterialRepository
+    internal class OrderRepository: Repository<Order>, IOrderRepository
     {
-        public MaterialRepository(ApplicationContext context) : base(context)
+        public OrderRepository(ApplicationContext context) : base(context)
         {
 
         }

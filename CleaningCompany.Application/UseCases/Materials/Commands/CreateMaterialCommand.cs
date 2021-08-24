@@ -1,4 +1,5 @@
-﻿using CleaningCompany.Domain.Interfaces;
+﻿using AutoMapper;
+using CleaningCompany.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace CleaningCompany.Application.UseCases.Materials.Commands
 
     public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialCommand, int>
     {
-        private readonly IMaterialRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreateMaterialCommandHandler(IMaterialRepository repository)
+        public CreateMaterialCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<int> Handle(CreateMaterialCommand request, CancellationToken cancellationToken)
