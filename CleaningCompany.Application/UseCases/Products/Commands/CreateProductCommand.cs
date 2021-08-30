@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Result;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
-    public class CreateProductCommand : IRequest<int>
+    public class CreateProductCommand : IRequest<Result<int>>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,7 +15,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
         public string Difficulty { get; set; }
     }
 
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }

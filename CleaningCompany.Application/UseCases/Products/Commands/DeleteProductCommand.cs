@@ -1,4 +1,5 @@
 ﻿using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Result;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
-    public class DeleteProductCommand : IRequest<int>
+    public class DeleteProductCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
     }
 
-    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, int>
+    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -23,7 +24,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

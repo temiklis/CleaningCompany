@@ -6,10 +6,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CleaningCompany.Domain\CleaningCompany.Domain.csproj" />
+    <ProjectReference Include="..\CleaningCompany.Results\CleaningCompany.Results.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Materials\Validation\" />
     <Folder Include="UseCases\Orders\DTOs\" />
     <Folder Include="UseCases\Orders\Validation\" />
     <Folder Include="UseCases\Orders\Queries\" />

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningCompany.Domain", "CleaningCompany.Domain\CleaningCompany.Domain.csproj", "{CA677593-66AB-46EA-BAB8-4C7E277AC31A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningCompany.Domain", "CleaningCompany.Domain\CleaningCompany.Domain.csproj", "{CA677593-66AB-46EA-BAB8-4C7E277AC31A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningCompany.Application", "CleaningCompany.Application\CleaningCompany.Application.csproj", "{462D2C00-3131-4AFC-9D53-ED1B6918EC2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningCompany.Application", "CleaningCompany.Application\CleaningCompany.Application.csproj", "{462D2C00-3131-4AFC-9D53-ED1B6918EC2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningCompany.Infrastructure", "CleaningCompany.Infrastructure\CleaningCompany.Infrastructure.csproj", "{1F0FEBE9-5208-4216-BAED-F384B915BED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningCompany.Infrastructure", "CleaningCompany.Infrastructure\CleaningCompany.Infrastructure.csproj", "{1F0FEBE9-5208-4216-BAED-F384B915BED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningCompany.API", "CleaningCompany.API\CleaningCompany.API.csproj", "{CB6767B2-CE25-40EE-A9EC-FC3EE251E967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningCompany.API", "CleaningCompany.API\CleaningCompany.API.csproj", "{CB6767B2-CE25-40EE-A9EC-FC3EE251E967}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningCompany.Results", "CleaningCompany.Results\CleaningCompany.Results.csproj", "{E0C3D8BA-1471-40FD-8279-AEF8C568E75C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CB6767B2-CE25-40EE-A9EC-FC3EE251E967}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB6767B2-CE25-40EE-A9EC-FC3EE251E967}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB6767B2-CE25-40EE-A9EC-FC3EE251E967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C3D8BA-1471-40FD-8279-AEF8C568E75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C3D8BA-1471-40FD-8279-AEF8C568E75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C3D8BA-1471-40FD-8279-AEF8C568E75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C3D8BA-1471-40FD-8279-AEF8C568E75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
