@@ -1,5 +1,7 @@
-﻿using CleaningCompany.Domain.Interfaces;
+﻿using CleaningCompany.Domain.Entities;
+using CleaningCompany.Domain.Interfaces;
 using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,20 @@ namespace CleaningCompany.Application.UseCases.Materials.Commands
 
         public async Task<Result<int>> Handle(DeleteMaterialCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var material = new Material { Id = request.Id };
+
+            _unitOfWork.Materials.Delete(material);
+
+            try
+            {
+                await _unitOfWork.Materials.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult<int>(ex.Message);
+            }
+
+            return new SuccessResult<int>(request.Id);
         }
     }
 }

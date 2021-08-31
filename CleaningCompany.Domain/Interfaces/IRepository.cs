@@ -11,5 +11,10 @@ namespace CleaningCompany.Domain.Interfaces
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetSingleAsync(int id);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+        Task<T> CreateAsync(T entity);
+        T Update(T entity);
+        void Delete(T entity);
+        Task<int> SaveChangesAsync();
     }
 }

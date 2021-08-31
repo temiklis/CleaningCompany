@@ -32,6 +32,19 @@ namespace CleaningCompany.API.Controllers
             return Ok(id);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<int>> Update(UpdateMaterialDto updateMaterialDto)
+        {
+            var id = await _mediator.Send(new UpdateMaterialCommand()
+            {
+                Id = updateMaterialDto.Id,
+                Name = updateMaterialDto.Name,
+                Price = updateMaterialDto.Price
+            });
+
+            return Ok(id);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MaterialDto>>> Get()
         {

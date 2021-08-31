@@ -1,10 +1,10 @@
-﻿using CleaningCompany.Application.UseCases.Products.DTOs;
+﻿using CleaningCompany.Application.UseCases.Products.Commands;
 using CleaningCompany.Domain.Entities.Enums;
 using FluentValidation;
 
 namespace CleaningCompany.Application.UseCases.Products.Validation
 {
-    public class CreateProductValidator : AbstractValidator<CreateProductDto>
+    public class CreateProductValidator : AbstractValidator<CreateProductCommand>
     {
         public CreateProductValidator()
         {

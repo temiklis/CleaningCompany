@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials.Validation;
-using CleaningCompany.Domain.Entities;
 using CleaningCompany.Domain.Interfaces;
 using CleaningCompany.Result;
 using CleaningCompany.Result.Implementations;
@@ -11,26 +10,21 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Materials.Commands
 {
-    public class CreateMaterialCommand : IRequest<Result<int>>
+    public class UpdateMaterialCommand : IRequest<Result<int>>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
     }
 
-    public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialCommand, Result<int>>
+    public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateMaterialCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public async Task<Result<int>> Handle(UpdateMaterialCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
-        public async Task<Result<int>> Handle(CreateMaterialCommand request, CancellationToken cancellationToken)
-        {
-            var validator = new CreateMaterialValidator();
+            var validator = new UpdateMaterialValidator();
             var validationResult = await validator.ValidateAsync(request);
 
             if (!validationResult.IsValid)
@@ -38,15 +32,15 @@ namespace CleaningCompany.Application.UseCases.Materials.Commands
                 return new ValidationErrorResult<int>("Validation error occured", validationResult);
             }
 
-            var material = _mapper.Map<Material>(request);
-            var materialWithTheSameNameExists = await _unitOfWork.Materials.AnyAsync(m => m.Name.ToUpper() == request.Name.ToUpper());
+            var material = await _unitOfWork.Materials.GetSingleAsync(request.Id);
 
-            if (materialWithTheSameNameExists)
+            if (material == null)
             {
-                return new ErrorResult<int>("Material with the same name already exists");
+                return new NotFoundResult<int>("Material with given id was not found");
             }
 
-            var createdMaterial = await _unitOfWork.Materials.CreateAsync(material);
+            _mapper.Map(request, material);
+            _unitOfWork.Materials.Update(material);
 
             try
             {
@@ -57,7 +51,7 @@ namespace CleaningCompany.Application.UseCases.Materials.Commands
                 return new ErrorResult<int>(ex.Message);
             }
 
-            return new SuccessResult<int>(createdMaterial.Id);
+            return new SuccessResult<int>(material.Id);
         }
     }
 }

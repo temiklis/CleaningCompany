@@ -1,5 +1,7 @@
-﻿using CleaningCompany.Domain.Interfaces;
+﻿using CleaningCompany.Domain.Entities;
+using CleaningCompany.Domain.Interfaces;
 using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,20 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
 
         public async Task<Result<int>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var product = new Product() { Id = request.Id };
+
+            _unitOfWork.Products.Delete(product);
+
+            try
+            {
+                await _unitOfWork.Products.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult<int>(ex.Message);
+            }
+
+            return new SuccessResult<int>(product.Id);
         }
     }
 }

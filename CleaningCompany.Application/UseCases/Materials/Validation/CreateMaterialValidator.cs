@@ -1,9 +1,9 @@
-﻿using CleaningCompany.Application.UseCases.Materials.DTOs;
+﻿using CleaningCompany.Application.UseCases.Materials.Commands;
 using FluentValidation;
 
 namespace CleaningCompany.Application.UseCases.Materials.Validation
 {
-    public class CreateMaterialValidator : AbstractValidator<CreateMaterialDto>
+    public class CreateMaterialValidator : AbstractValidator<CreateMaterialCommand>
     {
         public CreateMaterialValidator()
         {

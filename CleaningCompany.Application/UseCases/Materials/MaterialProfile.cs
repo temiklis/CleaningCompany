@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
 using CleaningCompany.Domain.Entities;
 
@@ -8,8 +9,11 @@ namespace CleaningCompany.Application.UseCases.Materials
     {
         public MaterialProfile()
         {
-            CreateMap<CreateMaterialDto, Material>();
             CreateMap<Material, MaterialDto>();
+            CreateMap<Material, MaterialWithProductsDto>();
+
+            CreateMap<CreateMaterialCommand, Material>();
+            CreateMap<UpdateMaterialCommand, Material>();
         }
     }
 }

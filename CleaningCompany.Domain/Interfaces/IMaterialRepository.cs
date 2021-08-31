@@ -9,5 +9,6 @@ namespace CleaningCompany.Domain.Interfaces
 {
     public interface IMaterialRepository : IRepository<Material>
     {
+        Task<Material> GetMaterialWithProducts(int id);
     }
 }
