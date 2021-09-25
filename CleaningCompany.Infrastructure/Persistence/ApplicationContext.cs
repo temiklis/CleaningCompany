@@ -1,7 +1,7 @@
 ﻿using CleaningCompany.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleaningCompany.Infrastructure
+namespace CleaningCompany.Infrastructure.Persistence
 {
     public class ApplicationContext : DbContext
     {

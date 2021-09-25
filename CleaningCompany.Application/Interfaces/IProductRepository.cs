@@ -1,7 +1,7 @@
 ﻿using CleaningCompany.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace CleaningCompany.Domain.Interfaces
+namespace CleaningCompany.Application.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {

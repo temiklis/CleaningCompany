@@ -1,4 +1,5 @@
-﻿using CleaningCompany.Domain.Interfaces;
+﻿using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Infrastructure.Persistence;
 using System;
 
 namespace CleaningCompany.Infrastructure.Implementations

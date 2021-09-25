@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CleaningCompany.Application\CleaningCompany.Application.csproj" />
+    <ProjectReference Include="..\CleaningCompany.Infrastructure\CleaningCompany.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

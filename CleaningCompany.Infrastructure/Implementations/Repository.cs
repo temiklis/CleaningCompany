@@ -1,5 +1,6 @@
 ﻿using CleaningCompany.Domain.Entities;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

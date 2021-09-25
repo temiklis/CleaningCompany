@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Domain.Entities;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
 using MediatR;
 using System;
 using System.Threading;

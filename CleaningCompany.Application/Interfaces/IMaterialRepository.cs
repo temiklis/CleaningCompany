@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleaningCompany.Domain.Interfaces
+namespace CleaningCompany.Application.Interfaces
 {
     public interface IMaterialRepository : IRepository<Material>
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials.Validation;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Result;
 using CleaningCompany.Result.Implementations;
 using MediatR;
@@ -21,6 +21,12 @@ namespace CleaningCompany.Application.UseCases.Materials.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
+        public UpdateMaterialCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
         public async Task<Result<int>> Handle(UpdateMaterialCommand request, CancellationToken cancellationToken)
         {

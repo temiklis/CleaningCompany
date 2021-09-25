@@ -1,5 +1,6 @@
 ﻿using CleaningCompany.Domain.Entities;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Infrastructure.Persistence;
 
 namespace CleaningCompany.Infrastructure.Implementations
 {

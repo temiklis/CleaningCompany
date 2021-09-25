@@ -1,6 +1,6 @@
 ﻿using CleaningCompany.Domain.Entities;
 
-namespace CleaningCompany.Domain.Interfaces
+namespace CleaningCompany.Application.Interfaces
 {
     public interface IOrderRepository : IRepository<Order>
     {

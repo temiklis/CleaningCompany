@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace CleaningCompany.Domain.Interfaces
+namespace CleaningCompany.Application.Interfaces
 {
     public interface IRepository<T> where T : Entity
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

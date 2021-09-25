@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CleaningCompany.Domain.Interfaces
+namespace CleaningCompany.Application.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

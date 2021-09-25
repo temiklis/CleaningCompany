@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials;
+using CleaningCompany.Application.UseCases.OrderRequests;
 using CleaningCompany.Application.UseCases.Orders;
 using CleaningCompany.Application.UseCases.Products;
 
@@ -14,6 +15,7 @@ namespace CleaningCompany.Application
                   x.AddProfile(new MaterialProfile());
                   x.AddProfile(new ProductProfile());
                   x.AddProfile(new OrderProfile());
+                  x.AddProfile(new OrderRequestProfile());
               });
 
             return config.CreateMapper();

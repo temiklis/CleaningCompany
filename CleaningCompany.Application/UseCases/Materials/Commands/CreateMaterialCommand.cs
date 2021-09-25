@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials.Validation;
 using CleaningCompany.Domain.Entities;
-using CleaningCompany.Domain.Interfaces;
+using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Result;
 using CleaningCompany.Result.Implementations;
 using MediatR;
