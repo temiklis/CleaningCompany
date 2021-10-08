@@ -5,14 +5,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\services\http.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CleaningCompany.Application\CleaningCompany.Application.csproj" />
     <ProjectReference Include="..\CleaningCompany.Infrastructure\CleaningCompany.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\ids-pages\" />
+    <Folder Include="ClientApp\src\app\components\common-components\" />
+    <Folder Include="ClientApp\src\app\models\ids-models\" />
+    <Folder Include="ClientApp\src\app\models\interfaces\" />
+    <Folder Include="ClientApp\src\app\models\response-formats\" />
+    <Folder Include="ClientApp\src\app\components\pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\services\http.service.ts" />
   </ItemGroup>
 
 </Project>
