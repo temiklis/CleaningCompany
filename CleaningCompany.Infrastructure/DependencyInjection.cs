@@ -2,6 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication;
+using CleaningCompany.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Infrastructure.Identity;
 
 namespace CleaningCompany.Infrastructure
 {
@@ -15,6 +20,24 @@ namespace CleaningCompany.Infrastructure
                     b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
 
             services.AddScoped<ApplicationContext>();
+
+            services
+                .AddDefaultIdentity<User>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>();
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<User, ApplicationContext>();
+
+            services.AddTransient<IIdentityService, IdentityService>();
+
+            services.AddAuthentication()
+                .AddIdentityServerJwt();
+
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
+            });*/
 
             return services;
 

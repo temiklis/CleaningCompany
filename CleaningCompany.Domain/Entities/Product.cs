@@ -1,5 +1,6 @@
 ﻿using CleaningCompany.Domain.Entities.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CleaningCompany.Domain.Entities
 {
@@ -7,6 +8,8 @@ namespace CleaningCompany.Domain.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal BasePrice { get; set; }
         public Difficulty Difficulty { get; set; }
 
