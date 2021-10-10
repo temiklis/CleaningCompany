@@ -1,3 +1,4 @@
+using CleaningCompany.Application;
 using CleaningCompany.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,54 +30,71 @@ namespace CleaningCompany.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
             services.AddInfrastructure(Configuration);
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+
+            services.AddSpaStaticFiles(configuration =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleaningCompany.API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                configuration.RootPath = "ClientApp/dist";
+            });
+
+            //services.AddSwaggerDocument();
+
+            services.AddOpenApiDocument(configure =>
+            {
+                configure.Title = "CleanArchitecture API";
+                configure.AddSecurity("JWT", Enumerable.Empty<string>(), new NSwag.OpenApiSecurityScheme
                 {
-                    In = ParameterLocation.Header,
-                    Description = "Please insert JWT with Bearer into field",
+                    Type = OpenApiSecuritySchemeType.ApiKey,
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: Bearer {your JWT token}."
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                           Reference = new OpenApiReference
-                           {
-                             Type = ReferenceType.SecurityScheme,
-                             Id = "Bearer"
-                           }
-                        },
-                        new string[] { }
-                    }
-                });
+
+                configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleaningCompany.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer(Configuration["SpaBaseUrl"]);
+                }
             });
         }
     }

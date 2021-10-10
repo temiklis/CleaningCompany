@@ -7,6 +7,7 @@ using CleaningCompany.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure.Identity;
+using CleaningCompany.Infrastructure.Implementations;
 
 namespace CleaningCompany.Infrastructure
 {
@@ -30,14 +31,16 @@ namespace CleaningCompany.Infrastructure
                 .AddApiAuthorization<User, ApplicationContext>();
 
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IMaterialRepository, MaterialRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            /*services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
-            });*/
+            services.AddAuthorization();
 
             return services;
 
