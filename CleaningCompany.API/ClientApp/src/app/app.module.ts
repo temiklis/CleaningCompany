@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/common-components/nav-menu/nav-menu.component';
 import { AppFooterComponent } from './components/common-components/app-footer/app-footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorizationModule } from './authorization.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizeInterceptor } from './services/authorization/authorize.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthorizationModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

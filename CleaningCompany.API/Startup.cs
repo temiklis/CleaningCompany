@@ -33,7 +33,9 @@ namespace CleaningCompany.API
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
-            services.AddControllers();
+            services.AddControllersWithViews();
+
+            services.AddRazorPages();
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -81,6 +83,7 @@ namespace CleaningCompany.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>
