@@ -1,1 +1,16 @@
-<p>login-menu works!</p>
+<ul class="navbar-nav" *ngIf="isAuthenticated | async">
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/profile"]' title="Manage">Hello {{ userName | async }}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+  </li>
+</ul>
+<ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/register"]' title="Register">Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]' title="Login">Login</a>
+  </li>
+</ul>

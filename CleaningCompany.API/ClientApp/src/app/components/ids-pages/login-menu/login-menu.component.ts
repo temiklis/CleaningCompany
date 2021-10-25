@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { AuthorizeService } from '../../../services/authorization/authorize.service';
 
 @Component({
-  selector: 'app-login-menu',
+  selector: 'login-menu',
   templateUrl: './login-menu.component.html',
   styleUrls: ['./login-menu.component.scss']
 })
