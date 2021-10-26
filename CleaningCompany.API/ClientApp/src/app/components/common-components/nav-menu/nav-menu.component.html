@@ -1,32 +1,10 @@
-<!--<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>CleanTheWorld</span>
-  <button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <span>About Us</span>
-  </button>
-  <button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <span>Price list</span>
-  </button>
-  <button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <span>Feedbacks</span>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-</mat-toolbar>
--->
 <header>
-  <nav class="
-      navbar navbar-expand-sm navbar-toggleable-sm navbar-light
-      bg-white
-      border-bottom
-      box-shadow
-      mb-3
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3
     ">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">CleanU</a>
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="../../../../assets/images/CleanU.png"/>
+      </a>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -39,21 +17,23 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
            [ngClass]="{ show: isExpanded }">
 
-        <login-menu></login-menu>
+        <div class="left">
+          <ul class="nav navbar-nav flex-grow">
+            <li class="nav-item"
+                [routerLinkActive]="['link-active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+              <a class="nav-link" [routerLink]="['/questions-and-answers']">Q&A</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/prices-and-services']">Prices & Services</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link" [routerLink]="['/about-us']">About Us</a>
+            </li>
+          </ul>
+        </div>
 
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link text-dark" [routerLink]="['/counter']">Ksyusha</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Tyoma</a>
-          </li>
-        </ul>
+        <login-menu class="right"></login-menu>
       </div>
     </div>
   </nav>

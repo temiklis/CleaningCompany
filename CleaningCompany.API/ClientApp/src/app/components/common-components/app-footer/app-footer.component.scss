@@ -1,0 +1,89 @@
+footer {
+  background: #6053a1;
+  color: #fff;
+  flex-direction: column;
+  display: flex;
+  padding: 1.5rem 0 1rem;
+  color: #fff;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+a.navbar-brand {
+  height: 100px;
+  display: block;
+  width: 230px;
+
+  > img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.inline {
+  display: inline-block;
+}
+
+.logo {
+
+  > span {
+    opacity: .5;
+  }
+}
+
+.contact {
+  position: absolute;
+  height: 100%;
+}
+
+.company {
+  width: 50%;
+  opacity: .5;
+  margin-bottom: 10px;
+}
+
+.phone {
+  background: lightgrey;
+  padding: 0.8vw 2vw;
+  align-items: center;
+  border-radius: 0.3vw;
+  font-size: 18px;
+  font-weight: 600;
+  display: inline-block;
+  width: 55%;
+  margin-left: 40px;
+  position: absolute;
+  bottom: 0;
+
+  > div > a {
+    margin-right: 10px;
+    cursor: pointer;
+    color: inherit;
+  }
+}
+
+ul {
+  list-style-type: none;
+
+  li > a {
+    color: inherit;
+    opacity: .5;
+    font-size: 20px;
+    font-weight: 600;
+
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  li:last-child {
+    margin-bottom: 20px;
+  }
+
+  li:not(last-child) {
+    margin-top: 10px;
+  }
+}

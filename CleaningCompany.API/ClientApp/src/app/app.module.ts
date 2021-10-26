@@ -9,18 +9,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationModule } from './authorization.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizeInterceptor } from './services/authorization/authorize.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { QuestionsAndAnswersComponent } from './components/questions-and-answers/questions-and-answers.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    QuestionsAndAnswersComponent
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     AppRoutingModule,
     AuthorizationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GoogleMapsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

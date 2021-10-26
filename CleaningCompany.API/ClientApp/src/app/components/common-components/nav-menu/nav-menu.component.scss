@@ -1,0 +1,31 @@
+nav {
+  background: #6053a1;
+  max-height: 70px;
+}
+
+a.navbar-brand {
+  height: 70px;
+
+  > img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+a.nav-link {
+  color: #fff;
+  opacity: .5;
+  font-size: 24px;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+div.navbar-collapse {
+  display: inline-block !important;
+}
+
+li.link-active > a {
+  opacity: 1;
+}

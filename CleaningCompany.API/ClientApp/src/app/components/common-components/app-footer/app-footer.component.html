@@ -1,1 +1,54 @@
-<p>app-footer works!</p>
+<footer>
+  <div class="col-md-12">
+    <div class="col-md-4 inline logo">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="../../../../assets/images/CleanU.png" />
+      </a>
+      <div class="company">PLC "100KA" UNP 193486956, Certificate issued by the Minsk City Executive Committee on January 23, 2021.</div>
+      <span class="material-icons" style="font-size:16px">room</span>
+      <span>Republic of Belarus, Minsk, 220020, Lesi Ukrainka street 4/1</span>
+    </div>
+    <div class="col-md-3 inline">
+
+      <google-map height="200px"
+                  width="100%"
+                  [zoom]="zoom"
+                  [center]="center"
+                  [options]="options"></google-map>
+    </div>
+
+    <div class="col-md-5 inline contact">
+      <ul>
+        <li>
+          <a [routerLink]="['/questions-and-answers']">Q&A</a>
+        </li>
+        <li>
+          <a [routerLink]="['/prices-and-services']">Prices & Service</a>
+        </li>
+        <li>
+          <a [routerLink]="['/about-us']">About Us</a>
+        </li>
+      </ul>
+      <div class="phone text-dark">
+        +375(44)708-11-38
+        <div class="right">
+          <a href="https://msng.link/o/?375447081138=vi" target="_blank" title="Contact Via Viber">
+            <i class="fab fa-viber"></i>
+          </a>
+          <a href="https://msng.link/o/?ksenya_rogaleva=tg" target="_blank" title="Contact Via Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://msng.link/o/?ksenya_rogaleva=sk" target="_blank" title="Contact Via Skype">
+            <i class="fab fa-skype"></i>
+          </a>
+          <a href="https://msng.link/o/?ksenya_rogaleva=ig" target="_blank" title="Contact Via Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://vk.com/id122844149" target="_blank" title="Contact Via VK">
+            <i class="fab fa-vk"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
