@@ -15,7 +15,11 @@ namespace CleaningCompany.Application.UseCases.Products
             CreateMap<UpdateProductCommand, Product>()
                 .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => Enum.Parse(typeof(Difficulty), x.Difficulty)));
 
-            CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductDto>()
+                .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()));
+            CreateMap<Product, ProductCardDto>()
+                .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()))
+                .ForMember(d => d.DifficultyId, opt => opt.MapFrom(x => x.Difficulty));
         }
     }
 }

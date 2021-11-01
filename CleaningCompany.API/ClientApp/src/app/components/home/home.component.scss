@@ -1,0 +1,134 @@
+.top, .advantages {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top::before, .advantages::before {
+  background-size: cover;
+  opacity: .5;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  content: "";
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  height: 400px;
+}
+
+.top::before {
+  background-image: url('../../../assets/images/clean-house.jpg');
+}
+
+.advantages {
+  margin-top: 70px;
+  height: 500px;
+  align-items: unset;
+  justify-content: unset;
+}
+
+.advantages::before {
+  background-image: url('../../../assets/images/clean-house2.jpg');
+  height: 500px;
+  opacity: .3;
+}
+
+.header-container {
+  position: relative;
+  border-bottom: 5px solid #6053A1;
+
+  > h1 {
+    font-size: 44px;
+    font-family: cursive;
+  }
+}
+
+.services-heading {
+  margin-left: 35px;
+  margin-top: 30px;
+  font-family: cursive;
+  font-size: 34px;
+  padding-bottom: 10px;
+  width: fit-content;
+  border-bottom: 5px solid #6053A1;
+}
+
+.service {
+  border: 10px solid #888;
+  height: 360px;
+  display: inline-block;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+  max-height: 110px;
+  overflow: hidden;
+}
+
+img {
+  height: 110px;
+}
+
+.title {
+  color: #6053A1;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: cursive;
+  text-align: center;
+}
+
+.description {
+  font-size: 20px;
+  line-height: normal;
+  font-weight: 600;
+  font-style: oblique;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.benefits-header {
+  position: relative;
+  font-family: cursive;
+  text-transform: uppercase;
+  font-size: 36px;
+  top: 10%;
+  left: 5%;
+  height: fit-content;
+}
+
+.block {
+  width: 100%;
+  position: absolute;
+  top: 20%;
+}
+
+.advantage {
+  margin-left: 70px;
+  height: 150px;
+  border: 5px solid #6053A1;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.advantage-heading {
+  font-family: cursive;
+  font-size: 24px;
+  margin-top: 10px;
+  color: #6953A1;
+}
+
+.advantage-description {
+  font-family: cursive;
+  font-style: italic;
+  font-size: 20px;
+  margin-top: 15px;
+  line-height: normal;
+}

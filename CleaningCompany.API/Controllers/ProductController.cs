@@ -57,6 +57,14 @@ namespace CleaningCompany.API.Controllers
             return Ok(products);
         }
 
+        [HttpGet("Cards")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetCards()
+        {
+            var cards = await _mediator.Send(new GetProductCardsQuery());
+
+            return Ok(cards);
+        }
+
         [HttpGet("id")]
         public async Task<ActionResult<ProductDto>> Get(int id)
         {
