@@ -14,7 +14,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { QuestionsAndAnswersComponent } from './components/questions-and-answers/questions-and-answers.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HomeComponent } from './components/home/home.component';
-import { PricesServicesComponent } from './components/prices-services/prices-services.component'
+import { PricesServicesComponent } from './components/prices-services/prices-services.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PricesServicesComponent } from './components/prices-services/prices-ser
     AppRoutingModule,
     AuthorizationModule,
     BrowserAnimationsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

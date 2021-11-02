@@ -23,9 +23,7 @@ export class HelperService {
         title: title,
         html: message,
         buttonsStyling: false,
-      }).then(() => {
-        resolve();
-      });
+      })
     });
   }
 

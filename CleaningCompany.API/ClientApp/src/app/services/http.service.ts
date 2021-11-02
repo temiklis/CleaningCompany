@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class HttpService {
-  apiBaseUrl: string = "http://localhost:5000/api";
+  apiBaseUrl: string = "http://localhost:5000/api/";
 
   constructor(
     private _http: HttpClient,

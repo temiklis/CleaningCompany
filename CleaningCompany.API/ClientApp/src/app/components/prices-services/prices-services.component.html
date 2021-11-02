@@ -1,1 +1,29 @@
-<p>prices-services works!</p>
+<div class="container">
+  <div class="heading text-center">
+    <h1>
+      <span>Prices & Services</span>
+    </h1>
+  </div>
+  <div class="content">
+    <div class="row" *ngIf="products">
+      <div class="col-md-3 product-card" *ngFor="let product of products">
+        <div class="difficulty-block">
+          <ngb-rating [max]="max" [rate]="product.DifficultyId" [readonly]="true">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
+        </div>
+        <div class="card-content">
+          <h1>{{product.Name}}</h1>
+          <div class="description" ngbTooltip="product.Description" container="body" tooltipClass="wide">
+            {{product.Description}}</div>
+          <div class="price-block">
+            <span>From {{product.BasePrice}} BYN</span>
+          </div>
+          <button class="btn btn-secondary select-product-btn">Select</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

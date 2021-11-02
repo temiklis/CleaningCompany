@@ -11,6 +11,9 @@ import { ProductsService } from '../../services/products.service';
 export class PricesServicesComponent implements OnInit {
 
   products: ProductCard[] = [];
+
+  value: number = 2;
+  max: number = 3;
   constructor(private productsService: ProductsService,
     private helperService: HelperService) { }
 

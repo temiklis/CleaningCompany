@@ -33,3 +33,14 @@ body {
 .content {
   margin-top: 40px;
 }
+
+.tooltip.wide {
+  .tooltip-inner {
+    max-width: 400px;
+    text-align: initial;
+    transform: translate(20%, 0);
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

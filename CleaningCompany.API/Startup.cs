@@ -33,7 +33,11 @@ namespace CleaningCompany.API
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                }); ;
 
             services.AddRazorPages();
 
@@ -67,6 +71,8 @@ namespace CleaningCompany.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
