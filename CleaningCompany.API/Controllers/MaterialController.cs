@@ -64,6 +64,17 @@ namespace CleaningCompany.API.Controllers
             return Ok(material);
         }
 
+        [HttpGet("ProductMaterials/{id}")]
+        public async Task<ActionResult<IEnumerable<MaterialDto>>> GetMaterialsForProduct([FromRoute]int id)
+        {
+            var materials = await _mediator.Send(new GetMaterialsByProductIdQuery()
+            {
+                Id = id
+            });
+
+            return Ok(materials);
+        }
+
         [HttpDelete]
         public async Task<ActionResult<int>> Delete(DeleteMaterialDto deleteMaterialDto)
         {

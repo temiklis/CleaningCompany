@@ -2,6 +2,7 @@
 using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
 using CleaningCompany.Domain.Entities;
+using System;
 
 namespace CleaningCompany.Application.UseCases.Materials
 {
@@ -9,7 +10,8 @@ namespace CleaningCompany.Application.UseCases.Materials
     {
         public MaterialProfile()
         {
-            CreateMap<Material, MaterialDto>();
+            CreateMap<Material, MaterialDto>()
+                .ForMember(m => m.Price, s => s.MapFrom(x => (decimal)Math.Round(x.Price, 2)));
             CreateMap<Material, MaterialWithProductsDto>();
 
             CreateMap<CreateMaterialCommand, Material>();

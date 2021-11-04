@@ -10,5 +10,6 @@ namespace CleaningCompany.Application.Interfaces
     public interface IMaterialRepository : IRepository<Material>
     {
         Task<Material> GetMaterialWithProducts(int id);
+        Task<IEnumerable<Material>> GetMaterialsForProduct(int id);
     }
 }

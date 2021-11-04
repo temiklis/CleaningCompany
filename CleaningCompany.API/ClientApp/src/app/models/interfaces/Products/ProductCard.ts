@@ -1,3 +1,5 @@
+import { Material } from "../Materials/Material";
+
 export interface ProductCard {
   Id: number;
   Name: string;
@@ -5,4 +7,5 @@ export interface ProductCard {
   BasePrice: number;
   Difficulty: string;
   DifficultyId: number;
+  Materials: Material[];
 }

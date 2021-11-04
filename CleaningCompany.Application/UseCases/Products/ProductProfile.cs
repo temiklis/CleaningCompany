@@ -16,10 +16,12 @@ namespace CleaningCompany.Application.UseCases.Products
                 .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => Enum.Parse(typeof(Difficulty), x.Difficulty)));
 
             CreateMap<Product, ProductDto>()
-                .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()));
+                .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()))
+                .ForMember(m => m.BasePrice, s => s.MapFrom(x => (decimal)Math.Round(x.BasePrice, 2))); ;
             CreateMap<Product, ProductCardDto>()
                 .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()))
-                .ForMember(d => d.DifficultyId, opt => opt.MapFrom(x => x.Difficulty));
+                .ForMember(d => d.DifficultyId, opt => opt.MapFrom(x => x.Difficulty))
+                .ForMember(m => m.BasePrice, s => s.MapFrom(x => (decimal)Math.Round(x.BasePrice, 2))); ;
         }
     }
 }
