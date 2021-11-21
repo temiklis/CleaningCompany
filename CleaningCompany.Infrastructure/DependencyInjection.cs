@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure.Identity;
 using CleaningCompany.Infrastructure.Implementations;
+using CleaningCompany.Infrastructure.Configuration;
 
 namespace CleaningCompany.Infrastructure
 {
@@ -21,6 +22,8 @@ namespace CleaningCompany.Infrastructure
                     b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
 
             services.AddScoped<ApplicationContext>();
+            services.Configure<EmailSettings>(options =>
+                configuration.GetSection(nameof(EmailSettings)).Bind(options));
 
             services
                 .AddDefaultIdentity<User>()
@@ -36,6 +39,7 @@ namespace CleaningCompany.Infrastructure
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOrderRequestRepository, OrderRequestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IEmailService, EmailService>();
 
 
             services.AddAuthentication()

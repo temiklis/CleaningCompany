@@ -18,6 +18,13 @@ import { HomeComponent } from './components/home/home.component';
 import { PricesServicesComponent } from './components/prices-services/prices-services.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateOrderRequestUserInfoModalComponent } from './components/modals/create-order-request-user-info-modal/create-order-request-user-info-modal.component';
+import { OrderRequestsComponent } from './components/admin-pages/order-requests/order-requests.component';
+import { OrdersComponent } from './components/admin-pages/orders/orders.component';
+import { UsersComponent } from './components/admin-pages/users/users.component';
+import { EmployeesComponent } from './components/admin-pages/employees/employees.component';
+import { ProductsComponent } from './components/admin-pages/products/products.component';
+import { MaterialsComponent } from './components/admin-pages/materials/materials.component';
+import { AdminNavMenuComponent } from './components/admin-pages/admin-nav-menu/admin-nav-menu.component';
 
 
 @NgModule({
@@ -29,7 +36,14 @@ import { CreateOrderRequestUserInfoModalComponent } from './components/modals/cr
     AboutUsComponent,
     HomeComponent,
     PricesServicesComponent,
-    CreateOrderRequestUserInfoModalComponent
+    CreateOrderRequestUserInfoModalComponent,
+    OrderRequestsComponent,
+    OrdersComponent,
+    UsersComponent,
+    EmployeesComponent,
+    ProductsComponent,
+    MaterialsComponent,
+    AdminNavMenuComponent
   ],
   imports: [
     BrowserModule,

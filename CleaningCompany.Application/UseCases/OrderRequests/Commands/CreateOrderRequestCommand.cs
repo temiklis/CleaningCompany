@@ -29,11 +29,13 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _emailService;
 
-        public CreateOrderRequestCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
+        public CreateOrderRequestCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IEmailService emailService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _emailService = emailService;
         }
 
         public async Task<Result<int>> Handle(CreateOrderRequestCommand request, CancellationToken cancellationToken)
@@ -56,6 +58,10 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
             try
             {
                 await _unitOfWork.OrderRequests.SaveChangesAsync();
+
+                var message = $"Your order request was successfully created! Please, wait, we will contact you!";
+
+                await _emailService.SendEmailAsync(request.Email, "Order Request successful creation", message);
             }
             catch (Exception ex)
             {

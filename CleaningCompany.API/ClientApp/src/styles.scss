@@ -13,6 +13,10 @@ body {
   padding-bottom: 0;
 }
 
+#app {
+  height: 100%;
+}
+
 .right {
   float: right;
 }
@@ -44,6 +48,17 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.app-content {
+  margin-left: 240px;
+  padding: 30px 50px;
+  position: relative;
+  min-height: 100%;
+}
+
+.app {
+  padding-top: 3.75rem;
 }
 
 /* Importing Bootstrap SCSS file. */
