@@ -1,5 +1,16 @@
 <div style="padding-bottom:245px">
-  <nav-menu></nav-menu>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  <ng-container *ngIf="!isAdminPage">
+    <nav-menu></nav-menu>
+    <router-outlet></router-outlet>
+    <app-footer *ngIf="!isAdminPage"></app-footer>
+  </ng-container>
+  <ng-container *ngIf="isAdminPage">
+    <div id="app" class="app">
+      <admin-nav-menu></admin-nav-menu>
+      <div class="app-content">
+        <home></home>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-container>
 </div>
