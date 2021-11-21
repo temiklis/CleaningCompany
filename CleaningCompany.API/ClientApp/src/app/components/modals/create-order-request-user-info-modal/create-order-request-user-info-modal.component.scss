@@ -1,0 +1,33 @@
+td {
+  font-size: 16px;
+}
+
+.price {
+  font-weight: 600;
+}
+
+.order-results {
+  td {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+}
+
+td.child-td {
+  border-top: none;
+  padding: 0 30px;
+}
+
+.sub-table {
+  margin: 10px 0;
+
+  tr > td:first-child {
+    text-align: initial;
+  }
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 600;
+}

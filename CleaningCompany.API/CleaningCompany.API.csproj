@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\components\common-components\" />
+    <Folder Include="ClientApp\src\app\components\modals\" />
     <Folder Include="ClientApp\src\app\models\ids-models\" />
     <Folder Include="ClientApp\src\app\models\response-formats\" />
   </ItemGroup>

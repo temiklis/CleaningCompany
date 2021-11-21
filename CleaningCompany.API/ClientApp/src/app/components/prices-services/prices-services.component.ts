@@ -1,16 +1,22 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Material } from '../../models/interfaces/Materials/Material';
 import { ProductCard } from '../../models/interfaces/Products/ProductCard';
 import { HelperService } from '../../services/helper.service';
 import { MaterialsService } from '../../services/materials.service';
 import { ProductsService } from '../../services/products.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateOrderRequestUserInfoModalComponent } from '../modals/create-order-request-user-info-modal/create-order-request-user-info-modal.component';
+import { OrderRequest } from '../../models/interfaces/OrderRequests/OrderRequest';
+import { Subscription } from 'rxjs';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-prices-services',
   templateUrl: './prices-services.component.html',
   styleUrls: ['./prices-services.component.scss']
 })
-export class PricesServicesComponent implements OnInit {
+export class PricesServicesComponent implements OnInit, OnDestroy {
+
   @ViewChild('ordering') ordering: ElementRef;
   products: ProductCard[] = [];
 
@@ -24,12 +30,25 @@ export class PricesServicesComponent implements OnInit {
 
   orderingVisible: boolean = false;
 
+  userEmail: string;
+  userEmailSubscription: Subscription;
+
   constructor(private productsService: ProductsService,
     private helperService: HelperService,
-    private materialsService: MaterialsService) { }
+    private materialsService: MaterialsService,
+    private modalService: NgbModal,
+    private userService: UsersService) { }
+
+  ngOnDestroy(): void {
+    this.userEmailSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.getProductCards();
+
+    this.userService.userEmail.subscribe(userEmail => {
+      this.userEmail = userEmail;
+    })
   }
 
   getProductCards() {
@@ -88,6 +107,25 @@ export class PricesServicesComponent implements OnInit {
   }
 
   createOrder() {
+    let orderRequest: OrderRequest = {
+      Address: null,
+      Email: this.userEmail,
+      FIO: null,
+      Products: this.selectedProducts
+    }
 
+    const modalRef = this.modalService.open(CreateOrderRequestUserInfoModalComponent, { backdrop: 'static', centered: true, size: 'xl' });
+    modalRef.componentInstance.orderRequest = orderRequest;
+    modalRef.componentInstance.totalPrice = this.totalOrderPrice;
+
+    modalRef.result.then(result => {
+      if (result) {
+        this.helperService.alert("Order Request was successfully created! We will contact you via E-mail. Also, you can check order request information in you profile.");
+        this.selectedProducts = [];
+        this.orderingVisible = false;
+      }
+    }).catch(error => {
+      this.helperService.alertError(error);
+    })
   }
 }

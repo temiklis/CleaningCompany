@@ -34,6 +34,7 @@ namespace CleaningCompany.Infrastructure
             services.AddTransient<IMaterialRepository, MaterialRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRequestRepository, OrderRequestRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 

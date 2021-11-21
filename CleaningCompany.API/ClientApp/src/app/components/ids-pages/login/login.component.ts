@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApplicationPaths, LoginActions, QueryParameterNames, ReturnUrlType } from '../../../constants/authorization.constants';
 import { AuthenticationResultStatus, AuthorizeService } from '../../../services/authorization/authorize.service';
+import { UsersService } from '../../../services/users.service';
 
 // The main responsibility of this component is to handle the user's login process.
 // This is the starting point for the login process. Any component that needs to authenticate
@@ -19,13 +20,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private authorizeService: AuthorizeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private userService: UsersService) { }
 
   async ngOnInit() {
     const action = this.activatedRoute.snapshot.url[1];
     switch (action.path) {
       case LoginActions.Login:
         await this.login(this.getReturnUrl());
+        this.userService.getCurrentUserEmail().then(email => this.userService.setUserEmail(email));
         break;
       case LoginActions.LoginCallback:
         await this.processLoginCallback();

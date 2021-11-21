@@ -16,6 +16,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HomeComponent } from './components/home/home.component';
 import { PricesServicesComponent } from './components/prices-services/prices-services.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateOrderRequestUserInfoModalComponent } from './components/modals/create-order-request-user-info-modal/create-order-request-user-info-modal.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     QuestionsAndAnswersComponent,
     AboutUsComponent,
     HomeComponent,
-    PricesServicesComponent
+    PricesServicesComponent,
+    CreateOrderRequestUserInfoModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.UseCases.OrderRequests.Commands;
+using CleaningCompany.Domain.Entities;
 
 namespace CleaningCompany.Application.UseCases.OrderRequests
 {
@@ -6,7 +8,8 @@ namespace CleaningCompany.Application.UseCases.OrderRequests
     {
         public OrderRequestProfile()
         {
-
+            CreateMap<CreateOrderRequestCommand, OrderRequest>()
+                .ForMember(o => o.Products, s => s.Ignore());
         }
     }
 }

@@ -1,0 +1,90 @@
+<div>
+  <div class="modal-header">
+    Order request
+  </div>
+  <table class="table table-striped table-secondary">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Amount</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let selectedProduct of orderRequest.Products; let i=index">
+      <tr>
+        <td class="product-name">
+          {{selectedProduct.Name}}
+        </td>
+        <td>{{getProductAmount(selectedProduct.Id)}}</td>
+        <td class="price">{{selectedProduct.BasePrice}} BYN</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="child-td">
+          <table class="table table-striped table-light sub-table">
+            <thead>
+              <tr>
+                <th>Material Name</th>
+                <th>Amount</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let material of selectedProduct.Materials">
+                <td>{{material.Name}}</td>
+                <td>1</td>
+                <td class="price">{{material.Price}} BYN</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="order-results">
+      <tr>
+        <td>Total:</td>
+        <td></td>
+        <td>{{totalPrice}} BYN</td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="modal-body">
+    <form [formGroup]="orderRequestForm">
+      <div class="form-group">
+        <label>
+          FIO
+          <span class="text-danger">*</span>
+        </label>
+        <input class="form-control" type="text" formControlName="FIO" />
+        <div class="alert alert-danger"
+             *ngIf="orderRequestForm.controls['FIO'].invalid && orderRequestForm.controls['Name'].touched">
+          FIO is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Email
+          <span class="text-danger">*</span>
+        </label>
+        <input class="form-control" type="text" formControlName="Email" />
+        <div class="alert alert-danger"
+             *ngIf="orderRequestForm.controls['Email'].invalid && orderRequestForm.controls['Email'].touched">
+          Email is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Address
+          <span class="text-danger">*</span>
+        </label>
+        <input class="form-control" type="text" formControlName="Address" />
+        <div class="alert alert-danger"
+             *ngIf="orderRequestForm.controls['Address'].invalid && orderRequestForm.controls['Address'].touched">
+          Address is required
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" (click)="submit()" [disabled]="orderRequestForm.invalid">Submit</button>
+  </div>
+</div>

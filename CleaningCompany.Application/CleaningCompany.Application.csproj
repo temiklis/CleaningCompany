@@ -11,9 +11,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Employees\" />
-    <Folder Include="UseCases\OrderRequests\Commands\" />
-    <Folder Include="UseCases\OrderRequests\DTOs\" />
-    <Folder Include="UseCases\OrderRequests\Validation\" />
     <Folder Include="UseCases\OrderRequests\Queries\" />
     <Folder Include="UseCases\Orders\DTOs\" />
     <Folder Include="UseCases\Orders\Validation\" />

@@ -7,5 +7,7 @@ namespace CleaningCompany.Application.Interfaces
         IMaterialRepository Materials { get; }
         IProductRepository Products { get; }
         IOrderRepository Orders { get; }
+        IOrderRequestRepository OrderRequests { get; }
+
     }
 }
