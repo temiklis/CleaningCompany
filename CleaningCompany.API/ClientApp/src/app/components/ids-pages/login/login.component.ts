@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     switch (action.path) {
       case LoginActions.Login:
         await this.login(this.getReturnUrl());
-        this.userService.getCurrentUserEmail().then(email => this.userService.setUserEmail(email));
         break;
       case LoginActions.LoginCallback:
         await this.processLoginCallback();

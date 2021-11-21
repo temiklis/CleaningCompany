@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpService } from './services/http.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +39,8 @@ import { CreateOrderRequestUserInfoModalComponent } from './components/modals/cr
     BrowserAnimationsModule,
     GoogleMapsModule,
     NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

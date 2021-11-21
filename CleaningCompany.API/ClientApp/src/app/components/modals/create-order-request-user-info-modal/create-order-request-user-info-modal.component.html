@@ -47,7 +47,7 @@
       </tr>
     </tfoot>
   </table>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="orderRequestForm">
     <form [formGroup]="orderRequestForm">
       <div class="form-group">
         <label>
@@ -56,7 +56,7 @@
         </label>
         <input class="form-control" type="text" formControlName="FIO" />
         <div class="alert alert-danger"
-             *ngIf="orderRequestForm.controls['FIO'].invalid && orderRequestForm.controls['Name'].touched">
+             *ngIf="orderRequestForm.controls['FIO'].invalid && orderRequestForm.controls['FIO'].touched">
           FIO is required
         </div>
       </div>
@@ -85,6 +85,7 @@
     </form>
   </div>
   <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="activeModal.close(false)">Cancel</button>
     <button class="btn btn-success" (click)="submit()" [disabled]="orderRequestForm.invalid">Submit</button>
   </div>
 </div>

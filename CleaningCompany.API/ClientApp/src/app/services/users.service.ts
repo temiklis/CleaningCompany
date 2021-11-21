@@ -7,19 +7,11 @@ import { HttpService } from "./http.service";
 })
 export class UsersService {
 
-  private userEmailStream = new BehaviorSubject<string>(null);
-
-  public userEmail = this.userEmailStream.asObservable();
-
   constructor(private httpService: HttpService) {
 
   }
 
   getCurrentUserEmail(): Promise<string> {
     return this.httpService.GET<string>(`User/CurrentUserEmail`);
-  }
-
-  public setUserEmail(email: string) {
-    this.userEmailStream.next(email);
   }
 }

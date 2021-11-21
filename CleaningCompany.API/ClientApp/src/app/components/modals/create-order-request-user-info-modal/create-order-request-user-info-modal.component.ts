@@ -2,8 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderRequest } from '../../../models/interfaces/OrderRequests/OrderRequest';
-import { ProductCard } from '../../../models/interfaces/Products/ProductCard';
-import { HelperService } from '../../../services/helper.service';
 import { OrderRequestsService } from '../../../services/order-requests.service';
 
 @Component({
@@ -23,7 +21,6 @@ export class CreateOrderRequestUserInfoModalComponent implements OnInit {
     private orderRequestsService: OrderRequestsService) { }
 
   ngOnInit(): void {
-
     this.orderRequestForm = this.fb.group({
       Address: this.fb.control(this.orderRequest.Address, [Validators.required]),
       Email: this.fb.control(this.orderRequest.Email, [Validators.required, Validators.email]),

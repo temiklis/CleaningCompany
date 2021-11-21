@@ -7,8 +7,9 @@ import { ProductsService } from '../../services/products.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateOrderRequestUserInfoModalComponent } from '../modals/create-order-request-user-info-modal/create-order-request-user-info-modal.component';
 import { OrderRequest } from '../../models/interfaces/OrderRequests/OrderRequest';
-import { Subscription } from 'rxjs';
-import { UsersService } from '../../services/users.service';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AuthorizeService } from '../../services/authorization/authorize.service';
 
 @Component({
   selector: 'app-prices-services',
@@ -31,24 +32,22 @@ export class PricesServicesComponent implements OnInit, OnDestroy {
   orderingVisible: boolean = false;
 
   userEmail: string;
-  userEmailSubscription: Subscription;
 
   constructor(private productsService: ProductsService,
     private helperService: HelperService,
     private materialsService: MaterialsService,
     private modalService: NgbModal,
-    private userService: UsersService) { }
+    private authorizeService: AuthorizeService) { }
 
   ngOnDestroy(): void {
-    this.userEmailSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.getProductCards();
-
-    this.userService.userEmail.subscribe(userEmail => {
+    this.authorizeService.getUser().pipe(map(u => u && u.name)).subscribe(userEmail => {
       this.userEmail = userEmail;
-    })
+    });
+
+    this.getProductCards();
   }
 
   getProductCards() {
@@ -114,7 +113,7 @@ export class PricesServicesComponent implements OnInit, OnDestroy {
       Products: this.selectedProducts
     }
 
-    const modalRef = this.modalService.open(CreateOrderRequestUserInfoModalComponent, { backdrop: 'static', centered: true, size: 'xl' });
+    const modalRef = this.modalService.open(CreateOrderRequestUserInfoModalComponent, { backdrop: 'static', centered: true, size: 'l', });
     modalRef.componentInstance.orderRequest = orderRequest;
     modalRef.componentInstance.totalPrice = this.totalOrderPrice;
 
