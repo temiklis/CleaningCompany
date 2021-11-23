@@ -50,6 +50,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
             var products = await _unitOfWork.Products.GetProductsByIds(request.Products.ToList());
 
             orderRequest.Products = products;
+            orderRequest.RequestedDate = DateTime.Now;
 
             var createdOrderRequest = await _unitOfWork.OrderRequests.CreateAsync(orderRequest);
 
