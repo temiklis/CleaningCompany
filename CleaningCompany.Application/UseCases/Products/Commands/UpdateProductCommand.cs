@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Products.Validation;
-using CleaningCompany.Domain.Entities;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Result;
 using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
