@@ -1,5 +1,7 @@
-﻿using CleaningCompany.Application.UseCases.OrderRequests.Commands;
+﻿using CleaningCompany.Application.UseCases.OrderRequests;
+using CleaningCompany.Application.UseCases.OrderRequests.Commands;
 using CleaningCompany.Application.UseCases.OrderRequests.DTOs;
+using CleaningCompany.Application.UseCases.OrderRequests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +34,14 @@ namespace CleaningCompany.API.Controllers
             });
 
             return Ok(id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderRequestDto>>> Get([FromQuery] OrderRequestParameters parameters)
+        {
+            var products = await _mediator.Send(new GetAllOrderRequestsQuery(parameters));
+
+            return Ok(products);
         }
     }
 }

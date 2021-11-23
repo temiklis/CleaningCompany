@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.UseCases.Materials.Validation;
 using CleaningCompany.Application.Interfaces;
-using CleaningCompany.Result;
-using CleaningCompany.Result.Implementations;
+using CleaningCompany.Results;
+using CleaningCompany.Results.Implementations;
 using MediatR;
 using System;
 using System.Threading;

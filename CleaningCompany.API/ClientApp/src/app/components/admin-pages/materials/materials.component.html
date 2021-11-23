@@ -1,1 +1,90 @@
-<p>materials works!</p>
+<div>
+  <div class="d-flex mb-3">
+    <div>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active">Materials</li>
+      </ul>
+      <h1 class="page-header mb-0">Materials</h1>
+    </div>
+
+    <div class="ms-auto create-btn">
+      <a class="btn btn-primary" (click)="goToCreateMaterial()"><i class="fa fa-plus-circle fa-fw me-1"></i> Create Material</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" (keyup.enter)="getMaterials()">
+            <div class="col-sm-1">
+              <div class="filters mb-2 mb-sm-0">
+                <span class="filters-title">
+                  <i class="fa fa-filter"></i>
+                  <strong class="ms-1">Filters</strong>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group form-search-group mb-2 mb-sm-0">
+                <input type="text" class="form-control form-search-input" placeholder="Material Name" [(ngModel)]="searchParams.Name">
+                <div class="form-search-icon"><i class="fa fa-search"></i></div>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-4 mb-2 mb-sm-0">
+              <div class="row">
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-success action" placement="bottom" ngbTooltip="Search" (click)="getMaterials()">
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-danger action" placement="bottom" ngbTooltip="Reset filters" (click)="resetFilters()">
+                      <i class="fa fa-undo"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <table *ngIf="materials?.length" class="table table-striped">
+            <thead>
+              <tr>
+                <td width="30%">Material Name</td>
+                <td width="800px">Products</td>
+                <td>Price</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let material of materials">
+                <td>
+                  <a (click)="goToMaterialDetails(material.Id)" class="name">{{material.Name}}</a>
+                </td>
+                <td class="description">
+                  <div>
+                    {{material.Products}}
+                  </div>
+                </td>
+                <td>{{material.Price}} $</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+            <ngb-pagination [collectionSize]="materials?.length"
+                            [pageSize]="searchParams.PageSize"
+                            [(page)]="searchParams.PageNumber"
+                            (pageChange)="updateResults($event)"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

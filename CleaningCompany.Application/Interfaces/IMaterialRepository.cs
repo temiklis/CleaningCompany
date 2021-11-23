@@ -11,5 +11,6 @@ namespace CleaningCompany.Application.Interfaces
     {
         Task<Material> GetMaterialWithProducts(int id);
         Task<IEnumerable<Material>> GetMaterialsForProduct(int id);
+        IQueryable<Material> GetMaterialsWithProducts();
     }
 }

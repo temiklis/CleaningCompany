@@ -1,0 +1,43 @@
+<div class="sidebar">
+  <div class="sidebar-content">
+    <div class="menu">
+      <div class="menu-header">CleanU Administration</div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('order-requests')}">
+        <a class="menu-link" (click)="changePage('/order-requests')">
+          <span class="menu-icon"><i class="fas fa-edit"></i></span>
+          <span class="menu-text">Order Requests</span>
+        </a>
+      </div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('orders')}">
+        <a class="menu-link" (click)="changePage('/orders')">
+          <span class="menu-icon"><i class="fas fa-shopping-basket"></i></span>
+          <span class="menu-text">Orders</span>
+        </a>
+      </div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('products')}">
+        <a class="menu-link" (click)="changePage('/products')">
+          <span class="menu-icon"><i class="fas fa-store"></i></span>
+          <span class="menu-text">Products</span>
+        </a>
+      </div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('materials')}">
+        <a class="menu-link" (click)="changePage('/materials')">
+          <span class="menu-icon"><i class="fas fa-pump-soap"></i></span>
+          <span class="menu-text">Materials</span>
+        </a>
+      </div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('users')}">
+        <a class="menu-link" (click)="changePage('/users')">
+          <span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+          <span class="menu-text">Users</span>
+        </a>
+      </div>
+      <div class="menu-item" [ngClass]="{'active': currentPage.includes('employees')}">
+        <a class="menu-link" (click)="changePage('/employees')">
+          <span class="menu-icon"><i class="fas fa-briefcase"></i></span>
+          <span class="menu-text">Employees</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

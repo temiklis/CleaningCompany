@@ -1,1 +1,96 @@
-<p>products works!</p>
+<div>
+  <div class="d-flex mb-3">
+    <div>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active">Products</li>
+      </ul>
+      <h1 class="page-header mb-0">Products</h1>
+    </div>
+
+    <div class="ms-auto create-btn">
+      <a class="btn btn-primary" (click)="goToCreateProduct()"><i class="fa fa-plus-circle fa-fw me-1"></i> Create Product</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" (keyup.enter)="getProducts()">
+            <div class="col-sm-1">
+              <div class="filters mb-2 mb-sm-0">
+                <span class="filters-title">
+                  <i class="fa fa-filter"></i>
+                  <strong class="ms-1">Filters</strong>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group form-search-group mb-2 mb-sm-0">
+                <input type="text" class="form-control form-search-input" placeholder="Product Name" [(ngModel)]="searchParams.Name">
+                <div class="form-search-icon"><i class="fa fa-search"></i></div>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-4 mb-2 mb-sm-0">
+              <div class="row">
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-success action" placement="bottom" ngbTooltip="Search" (click)="getProducts()">
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-danger action" placement="bottom" ngbTooltip="Reset filters" (click)="resetFilters()">
+                      <i class="fa fa-undo"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <table *ngIf="products?.length" class="table table-striped">
+            <thead>
+              <tr>
+                <td width="30%">Product Name</td>
+                <td width="600px">Description</td>
+                <td>Difficulty</td>
+                <td>Base Price</td>
+                <td>Orders Amount</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products">
+                <td>
+                  <a (click)="goToProductDetails(product.Id)" class="name">{{product.Name}}</a>
+                </td>
+                <td class="description">
+                  <div>
+                    {{product.Description}}
+                  </div>
+                </td>
+                <td>
+                  <small class="badge bg-secondary text-dark">{{product.Difficulty}}</small>
+                </td>
+                <td>{{product.BasePrice}} $</td>
+                <td>{{product.OrdersAmount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+            <ngb-pagination [collectionSize]="products?.length"
+                            [pageSize]="searchParams.PageSize"
+                            [(page)]="searchParams.PageNumber"
+                            (pageChange)="updateResults($event)"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

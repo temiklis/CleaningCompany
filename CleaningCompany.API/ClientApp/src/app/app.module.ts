@@ -25,6 +25,9 @@ import { EmployeesComponent } from './components/admin-pages/employees/employees
 import { ProductsComponent } from './components/admin-pages/products/products.component';
 import { MaterialsComponent } from './components/admin-pages/materials/materials.component';
 import { AdminNavMenuComponent } from './components/admin-pages/admin-nav-menu/admin-nav-menu.component';
+import { SidenavComponent } from './components/admin-pages/sidenav/sidenav.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -37,24 +40,27 @@ import { AdminNavMenuComponent } from './components/admin-pages/admin-nav-menu/a
     HomeComponent,
     PricesServicesComponent,
     CreateOrderRequestUserInfoModalComponent,
+    SidenavComponent,
     OrderRequestsComponent,
     OrdersComponent,
     UsersComponent,
     EmployeesComponent,
     ProductsComponent,
     MaterialsComponent,
-    AdminNavMenuComponent
+    AdminNavMenuComponent,
   ],
   imports: [
+    AppRoutingModule,
+    RouterModule,
     BrowserModule,
     FontAwesomeModule,
-    AppRoutingModule,
     AuthorizationModule,
     BrowserAnimationsModule,
     GoogleMapsModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

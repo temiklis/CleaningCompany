@@ -26,6 +26,13 @@ namespace CleaningCompany.Infrastructure.Implementations
             return materials.AsEnumerable();
         }
 
+        public IQueryable<Material> GetMaterialsWithProducts()
+        {
+            return _context.Materials
+                .Include(m => m.Products)
+                .AsQueryable();
+        }
+
         public async Task<Material> GetMaterialWithProducts(int id)
         {
             return await _context.Materials

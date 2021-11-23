@@ -1,4 +1,4 @@
-﻿namespace CleaningCompany.Result
+﻿namespace CleaningCompany.Results
 {
     public class ValidationError : Error
     {

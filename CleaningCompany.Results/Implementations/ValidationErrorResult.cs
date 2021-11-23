@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace CleaningCompany.Result.Implementations
+namespace CleaningCompany.Results.Implementations
 {
     public class ValidationErrorResult : ErrorResult
     {

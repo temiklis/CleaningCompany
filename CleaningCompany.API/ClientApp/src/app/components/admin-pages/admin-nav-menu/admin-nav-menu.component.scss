@@ -1,10 +1,18 @@
 nav {
   background: #6053a1;
   max-height: 70px;
+  border: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0;
+  z-index: 1030;
 }
 
 a.navbar-brand {
   height: 70px;
+  margin-left: 20px;
 
   > img {
     height: 100%;

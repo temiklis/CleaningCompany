@@ -1,9 +1,9 @@
-﻿using CleaningCompany.Result.Interfaces;
+﻿using CleaningCompany.Results.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CleaningCompany.Result.Implementations
+namespace CleaningCompany.Results.Implementations
 {
     public class ErrorResult : Result, IErrorResult
     {

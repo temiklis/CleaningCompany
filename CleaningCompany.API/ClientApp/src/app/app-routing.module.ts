@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -17,7 +18,7 @@ export const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'prices-and-services', component: PricesServicesComponent },
   {
-    path: 'admin', component: HomeComponent, children: [
+    path: 'admin', children: [
       { path: "", redirectTo: "order-requests", pathMatch: "full" },
       { path: "order-requests", component: OrderRequestsComponent },
       { path: "orders", component: OrdersComponent },
@@ -30,7 +31,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

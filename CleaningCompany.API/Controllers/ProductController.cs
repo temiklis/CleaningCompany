@@ -1,4 +1,5 @@
-﻿using CleaningCompany.Application.UseCases.Products.Commands;
+﻿using CleaningCompany.Application.UseCases.Products;
+using CleaningCompany.Application.UseCases.Products.Commands;
 using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Application.UseCases.Products.Queries;
 using MediatR;
@@ -50,9 +51,9 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> Get()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] ProductParameters parameters)
         {
-            var products = await _mediator.Send(new GetAllProductsQuery());
+            var products = await _mediator.Send(new GetAllProductsQuery(parameters));
 
             return Ok(products);
         }

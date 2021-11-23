@@ -1,4 +1,4 @@
-﻿using CleaningCompany.Result;
+﻿using CleaningCompany.Results;
 using MediatR;
 
 namespace CleaningCompany.Application.UseCases.Orders.Commands
