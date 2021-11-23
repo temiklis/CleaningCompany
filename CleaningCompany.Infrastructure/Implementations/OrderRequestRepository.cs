@@ -1,6 +1,9 @@
 ﻿using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CleaningCompany.Infrastructure.Implementations
 {
@@ -9,6 +12,13 @@ namespace CleaningCompany.Infrastructure.Implementations
         public OrderRequestRepository(ApplicationContext context) : base(context)
         {
 
+        }
+
+        public IQueryable<OrderRequest> GetOrderRequestsWithProducts()
+        {
+            return _context.OrderRequests
+                .Include(or => or.Products)
+                .AsQueryable();
         }
     }
 }

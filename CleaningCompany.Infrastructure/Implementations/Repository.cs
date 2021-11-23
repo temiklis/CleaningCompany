@@ -49,9 +49,10 @@ namespace CleaningCompany.Infrastructure.Implementations
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public IQueryable<T> GetAllAsync() 
         {
-            return await _context.Set<T>().ToListAsync();
+            return _context.Set<T>()
+                .AsQueryable();
         }
 
         public async Task<T> GetSingleAsync(int id)

@@ -1,4 +1,4 @@
-﻿namespace CleaningCompany.Result.Implementations
+﻿namespace CleaningCompany.Results.Implementations
 {
     public class SuccessResult : Result
     {

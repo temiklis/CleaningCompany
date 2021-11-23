@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CleaningCompany.Result
+namespace CleaningCompany.Results
 {
     public abstract class Result
     {

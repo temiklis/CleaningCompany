@@ -26,7 +26,7 @@ namespace CleaningCompany.Application.UseCases.Products.Queries
 
         public async Task<IEnumerable<ProductCardDto>> Handle(GetProductCardsQuery request, CancellationToken cancellationToken)
         {
-            var dbProducts = await _unitOfWork.Products.GetAllAsync();
+            var dbProducts = _unitOfWork.Products.GetAllAsync();
 
             return _mapper.Map<IEnumerable<ProductCardDto>>(dbProducts);
         }

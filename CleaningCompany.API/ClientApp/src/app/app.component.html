@@ -1,4 +1,4 @@
-<div style="padding-bottom:245px">
+<div [ngClass]="{'pb':!isAdminPage}">
   <ng-container *ngIf="!isAdminPage">
     <nav-menu></nav-menu>
     <router-outlet></router-outlet>
@@ -8,7 +8,7 @@
     <div id="app" class="app">
       <admin-nav-menu></admin-nav-menu>
       <div class="app-content">
-        <home></home>
+        <sidenav></sidenav>
         <router-outlet></router-outlet>
       </div>
     </div>

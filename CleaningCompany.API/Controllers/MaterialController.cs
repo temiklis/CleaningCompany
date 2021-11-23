@@ -1,4 +1,5 @@
-﻿using CleaningCompany.Application.UseCases.Materials.Commands;
+﻿using CleaningCompany.Application.UseCases.Materials;
+using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
 using CleaningCompany.Application.UseCases.Materials.Queries;
 using MediatR;
@@ -46,9 +47,9 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MaterialDto>>> Get()
+        public async Task<ActionResult<IEnumerable<MaterialWithProductsStringDto>>> Get([FromQuery] MaterialParameters parameters)
         {
-            var materials = await _mediator.Send(new GetAllMaterialsQuery());
+            var materials = await _mediator.Send(new GetAllMaterialsQuery(parameters));
 
             return Ok(materials);
         }
@@ -65,7 +66,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("ProductMaterials/{id}")]
-        public async Task<ActionResult<IEnumerable<MaterialDto>>> GetMaterialsForProduct([FromRoute]int id)
+        public async Task<ActionResult<IEnumerable<MaterialDto>>> GetMaterialsForProduct([FromRoute] int id)
         {
             var materials = await _mediator.Send(new GetMaterialsByProductIdQuery()
             {

@@ -1,4 +1,4 @@
-﻿using CleaningCompany.Result;
+﻿using CleaningCompany.Results;
 using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.Interfaces

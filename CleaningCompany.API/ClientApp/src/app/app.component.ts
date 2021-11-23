@@ -13,7 +13,7 @@ export class AppComponent  {
   constructor(private router: Router) {
     router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        this.isAdminPage = e.url.startsWith('admin');
+        this.isAdminPage = e.url.startsWith('/admin');
       }
     })
   }
