@@ -11,9 +11,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Employees\" />
-    <Folder Include="UseCases\Orders\DTOs\" />
     <Folder Include="UseCases\Orders\Validation\" />
-    <Folder Include="UseCases\Orders\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

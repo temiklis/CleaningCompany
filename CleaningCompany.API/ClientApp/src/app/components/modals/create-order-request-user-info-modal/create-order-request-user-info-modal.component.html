@@ -82,6 +82,18 @@
           Address is required
         </div>
       </div>
+      <div class="form-group">
+        <label>
+          Requested Date
+          <span class="text-danger">*</span>
+        </label>
+        <input ngbDatepicker #d1="ngbDatepicker" type="text" (click)="d1.toggle()" [minDate]="minDate"
+               class="form-control" name="start" placeholder="Requested Date" readonly="readonly" formControlName="RequestedDate"/>
+        <div class="alert alert-danger"
+             *ngIf="orderRequestForm.controls['RequestedDate'].invalid && orderRequestForm.controls['RequestedDate'].touched">
+          Requested Date is required
+        </div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">

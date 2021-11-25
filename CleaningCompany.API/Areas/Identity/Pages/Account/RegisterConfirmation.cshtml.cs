@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using CleaningCompany.Application.Interfaces;
 
 namespace CleaningCompany.API.Areas.Identity.Pages.Account
 {
@@ -14,12 +15,12 @@ namespace CleaningCompany.API.Areas.Identity.Pages.Account
     public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _sender;
+        private readonly IEmailService _emailService;
 
-        public RegisterConfirmationModel(UserManager<User> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<User> userManager, IEmailService emailService)
         {
             _userManager = userManager;
-            _sender = sender;
+            _emailService = emailService;
         }
 
         public string Email { get; set; }

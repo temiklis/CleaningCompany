@@ -28,7 +28,7 @@ namespace CleaningCompany.API.Controllers
             {
                 FIO = createOrderRequestDto.FIO,
                 Address = createOrderRequestDto.Address,
-                Date = DateTime.Now,
+                RequestedDate = createOrderRequestDto.RequestedDate,
                 Email = createOrderRequestDto.Email,
                 Products = createOrderRequestDto.Products.Select(p => p.Id).ToList()
             });

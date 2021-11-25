@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from '../../../models/interfaces/Orders/Order';
+import { OrderSearchParams } from '../../../models/interfaces/Orders/OrderSearchParams';
+import { HelperService } from '../../../services/helper.service';
+import { OrdersService } from '../../../services/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +11,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  orders: Order[];
+
+  searchParams: OrderSearchParams;
+  defaultSearchParams: OrderSearchParams = {
+    PageNumber: 1,
+    PageSize: 10
+  }
+
+  constructor(private orderService: OrdersService,
+    private helperService: HelperService) { }
 
   ngOnInit(): void {
+    this.searchParams = { ...this.defaultSearchParams };
+    this.getOrders();
   }
+
+  getOrders() {
+    this.orderService.getAllOrders(this.searchParams).then(results => {
+      this.orders = results;
+    })
+  }
+
+  goToCreateOrder() {
+
+  }
+
+  goToOrderDetails(id: number) {
+
+  }
+
+  updateResults(page: number) {
+    this.searchParams.PageNumber = page;
+    this.getOrders();
+  }
+
+  resetFilters() {
+    this.searchParams = { ...this.defaultSearchParams };
+    this.getOrders();
+  }
+
 
 }

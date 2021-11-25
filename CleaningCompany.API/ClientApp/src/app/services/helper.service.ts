@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import * as moment from 'moment';
 import Swal from "sweetalert2";
 
 @Injectable({
@@ -33,5 +34,9 @@ export class HelperService {
 
   alertError(message: string): Promise<any> {
     return this.alertWithTitle("Error", message);
+  }
+
+  toDBDate(date: Date) {
+    return moment(date).add(0 - date.getTimezoneOffset(), 'm').utc().toISOString();
   }
 }

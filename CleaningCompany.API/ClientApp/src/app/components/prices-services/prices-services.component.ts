@@ -110,7 +110,8 @@ export class PricesServicesComponent implements OnInit, OnDestroy {
       Address: null,
       Email: this.userEmail,
       FIO: null,
-      Products: this.selectedProducts
+      Products: this.selectedProducts,
+      RequestedDate: null
     }
 
     const modalRef = this.modalService.open(CreateOrderRequestUserInfoModalComponent, { backdrop: 'static', centered: true, size: 'l', });

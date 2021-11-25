@@ -5,4 +5,5 @@ export interface OrderRequest {
   FIO: string;
   Address: string;
   Products: ProductCard[];
+  RequestedDate: Date;
 }

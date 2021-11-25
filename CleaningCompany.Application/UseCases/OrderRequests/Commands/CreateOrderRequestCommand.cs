@@ -18,7 +18,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
         public string Email { get; set; }
         public string FIO { get; set; }
         public string Address { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime RequestedDate { get; set; }
 
         public ICollection<int> Products { get; set; }
     }
@@ -50,7 +50,6 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
             var products = await _unitOfWork.Products.GetProductsByIds(request.Products.ToList());
 
             orderRequest.Products = products;
-            orderRequest.RequestedDate = DateTime.Now;
 
             var createdOrderRequest = await _unitOfWork.OrderRequests.CreateAsync(orderRequest);
 

@@ -1,1 +1,95 @@
-<p>orders works!</p>
+<div>
+  <div class="d-flex mb-3">
+    <div>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active">Orders</li>
+      </ul>
+      <h1 class="page-header mb-0">Orders</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" (keyup.enter)="getOrders()">
+            <div class="col-sm-1">
+              <div class="filters mb-2 mb-sm-0">
+                <span class="filters-title">
+                  <i class="fa fa-filter"></i>
+                  <strong class="ms-1">Filters</strong>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-2 mb-2 mb-sm-0">
+              <div class="row">
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-success action" placement="bottom" ngbTooltip="Search" (click)="getOrders()">
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-danger action" placement="bottom" ngbTooltip="Reset filters" (click)="resetFilters()">
+                      <i class="fa fa-undo"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <table *ngIf="orders?.length" class="table table-striped">
+            <thead>
+              <tr>
+                <td>Client Email</td>
+                <td width="600px">Products</td>
+                <td width="600px">Responsible Employees</td>
+                <td>TotalPrice</td>
+                <td>Order Date</td>
+                <td>Rendered Date</td>
+                <td>Status</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders" (click)="goToOrderDetails(order.Id)">
+                <td>
+                  <a class="name">{{order.ClientEmail}}</a>
+                </td>
+                <td class="products">
+                  <div>
+                    {{order.Products}}
+                  </div>
+                </td>
+                <td class="products">
+                  <div>
+                    {{order.Employees}}
+                  </div>
+                </td>
+                <td>{{order.TotalPrice}} $</td>
+                <td>{{order.OrderDate.includes('0001') ? '-' : order.OrderDate | date}}</td>
+                <td>{{order.RenderedDate.includes('0001') ? '-' : order.RenderedDate | date}}</td>
+                <td>
+                  <small class="badge bg-success" *ngIf="order.Status == 'Completed'">{{order.Status}}</small>
+                  <small class="badge bg-danger" *ngIf="order.Status == 'NotStarted'">{{order.Status}}</small>
+                  <small class="badge bg-secondary" *ngIf="order.Status == 'Pending'">{{order.Status}}</small>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+            <ngb-pagination [collectionSize]="orders?.length"
+                            [pageSize]="searchParams.PageSize"
+                            [(page)]="searchParams.PageNumber"
+                            (pageChange)="updateResults($event)"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -81,8 +81,8 @@
                     {{request.Products}}
                   </div>
                 </td>
-                <td>{{request.RequestedDate}}</td>
-                <td>{{request.RenderedDate || '-'}}</td>
+                <td>{{request.RequestedDate?.includes('0001')? '-' : request.RequestedDate | date}}</td>
+                <td>{{request.RenderedDate?.includes('0001')? '-' : request.RenderedDate | date}}</td>
               </tr>
             </tbody>
           </table>
