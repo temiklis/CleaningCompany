@@ -9,5 +9,6 @@ namespace CleaningCompany.Application.Interfaces
         IOrderRepository Orders { get; }
         IOrderRequestRepository OrderRequests { get; }
         IEmployeeRepository Employees { get; }
+        IClientRepository Clients { get; }
     }
 }

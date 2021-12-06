@@ -15,7 +15,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
 {
     public class GetAllOrderRequestsQuery : IRequest<IEnumerable<OrderRequestDto>>
     {
-        public OrderRequestParameters Parameters;
+        public OrderRequestParameters Parameters { get; private set; }
 
         public GetAllOrderRequestsQuery(OrderRequestParameters parameters)
         {

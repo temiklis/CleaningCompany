@@ -20,7 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateOrderRequestUserInfoModalComponent } from './components/modals/create-order-request-user-info-modal/create-order-request-user-info-modal.component';
 import { OrderRequestsComponent } from './components/admin-pages/order-requests/order-requests.component';
 import { OrdersComponent } from './components/admin-pages/orders/orders.component';
-import { UsersComponent } from './components/admin-pages/users/users.component';
+import { ClientsComponent } from './components/admin-pages/clients/clients.component';
 import { EmployeesComponent } from './components/admin-pages/employees/employees.component';
 import { ProductsComponent } from './components/admin-pages/products/products.component';
 import { MaterialsComponent } from './components/admin-pages/materials/materials.component';
@@ -46,7 +46,7 @@ import { UserOrdersComponent } from './components/common-components/user-orders/
     SidenavComponent,
     OrderRequestsComponent,
     OrdersComponent,
-    UsersComponent,
+    ClientsComponent,
     EmployeesComponent,
     ProductsComponent,
     MaterialsComponent,

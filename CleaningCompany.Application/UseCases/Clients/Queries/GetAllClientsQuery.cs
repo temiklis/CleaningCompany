@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.Interfaces;
-using CleaningCompany.Application.UseCases.Employees.DTOs;
+using CleaningCompany.Application.UseCases.Clients.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
 using MediatR;
@@ -9,41 +9,41 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CleaningCompany.Application.UseCases.Employees.Queries
+namespace CleaningCompany.Application.UseCases.Clients.Queries
 {
-    public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
+    public class GetAllClientsQuery : IRequest<IEnumerable<ClientDto>>
     {
-        public EmployeeParameters Parameters { get; private set; }
-        public GetAllEmployeesQuery(EmployeeParameters parameters)
+        public ClientParameters Parameters { get; private set; }
+        public GetAllClientsQuery(ClientParameters parameters)
         {
             Parameters = parameters;
         }
     }
 
-    public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeDto>>
+    public class GetAllClientsQueryHandler : IRequestHandler<GetAllClientsQuery, IEnumerable<ClientDto>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllEmployeesQueryHandler(IMapper mapper, IUnitOfWork unitOfWork)
+        public GetAllClientsQueryHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<EmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ClientDto>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
         {
-            var query = _unitOfWork.Employees.GetAllAsync();
+            var query = _unitOfWork.Clients.GetAllClientsWithOrders();
 
             query = GetFilters(query, request.Parameters);
 
-            var dtos = await PagedList<Employee>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
-                _mapper.Map<IEnumerable<EmployeeDto>>);
+            var dtos = await PagedList<Client>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
+                _mapper.Map<IEnumerable<ClientDto>>);
 
             return dtos;
         }
 
-        private static IQueryable<Employee> GetFilters(IQueryable<Employee> query, EmployeeParameters parameters)
+        private static IQueryable<Client> GetFilters(IQueryable<Client> query, ClientParameters parameters)
         {
             if (!string.IsNullOrEmpty(parameters.Name))
             {
@@ -59,5 +59,4 @@ namespace CleaningCompany.Application.UseCases.Employees.Queries
             return query;
         }
     }
-
 }

@@ -13,7 +13,7 @@ namespace CleaningCompany.Application.UseCases.Materials.Queries
 {
     public class GetAllMaterialsQuery : IRequest<IEnumerable<MaterialWithProductsStringDto>>
     {
-        public MaterialParameters Parameters { get; set; }
+        public MaterialParameters Parameters { get; private set; }
         public GetAllMaterialsQuery(MaterialParameters parameters)
         {
             Parameters = parameters;

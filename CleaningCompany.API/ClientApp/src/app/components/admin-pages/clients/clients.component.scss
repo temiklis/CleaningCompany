@@ -1,0 +1,22 @@
+.action {
+  width: 100%;
+}
+
+table {
+  margin-top: 20px;
+}
+
+a.name {
+  text-decoration: none;
+  cursor: pointer;
+  color: #6053A1;
+}
+
+thead > tr > td {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+tbody > tr > td {
+  font-size: 16px;
+}
