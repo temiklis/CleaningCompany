@@ -1,5 +1,4 @@
-﻿using CleaningCompany.Domain.Entities;
-using CleaningCompany.Application.Interfaces;
+﻿using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Infrastructure.Implementations
 {
-    internal class Repository<T> : IRepository<T> where T : Entity
+    internal class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ApplicationContext _context;
 

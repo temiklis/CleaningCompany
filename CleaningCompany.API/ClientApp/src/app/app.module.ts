@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpService } from './services/http.service';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/common-components/nav-menu/nav-menu.component';
 import { AppFooterComponent } from './components/common-components/app-footer/app-footer.component';
@@ -28,6 +28,9 @@ import { AdminNavMenuComponent } from './components/admin-pages/admin-nav-menu/a
 import { SidenavComponent } from './components/admin-pages/sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from './components/profile/profile.component';
+import { UserInfoComponent } from './components/common-components/user-info/user-info.component';
+import { UserOrdersComponent } from './components/common-components/user-orders/user-orders.component';
 
 
 @NgModule({
@@ -48,10 +51,13 @@ import { CommonModule } from '@angular/common';
     ProductsComponent,
     MaterialsComponent,
     AdminNavMenuComponent,
+    ProfileComponent,
+    UserInfoComponent,
+    UserOrdersComponent,
   ],
   imports: [
+    RouterModule.forRoot(routes),
     AppRoutingModule,
-    RouterModule,
     BrowserModule,
     FontAwesomeModule,
     AuthorizationModule,

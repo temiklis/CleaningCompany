@@ -8,6 +8,6 @@ namespace CleaningCompany.Application.Interfaces
         IProductRepository Products { get; }
         IOrderRepository Orders { get; }
         IOrderRequestRepository OrderRequests { get; }
-
+        IEmployeeRepository Employees { get; }
     }
 }

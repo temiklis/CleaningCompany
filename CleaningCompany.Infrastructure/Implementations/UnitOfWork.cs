@@ -16,6 +16,8 @@ namespace CleaningCompany.Infrastructure.Implementations
 
         public IOrderRequestRepository OrderRequests { get; private set; }
 
+        public IEmployeeRepository Employees { get; private set; }
+
         public UnitOfWork(ApplicationContext context)
         {
             _context = context;
@@ -24,6 +26,7 @@ namespace CleaningCompany.Infrastructure.Implementations
             Products = new ProductRepository(_context);
             Orders = new OrderRepository(_context);
             OrderRequests = new OrderRequestRepository(_context);
+            Employees= new EmployeeRepository(_context);
         }
 
         public void Dispose()

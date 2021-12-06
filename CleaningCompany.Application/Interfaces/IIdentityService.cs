@@ -1,4 +1,5 @@
 ﻿using CleaningCompany.Results;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.Interfaces
@@ -14,5 +15,7 @@ namespace CleaningCompany.Application.Interfaces
         Task<Result<string>> CreateUserAsync(string userName, string password);
 
         Task<Result<bool>> DeleteUserAsync(string userId);
+
+        Task<List<string>> GetUserRoles(string userName);
     }
 }

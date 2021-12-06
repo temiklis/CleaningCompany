@@ -33,6 +33,8 @@ namespace CleaningCompany.API
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+            services.AddHttpContextAccessor();
+
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
                 {

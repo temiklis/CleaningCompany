@@ -20,5 +20,12 @@ namespace CleaningCompany.Infrastructure.Implementations
                 .Include(or => or.Products)
                 .AsQueryable();
         }
+
+        public IQueryable<OrderRequest> GetUserOrderRequests(string email)
+        {
+            return _context.OrderRequests
+                .Include(or => or.Products)
+                .Where(or => or.Email.ToUpper() == email.ToUpper());
+        }
     }
 }

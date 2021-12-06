@@ -8,8 +8,11 @@ import { OrderRequestsComponent } from './components/admin-pages/order-requests/
 import { OrdersComponent } from './components/admin-pages/orders/orders.component';
 import { ProductsComponent } from './components/admin-pages/products/products.component';
 import { UsersComponent } from './components/admin-pages/users/users.component';
+import { UserInfoComponent } from './components/common-components/user-info/user-info.component';
+import { UserOrdersComponent } from './components/common-components/user-orders/user-orders.component';
 import { HomeComponent } from './components/home/home.component';
 import { PricesServicesComponent } from './components/prices-services/prices-services.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionsAndAnswersComponent } from './components/questions-and-answers/questions-and-answers.component'
 
 export const routes: Routes = [
@@ -28,6 +31,13 @@ export const routes: Routes = [
       { path: "employees", component: EmployeesComponent },
     ]
   },
+  {
+    path: 'profile', component: ProfileComponent, children: [
+      { path: '', redirectTo: 'info', pathMatch: "full" },
+      { path: 'info', component: UserInfoComponent },
+      { path: 'orders', component: UserOrdersComponent }
+    ]
+  }
 ];
 
 @NgModule({

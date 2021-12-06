@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="heading text-center">
+    <h1>
+      <span>Profile Information</span>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <ul>
+        <li [routerLink]="['info']"
+            routerLinkActive="active">
+          <a>Profile</a>
+        </li>
+        <li [routerLink]="['orders']"
+            routerLinkActive="active">
+          <a>Orders</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -3,9 +3,12 @@ using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
 using CleaningCompany.Results.Implementations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CleaningCompany.Infrastructure.Identity
@@ -15,14 +18,17 @@ namespace CleaningCompany.Infrastructure.Identity
         private readonly UserManager<User> _userManager;
         private readonly IUserClaimsPrincipalFactory<User> _userClaimsPrincipalFactory;
         private readonly IAuthorizationService _authorizationService;
+        private IHttpContextAccessor _httpContextAccessor;
 
         public IdentityService(UserManager<User> userManager,
             IUserClaimsPrincipalFactory<User> userClaimsPrincipalFactory,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> AuthorizeAsync(string userId, string policyName)
@@ -90,6 +96,20 @@ namespace CleaningCompany.Infrastructure.Identity
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
             return await _userManager.IsInRoleAsync(user, role);
+        }
+
+        public async Task<List<string>> GetUserRoles(string userName)
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+            var claims = user.Claims;
+            var identity = user.Identity;
+            var userId = user?.FindFirst(c => c.Value == ClaimTypes.NameIdentifier)?.Value;
+
+            var dbUser = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+
+            var roles = await _userManager.GetRolesAsync(dbUser);
+
+            return roles.ToList();
         }
     }
 }

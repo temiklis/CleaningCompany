@@ -39,9 +39,20 @@ namespace CleaningCompany.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderRequestDto>>> Get([FromQuery] OrderRequestParameters parameters)
         {
-            var products = await _mediator.Send(new GetAllOrderRequestsQuery(parameters));
+            var orderRequests = await _mediator.Send(new GetAllOrderRequestsQuery(parameters));
 
-            return Ok(products);
+            return Ok(orderRequests);
+        }
+
+        [HttpGet("UserRequests")]
+        public async Task<ActionResult<IEnumerable<UserOrderRequestDto>>> GetUserOrderRequests([FromQuery] string email)
+        {
+            var orderRequests = await _mediator.Send(new GetUserOrderRequestsQuery()
+            {
+                Email = email
+            });
+
+            return Ok(orderRequests);
         }
     }
 }

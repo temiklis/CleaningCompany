@@ -10,7 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Employees\" />
+    <Folder Include="UseCases\Employees\Commands\" />
+    <Folder Include="UseCases\Employees\Validation\" />
     <Folder Include="UseCases\Orders\Validation\" />
   </ItemGroup>
 

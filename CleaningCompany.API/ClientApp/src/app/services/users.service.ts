@@ -14,4 +14,8 @@ export class UsersService {
   getCurrentUserEmail(): Promise<string> {
     return this.httpService.GET<string>(`User/CurrentUserEmail`);
   }
+
+  getRoles(): Promise<string[]> {
+    return this.httpService.GET<string[]>(`User/Roles`);
+  }
 }

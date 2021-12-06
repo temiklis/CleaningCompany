@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../../../models/interfaces/Employees/Employee';
+import { EmployeeSearchParams } from '../../../models/interfaces/Employees/EmployeeSearchParams';
+import { EmployeeService } from '../../../services/employee.service';
 
 @Component({
   selector: 'app-employees',
@@ -6,10 +9,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
+  employees: Employee[];
 
-  constructor() { }
+  searchParams: EmployeeSearchParams;
+  defaultSearchParams: EmployeeSearchParams = {
+    Name: null,
+    Email: null,
+    PageNumber: 1,
+    PageSize: 10
+  }
+
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.searchParams = { ...this.defaultSearchParams };
+    this.getEmployees();
+  }
+
+  getEmployees() {
+    this.employeeService.getAllEmployees(this.searchParams).then(employees => {
+      this.employees = employees;
+    })
+  }
+
+  goToEmployeeDetails(id: number) {
+
+  }
+
+  updateResults(page: number) {
+    this.searchParams.PageNumber = page;
+    this.getEmployees();
+  }
+
+  resetFilters() {
+    this.searchParams = { ...this.defaultSearchParams };
+    this.getEmployees();
   }
 
 }

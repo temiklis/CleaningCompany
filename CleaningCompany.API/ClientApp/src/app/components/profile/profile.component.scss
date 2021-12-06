@@ -1,0 +1,38 @@
+.container {
+  margin-top: 40px;
+}
+
+h1 {
+  border-bottom: none;
+  width: inherit;
+
+  span {
+    border-bottom: 2px solid;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  padding: 10px 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: lightgrey;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+li > a {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: cursive;
+}
+
+li.active, li:hover {
+  background-color: grey;
+}

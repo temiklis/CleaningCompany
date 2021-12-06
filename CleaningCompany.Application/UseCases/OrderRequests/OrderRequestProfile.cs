@@ -19,6 +19,9 @@ namespace CleaningCompany.Application.UseCases.OrderRequests
                 .ForMember(o => o.UserFIO, s => s.MapFrom(p => p.FIO))
                 .ForMember(o => o.Products, s => s.MapFrom(or => string.Join(',', or.Products.Select(p => p.Name))));
 
+            CreateMap<OrderRequest, UserOrderRequestDto>()
+                .ForMember(o => o.Products, s => s.MapFrom(or => string.Join(',', or.Products.Select(p => p.Name))));
+
         }
     }
 }
