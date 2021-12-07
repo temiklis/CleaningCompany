@@ -5,6 +5,7 @@ using CleaningCompany.Application.UseCases.Materials;
 using CleaningCompany.Application.UseCases.OrderRequests;
 using CleaningCompany.Application.UseCases.Orders;
 using CleaningCompany.Application.UseCases.Products;
+using CleaningCompany.Application.UseCases.Users;
 
 namespace CleaningCompany.Application
 {
@@ -20,6 +21,7 @@ namespace CleaningCompany.Application
                   x.AddProfile(new OrderRequestProfile());
                   x.AddProfile(new EmployeeProfile());
                   x.AddProfile(new ClientProfile());
+                  x.AddProfile(new UserProfile());
               });
 
             return config.CreateMapper();

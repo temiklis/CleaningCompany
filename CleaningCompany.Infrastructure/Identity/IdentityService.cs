@@ -111,5 +111,12 @@ namespace CleaningCompany.Infrastructure.Identity
 
             return roles.ToList();
         }
+
+        public  async Task<User> GetUserProfileAsync(string userId)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.Id == userId);
+
+            return user;
+        }
     }
 }
