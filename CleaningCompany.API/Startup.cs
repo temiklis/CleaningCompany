@@ -1,20 +1,18 @@
+using CleaningCompany.API.Services;
 using CleaningCompany.Application;
+using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleaningCompany.API
 {
@@ -33,22 +31,24 @@ namespace CleaningCompany.API
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                }); ;
+                }); 
 
             services.AddRazorPages();
+
+            services.Configure<ApiBehaviorOptions>(options => 
+                options.SuppressModelStateInvalidFilter = true);
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
-            //services.AddSwaggerDocument();
 
             services.AddOpenApiDocument(configure =>
             {
@@ -85,8 +85,9 @@ namespace CleaningCompany.API
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseIdentityServer();
             app.UseAuthorization();
+
+            app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {

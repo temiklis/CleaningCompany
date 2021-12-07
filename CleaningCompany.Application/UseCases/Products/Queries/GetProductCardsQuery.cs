@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Products.DTOs;
 using MediatR;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Products.Queries
 {
+    [Authorize(Roles = "User")]
     public class GetProductCardsQuery : IRequest<IEnumerable<ProductCardDto>>
     {
 

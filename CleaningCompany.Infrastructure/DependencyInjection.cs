@@ -9,6 +9,16 @@ using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure.Identity;
 using CleaningCompany.Infrastructure.Implementations;
 using CleaningCompany.Infrastructure.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Linq;
+using IdentityServer4.Models;
+using System;
+using System.Collections.Generic;
+using IdentityModel;
+using Microsoft.IdentityModel.Tokens;
+using IdentityServer4.AccessTokenValidation;
+using System.Threading.Tasks;
 
 namespace CleaningCompany.Infrastructure
 {
@@ -30,8 +40,14 @@ namespace CleaningCompany.Infrastructure
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
+            
             services.AddIdentityServer()
-                .AddApiAuthorization<User, ApplicationContext>();
+                .AddApiAuthorization<User, ApplicationContext>(options =>
+                {
+                    options.ApiResources.Add(GetApis().First());
+                });
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IMaterialRepository, MaterialRepository>();
@@ -42,14 +58,30 @@ namespace CleaningCompany.Infrastructure
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IEmailService, EmailService>();
 
-
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+                options.AddPolicy("CanPurge", policy => policy.RequireRole("Admin")));
 
             return services;
 
+        }
+
+        private static IEnumerable<ApiResource> GetApis()
+        {
+
+            return new List<ApiResource>
+            {
+                new ApiResource("CleaningCompany.API", "My Asp.net core WebApi,the best Webapi!"){
+                    UserClaims =
+                    {
+                        JwtClaimTypes.Name,
+                        JwtClaimTypes.Subject,
+                        JwtClaimTypes.Role,
+                    }
+                },
+            };
         }
     }
 }

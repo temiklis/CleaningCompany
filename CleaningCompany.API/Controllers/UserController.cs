@@ -11,9 +11,12 @@ namespace CleaningCompany.API.Controllers
     public class UserController : BaseController
     {
         private readonly IIdentityService _identityService;
-        public UserController(IIdentityService identityService)
+        ICurrentUserService _currentUserService;
+
+        public UserController(IIdentityService identityService, ICurrentUserService currentUserService)
         {
             _identityService = identityService;
+            _currentUserService = currentUserService;
         }
 
         [HttpGet("CurrentUserEmail")]
@@ -28,12 +31,7 @@ namespace CleaningCompany.API.Controllers
         [HttpGet("Roles")]
         public async Task<ActionResult<List<string>>> GetCurrentUserRoles()
         {
-            var user = User;
-            var claims = User.Claims;
-            var identity = User.Identity;
-            var userName = User.Identity.Name;
-            userName = "";
-
+            var userName = _currentUserService.UserId;
             var roles = await _identityService.GetUserRoles(userName);
 
             return Ok(roles);
