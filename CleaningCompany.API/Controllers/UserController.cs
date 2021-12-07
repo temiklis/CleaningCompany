@@ -1,4 +1,7 @@
 ﻿using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Application.UseCases.Users.DTOs;
+using CleaningCompany.Application.UseCases.Users.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +14,13 @@ namespace CleaningCompany.API.Controllers
     public class UserController : BaseController
     {
         private readonly IIdentityService _identityService;
-        ICurrentUserService _currentUserService;
+        private readonly IMediator _mediator;
+        private readonly ICurrentUserService _currentUserService;
 
-        public UserController(IIdentityService identityService, ICurrentUserService currentUserService)
+        public UserController(IIdentityService identityService, IMediator mediator, ICurrentUserService currentUserService)
         {
             _identityService = identityService;
+            _mediator = mediator;
             _currentUserService = currentUserService;
         }
 
@@ -35,6 +40,14 @@ namespace CleaningCompany.API.Controllers
             var roles = await _identityService.GetUserRoles(userName);
 
             return Ok(roles);
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<UserProfileDto>> Get([FromRoute] string userId)
+        {
+            var user = await _mediator.Send(new GetUserProfileQuery() { UserId = userId });
+
+            return Ok(user);
         }
     }
 }

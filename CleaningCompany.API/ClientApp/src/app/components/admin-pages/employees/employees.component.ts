@@ -36,6 +36,10 @@ export class EmployeesComponent implements OnInit {
 
   }
 
+  goToCreateEmployee() {
+
+  }
+
   updateResults(page: number) {
     this.searchParams.PageNumber = page;
     this.getEmployees();

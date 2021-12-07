@@ -14,7 +14,7 @@ namespace CleaningCompany.Domain.Entities
         public DateTime OrderDate { get; set; }
         public DateTime RenderedDate { get; set; }
 
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public Client Client { get; set; }
 
         public ICollection<Employee> ResponsibleEmployees { get; set; }

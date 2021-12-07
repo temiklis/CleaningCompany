@@ -45,7 +45,7 @@ export class AuthorizeService {
     let user: User = null;
     try {
       user = await this.userManager.signinSilent(this.createArguments());
-      this.userSubject.next({ name: user.profile.name, email: user.profile.email });
+      this.userSubject.next({ name: user.profile.name, id: user.profile.sub });
       return this.success(state);
     } catch (silentError) {
       // User might not be authenticated, fallback to popup authentication
@@ -56,7 +56,7 @@ export class AuthorizeService {
           throw new Error('Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.');
         }
         user = await this.userManager.signinPopup(this.createArguments());
-        this.userSubject.next({ name: user.profile.name, email: user.profile.email });
+        this.userSubject.next({ name: user.profile.name, id: user.profile.sub });
         return this.success(state);
       } catch (popupError) {
         if (popupError.message === 'Popup window closed') {
@@ -82,7 +82,7 @@ export class AuthorizeService {
     try {
       await this.ensureUserManagerInitialized();
       const user = await this.userManager.signinCallback(url);
-      this.userSubject.next(user && { name: user.profile.name, email: user.profile.email });
+      this.userSubject.next(user && { name: user.profile.name, id: user.profile.sub });
       return this.success(user && user.state);
     } catch (error) {
       console.log('There was an error signing in: ', error);
@@ -165,7 +165,7 @@ export class AuthorizeService {
     return from(this.ensureUserManagerInitialized())
       .pipe(
         mergeMap(() => this.userManager.getUser()),
-        map(u => u && { name: u.profile.name, email: u.profile.email }));
+        map(u => u && { name: u.profile.name, id: u.profile.sub }));
   }
 }
 
@@ -196,5 +196,5 @@ export enum AuthenticationResultStatus {
 
 export interface IUser {
   name: string;
-  email: string;
+  id: string;
 }

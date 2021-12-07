@@ -7,7 +7,7 @@ import { MaterialsComponent } from './components/admin-pages/materials/materials
 import { OrderRequestsComponent } from './components/admin-pages/order-requests/order-requests.component';
 import { OrdersComponent } from './components/admin-pages/orders/orders.component';
 import { ProductsComponent } from './components/admin-pages/products/products.component';
-import { UsersComponent } from './components/admin-pages/users/users.component';
+import { ClientsComponent } from './components/admin-pages/clients/clients.component';
 import { UserInfoComponent } from './components/common-components/user-info/user-info.component';
 import { UserOrdersComponent } from './components/common-components/user-orders/user-orders.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,7 +27,7 @@ export const routes: Routes = [
       { path: "orders", component: OrdersComponent },
       { path: "products", component: ProductsComponent },
       { path: "materials", component: MaterialsComponent },
-      { path: "users", component: UsersComponent },
+      { path: "clients", component: ClientsComponent },
       { path: "employees", component: EmployeesComponent },
     ]
   },

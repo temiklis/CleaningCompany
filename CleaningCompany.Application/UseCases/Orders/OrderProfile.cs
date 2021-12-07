@@ -15,6 +15,21 @@ namespace CleaningCompany.Application.UseCases.Orders
                 .ForMember(o => o.Products, s => s.MapFrom(o => string.Join(',', o.Products.Select(p => p.Name))))
                 .ForMember(o => o.ClientEmail, s => s.MapFrom(o => o.Client.Email))
                 .ForMember(o => o.Status, s => s.MapFrom(o => ((Status)o.Status).ToString()));
+
+            CreateMap<Order, ClientOrderDto>()
+                .ForMember(o => o.Products, s => s.MapFrom(o => string.Join(',', o.Products.Select(p => p.Name))))
+                .ForMember(o => o.Status, s => s.MapFrom(o => ((Status)o.Status).ToString()));
+
+            CreateMap<Product, EmployeeOrderProductDto>()
+               .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()));
+
+            CreateMap<Order, EmployeeAssignedOrderDto>()
+                .ForMember(o => o.Status, s => s.MapFrom(o => ((Status)o.Status).ToString()))
+                .ForMember(o => o.Products, s => s.MapFrom(o => string.Join(',', o.Products.Select(p => p.Name))))
+                .ForMember(o => o.ProductsList, s => s.MapFrom(o => o.Products))
+                .ForMember(o => o.EmployeesAmount, s => s.MapFrom(o => o.ResponsibleEmployees.Count))
+                .ForMember(o => o.TotalIncome, s => s.Ignore());
+
         }
     }
 }

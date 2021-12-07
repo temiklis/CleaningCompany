@@ -13,7 +13,7 @@ namespace CleaningCompany.Application.UseCases.Orders.Queries
 {
     public class GetAllOrdersQuery : IRequest<IEnumerable<OrderDto>>
     {
-        public OrderParameters Parameters { get; set; }
+        public OrderParameters Parameters { get; private set; }
 
         public GetAllOrdersQuery(OrderParameters parameters)
         {

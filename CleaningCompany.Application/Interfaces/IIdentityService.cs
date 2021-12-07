@@ -1,4 +1,5 @@
-﻿using CleaningCompany.Results;
+﻿using CleaningCompany.Domain.Entities;
+using CleaningCompany.Results;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,5 +18,6 @@ namespace CleaningCompany.Application.Interfaces
         Task<Result<bool>> DeleteUserAsync(string userId);
 
         Task<List<string>> GetUserRoles(string userName);
+        Task<User> GetUserProfileAsync(string userId);
     }
 }
