@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using CleaningCompany.Domain.Entities;
 using System.Linq;
 using CleaningCompany.Results;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Materials.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllMaterialsQuery : IRequest<IEnumerable<MaterialWithProductsStringDto>>
     {
         public MaterialParameters Parameters { get; private set; }

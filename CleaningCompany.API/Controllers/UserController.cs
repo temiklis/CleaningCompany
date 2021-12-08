@@ -13,39 +13,41 @@ namespace CleaningCompany.API.Controllers
     [Route("api/[controller]")]
     public class UserController : BaseController
     {
-        private readonly IIdentityService _identityService;
         private readonly IMediator _mediator;
         private readonly ICurrentUserService _currentUserService;
 
-        public UserController(IIdentityService identityService, IMediator mediator, ICurrentUserService currentUserService)
+        public UserController(IMediator mediator, ICurrentUserService currentUserService)
         {
-            _identityService = identityService;
             _mediator = mediator;
             _currentUserService = currentUserService;
         }
 
         [HttpGet("CurrentUserEmail")]
-        public ActionResult<string> GetCurrentUserEmail()
+        public async Task<ActionResult<string>> GetCurrentUserEmail()
         {
-            var claim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
-            if (claim != null)
-                return claim.Value;
-            return string.Empty;
+            var query = new GetCurrentUserEmailQuery();
+
+            var userEmail = await _mediator.Send(query);
+
+            return Ok(userEmail);
         }
 
         [HttpGet("Roles")]
-        public async Task<ActionResult<List<string>>> GetCurrentUserRoles()
+        public async Task<ActionResult<IReadOnlyCollection<string>>> GetCurrentUserRoles()
         {
-            var userName = _currentUserService.UserId;
-            var roles = await _identityService.GetUserRoles(userName);
+            var query = new GetCurrentUserRolesQuery();
+
+            var roles = await _mediator.Send(query);
 
             return Ok(roles);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserProfileDto>> Get([FromRoute] string userId)
+        [HttpGet()]
+        public async Task<ActionResult<UserProfileDto>> Get()
         {
-            var user = await _mediator.Send(new GetUserProfileQuery() { UserId = userId });
+            var query = new GetUserProfileQuery();
+
+            var user = await _mediator.Send(query);
 
             return Ok(user);
         }

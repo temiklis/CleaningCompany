@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.OrderRequests.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllOrderRequestsQuery : IRequest<IEnumerable<OrderRequestDto>>
     {
         public OrderRequestParameters Parameters { get; private set; }

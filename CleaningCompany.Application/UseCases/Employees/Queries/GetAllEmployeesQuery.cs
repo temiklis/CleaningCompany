@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Employees.DTOs;
 using CleaningCompany.Domain.Entities;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Employees.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
     {
         public EmployeeParameters Parameters { get; private set; }

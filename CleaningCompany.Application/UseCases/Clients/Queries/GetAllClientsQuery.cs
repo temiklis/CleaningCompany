@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Clients.DTOs;
 using CleaningCompany.Domain.Entities;
+using CleaningCompany.Domain.Entities.Enums;
 using CleaningCompany.Results;
 using MediatR;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Clients.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllClientsQuery : IRequest<IEnumerable<ClientDto>>
     {
         public ClientParameters Parameters { get; private set; }

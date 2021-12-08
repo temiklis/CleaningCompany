@@ -3,15 +3,16 @@ using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Application.Interfaces;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using CleaningCompany.Results;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Products.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>
     {
         public ProductParameters Parameters { get; private set; }

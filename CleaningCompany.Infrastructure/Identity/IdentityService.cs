@@ -93,6 +93,13 @@ namespace CleaningCompany.Infrastructure.Identity
             return user.UserName;
         }
 
+        public async Task<string> GetUserEmailAsync(string userId)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+
+            return user.Email;
+        }
+
         public async Task<bool> IsInRoleAsync(string userId, string role)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);

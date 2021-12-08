@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Orders.DTOs;
 using CleaningCompany.Domain.Entities;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Orders.Queries
 {
+    [Authorize(Roles = "Admin")]
     public class GetAllOrdersQuery : IRequest<IEnumerable<OrderDto>>
     {
         public OrderParameters Parameters { get; private set; }
