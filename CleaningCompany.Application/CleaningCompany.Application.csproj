@@ -15,7 +15,6 @@
     <Folder Include="UseCases\Employees\Commands\" />
     <Folder Include="UseCases\Employees\Validation\" />
     <Folder Include="UseCases\Orders\Validation\" />
-    <Folder Include="UseCases\Users\Commands\" />
     <Folder Include="UseCases\Users\Validation\" />
   </ItemGroup>
 

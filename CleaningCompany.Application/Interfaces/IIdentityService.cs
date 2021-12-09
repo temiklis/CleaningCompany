@@ -16,6 +16,7 @@ namespace CleaningCompany.Application.Interfaces
         Task<bool> AuthorizeAsync(string userId, string policyName);
 
         Task<Result<string>> CreateUserAsync(string userName, string password);
+        Task<Result<bool>> UpdateUserProfile(User user);
 
         Task<Result<bool>> DeleteUserAsync(string userId);
 

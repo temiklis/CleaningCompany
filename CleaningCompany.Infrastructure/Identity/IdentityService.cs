@@ -62,6 +62,18 @@ namespace CleaningCompany.Infrastructure.Identity
             return new SuccessResult<string>(user.Id);
         }
 
+        public async Task<Result<bool>> UpdateUserProfile(User user)
+        {
+            var result = await _userManager.UpdateAsync(user);
+
+            if(!result.Succeeded)
+            {
+                return new ErrorResult<bool>("Can't update user");
+            }
+
+            return new SuccessResult<bool>(result.Succeeded);
+        }
+
         public async Task<Result<bool>> DeleteUserAsync(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);

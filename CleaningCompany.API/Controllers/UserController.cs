@@ -1,4 +1,5 @@
 ﻿using CleaningCompany.Application.Interfaces;
+using CleaningCompany.Application.UseCases.Users.Commands;
 using CleaningCompany.Application.UseCases.Users.DTOs;
 using CleaningCompany.Application.UseCases.Users.Queries;
 using MediatR;
@@ -42,7 +43,7 @@ namespace CleaningCompany.API.Controllers
             return Ok(roles);
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult<UserProfileDto>> Get()
         {
             var query = new GetUserProfileQuery();
@@ -50,6 +51,23 @@ namespace CleaningCompany.API.Controllers
             var user = await _mediator.Send(query);
 
             return Ok(user);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdateUserProfileDto dto)
+        {
+            var command = new UpdateUserProfileCommand()
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Address = dto.Address,
+                BirthDay = dto.Birthday,
+                Gender = dto.Gender
+            };
+
+            var result = await _mediator.Send(command);
+
+            return CreateResponseFromResult(result);
         }
     }
 }
