@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Orders.DTOs;
 using MediatR;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Orders.Queries
 {
+    [Authorize()]
     public class GetClientOrdersQuery : IRequest<IEnumerable<ClientOrderDto>>
     {
         public string ClientId { get; set; }

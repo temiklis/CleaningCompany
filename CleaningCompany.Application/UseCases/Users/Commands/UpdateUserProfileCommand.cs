@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Users.Commands
 {
+    [Authorize()]
     public class UpdateUserProfileCommand : IRequest<Result<bool>>
     {
         public string FirstName { get; set; }
@@ -32,9 +34,9 @@ namespace CleaningCompany.Application.UseCases.Users.Commands
 
         public async Task<Result<bool>> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
         {
-            var dbUser = _mapper.Map<User>(request);
+            var dbUser = await _identityService.GetUserProfileAsync(_currentUserService.UserId);
 
-            dbUser.Id = _currentUserService.UserId;
+            _mapper.Map(request, dbUser);
 
             var result = await _identityService.UpdateUserProfile(dbUser);
 

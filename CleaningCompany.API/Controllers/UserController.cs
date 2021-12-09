@@ -67,7 +67,7 @@ namespace CleaningCompany.API.Controllers
 
             var result = await _mediator.Send(command);
 
-            return CreateResponseFromResult(result);
+            return CreateResponseFromResult<bool>(result);
         }
     }
 }
