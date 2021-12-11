@@ -11,6 +11,8 @@ namespace CleaningCompany.Domain.Entities
         public DateTime RenderedDate { get; set; }
         public DateTime RequestedDate { get; set; }
 
+        public Order Order { get; set; }
+
         public ICollection<Product> Products { get; set; }
     }
 }

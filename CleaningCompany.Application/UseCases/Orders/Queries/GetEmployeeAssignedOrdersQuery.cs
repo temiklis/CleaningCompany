@@ -11,26 +11,30 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Orders.Queries
 {
-    [Authorize()]
+    [Authorize(Roles ="Employee,Admin")]
     public class GetEmployeeAssignedOrdersQuery : IRequest<IEnumerable<EmployeeAssignedOrderDto>>
     {
-        public string EmployeeId { get; set; }
+
     }
 
     public class GetEmployeeAssignedOrdersQueryHandler : IRequestHandler<GetEmployeeAssignedOrdersQuery, IEnumerable<EmployeeAssignedOrderDto>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICurrentUserService _currentUserService;
 
-        public GetEmployeeAssignedOrdersQueryHandler(IMapper mapper, IUnitOfWork unitOfWork)
+        public GetEmployeeAssignedOrdersQueryHandler(IMapper mapper, IUnitOfWork unitOfWork, ICurrentUserService currentUserService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _currentUserService = currentUserService;
         }
 
         public async Task<IEnumerable<EmployeeAssignedOrderDto>> Handle(GetEmployeeAssignedOrdersQuery request, CancellationToken cancellationToken)
         {
-            var query = _unitOfWork.Orders.GetEmployeeAssignedOrders(request.EmployeeId);
+            var userId = _currentUserService.UserId;
+
+            var query = _unitOfWork.Orders.GetEmployeeAssignedOrders(userId);
             var orders = _mapper.Map<IEnumerable<EmployeeAssignedOrderDto>>(query);
 
             foreach (var order in orders)

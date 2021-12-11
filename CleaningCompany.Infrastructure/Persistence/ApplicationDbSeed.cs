@@ -19,6 +19,26 @@ namespace CleaningCompany.Infrastructure.Persistence
             }
         }
 
+        public static async void InitializeOrderRequests(ApplicationContext context)
+        {
+            if (!context.OrderRequests.Any())
+            {
+                await context.OrderRequests.AddRangeAsync(GetOrderRequests());
+                context.SaveChanges();
+            }
+        }
+
+        public static async void InitializeOrders(ApplicationContext context)
+        {
+            if (!context.Orders.Any())
+            {
+                var employees = context.Employees.Take(2).ToList();
+
+                await context.Orders.AddRangeAsync(GetOrders(employees));
+                context.SaveChanges();
+            }
+        }
+
 
         public static async Task InitializeUser(ApplicationContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -56,12 +76,12 @@ namespace CleaningCompany.Infrastructure.Persistence
 
         private static (string role, string password) GetUserCredentionals(User user)
         {
-            if(user is Client)
+            if (user is Client)
             {
                 return (UserRoles.User.ToString(), "User123");
             }
 
-            if(user is Employee)
+            if (user is Employee)
             {
                 return (UserRoles.Employee.ToString(), "emp123");
             }
@@ -219,6 +239,47 @@ namespace CleaningCompany.Infrastructure.Persistence
                     Description = "Cleaning the entire kitchen is a full 5-6 hour cleaning of everything in the kitchen." +
                     " All equipment is washed inside and out. Wipe down all the furniture, put things in order, throw out the trash and replace the trash bags.",
                     BasePrice = 69.90m
+                }
+            };
+        }
+
+        private static List<OrderRequest> GetOrderRequests()
+        {
+            return new List<OrderRequest>()
+            {
+                new OrderRequest()
+                {
+                    Email = "testUser2@gmail.com",
+                    Address = "Lesi Ukrainki 4/1, 96",
+                    FIO = "Test User 2",
+                    Products = GetProducts().TakeLast(3).ToList(),
+                    RequestedDate = DateTime.Now
+                },
+                new OrderRequest()
+                {
+                    Email = "testUser2@gmail.com",
+                    Address = "Lesi Ukrainki 4/1, 96",
+                    FIO = "Test User 2",
+                    Products = GetProducts().Take(3).ToList(),
+                    RequestedDate = DateTime.Now
+                }
+            };
+        }
+
+        private static List<Order> GetOrders(List<Employee> employees)
+        {
+            return new List<Order>()
+            {
+                new Order()
+                {
+                    ClientId = "55c3e6d8-90a4-4b13-8f33-cdebd0c8404b",
+                    OrderDate = DateTime.Now,
+                    OrderRequestId = GetOrderRequests().FirstOrDefault().Id,
+                    TotalPrice = 200,
+                    Status = Status.Pending,
+                    Products = GetProducts().TakeLast(3).ToList(),
+                    ResponsibleEmployees = employees,
+                    RenderedDate = DateTime.Now
                 }
             };
         }

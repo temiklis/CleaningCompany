@@ -28,6 +28,7 @@ namespace CleaningCompany.Application.UseCases.Orders
                 .ForMember(o => o.Products, s => s.MapFrom(o => string.Join(',', o.Products.Select(p => p.Name))))
                 .ForMember(o => o.ProductsList, s => s.MapFrom(o => o.Products))
                 .ForMember(o => o.EmployeesAmount, s => s.MapFrom(o => o.ResponsibleEmployees.Count))
+                .ForMember(o => o.Address, s => s.MapFrom(o => o.OrderRequest.Address))
                 .ForMember(o => o.TotalIncome, s => s.Ignore());
 
         }

@@ -25,6 +25,15 @@ namespace CleaningCompany.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            /* modelBuilder.Entity<Post>()
+            .HasOne<Blog>()
+            .WithMany()
+            .HasForeignKey(p => p.BlogId);*/
+
+            builder.Entity<OrderRequest>()
+                .HasOne<Order>(or => or.Order)
+                .WithOne(o => o.OrderRequest)
+                .HasForeignKey<Order>(o => o.OrderRequestId);
 
             base.OnModelCreating(builder);
         }

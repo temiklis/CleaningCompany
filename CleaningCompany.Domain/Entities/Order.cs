@@ -17,6 +17,9 @@ namespace CleaningCompany.Domain.Entities
         public string ClientId { get; set; }
         public Client Client { get; set; }
 
+        public int OrderRequestId { get; set; }
+        public OrderRequest OrderRequest { get; set; }
+
         public ICollection<Employee> ResponsibleEmployees { get; set; }
         public ICollection<Product> Products { get; set; }
     }

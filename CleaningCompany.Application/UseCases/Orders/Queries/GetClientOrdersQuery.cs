@@ -9,26 +9,30 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Orders.Queries
 {
-    [Authorize()]
+    [Authorize(Roles ="User,Admin")]
     public class GetClientOrdersQuery : IRequest<IEnumerable<ClientOrderDto>>
     {
-        public string ClientId { get; set; }
+
     }
 
     public class GetClientOrdersQueryHandler : IRequestHandler<GetClientOrdersQuery, IEnumerable<ClientOrderDto>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICurrentUserService _currentUserService;
 
-        public GetClientOrdersQueryHandler(IMapper mapper, IUnitOfWork unitOfWork)
+        public GetClientOrdersQueryHandler(IMapper mapper, IUnitOfWork unitOfWork, ICurrentUserService currentUserService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _currentUserService = currentUserService;
         }
 
         public async Task<IEnumerable<ClientOrderDto>> Handle(GetClientOrdersQuery request, CancellationToken cancellationToken)
         {
-            var query = _unitOfWork.Orders.GetClientOrders(request.ClientId);
+            var userId = _currentUserService.UserId;
+
+            var query = _unitOfWork.Orders.GetClientOrders(userId);
 
             return _mapper.Map<IEnumerable<ClientOrderDto>>(query);
         }

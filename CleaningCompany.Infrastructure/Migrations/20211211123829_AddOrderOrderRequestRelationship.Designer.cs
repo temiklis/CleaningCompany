@@ -4,14 +4,16 @@ using CleaningCompany.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleaningCompany.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211211123829_AddOrderOrderRequestRelationship")]
+    partial class AddOrderOrderRequestRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,8 +83,7 @@ namespace CleaningCompany.Infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("OrderRequestId")
-                        .IsUnique();
+                    b.HasIndex("OrderRequestId");
 
                     b.ToTable("Orders");
                 });
@@ -560,8 +561,8 @@ namespace CleaningCompany.Infrastructure.Migrations
                         .HasForeignKey("ClientId");
 
                     b.HasOne("CleaningCompany.Domain.Entities.OrderRequest", "OrderRequest")
-                        .WithOne("Order")
-                        .HasForeignKey("CleaningCompany.Domain.Entities.Order", "OrderRequestId")
+                        .WithMany()
+                        .HasForeignKey("OrderRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -688,11 +689,6 @@ namespace CleaningCompany.Infrastructure.Migrations
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CleaningCompany.Domain.Entities.OrderRequest", b =>
-                {
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("CleaningCompany.Domain.Entities.Client", b =>

@@ -1,1 +1,82 @@
-<p>user-orders works!</p>
+<div class="col-md-12">
+  <div *ngIf="clientOrders?.length" class="table-block">
+    <div class="table-header text-center">
+      <h1>
+        <span>Orders</span>
+      </h1>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Products</td>
+          <td>Rendered Date</td>
+          <td>Total Price</td>
+          <td>Status</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of clientOrders">
+          <td>{{order.Products}}</td>
+          <td>{{order.RenderedDate | date}}</td>
+          <td>{{order.TotalPrice}} $</td>
+          <td>{{order.Status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="clientRequests?.length">
+    <div class="table-header text-center">
+      <h1>
+        <span>Requests</span>
+      </h1>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Products</td>
+          <td>Address</td>
+          <td>Requested Date</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of clientRequests">
+          <td>{{request.Products}}</td>
+          <td>{{request.Address}}</td>
+          <td>{{request.RequestedDate | date}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="employeeOrders?.length">
+    <div class="table-header text-center">
+      <h1>
+        <span>Orders</span>
+      </h1>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Products</td>
+          <td>Address</td>
+          <td>Rendered Date</td>
+          <td>Status</td>
+          <td>Total Income</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of employeeOrders">
+          <td>{{order.Products}}</td>
+          <td>{{order.Address}}</td>
+          <td>{{order.RenderedDate | date}}</td>
+          <td>{{order.Status}}</td>
+          <td>
+            <span *ngIf="order.Status == 'Completed'">{{order.TotalIncome}}</span>
+            <span *ngIf="order.Status != 'Completed'">-</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

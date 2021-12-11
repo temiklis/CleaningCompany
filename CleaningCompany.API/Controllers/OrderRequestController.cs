@@ -4,7 +4,6 @@ using CleaningCompany.Application.UseCases.OrderRequests.DTOs;
 using CleaningCompany.Application.UseCases.OrderRequests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,8 +43,8 @@ namespace CleaningCompany.API.Controllers
             return Ok(orderRequests);
         }
 
-        [HttpGet("UserRequests")]
-        public async Task<ActionResult<IEnumerable<UserOrderRequestDto>>> GetUserOrderRequests([FromQuery] string email)
+        [HttpGet("Client")]
+        public async Task<ActionResult<IEnumerable<UserOrderRequestDto>>> GetClientOrderRequests([FromQuery] string email)
         {
             var orderRequests = await _mediator.Send(new GetUserOrderRequestsQuery()
             {

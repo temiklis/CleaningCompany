@@ -13,6 +13,7 @@ namespace CleaningCompany.Application.UseCases.Orders.DTOs
         public string Status { get; set; }
         public decimal TotalIncome { get; set; }
         public int EmployeesAmount { get; set; }
+        public string Address { get; set; }
 
         public List<EmployeeOrderProductDto> ProductsList { get; set; }
     }

@@ -27,24 +27,16 @@ namespace CleaningCompany.Infrastructure.Implementations
             return _context.Orders
                 .Include(o => o.Products)
                 .Include(o => o.ResponsibleEmployees)
+                .Include(o => o.OrderRequest)
                 .Where(o => o.ResponsibleEmployees.Any(r => r.Id == employeeId));
-
-            //return _context.Employees
-            //    .Include(e => e.AssignedOrders)
-            //    .ThenInclude(o => o.Products)
-            //    .Include(e => e.AssignedOrders)
-            //    .ThenInclude(o => o.ResponsibleEmployees)
-            //    .Where(e => e.Id == employeeId)
-            //    .SelectMany(e => e.AssignedOrders);
         }
 
         public IQueryable<Order> GetClientOrders(string clientId)
         {
-            return _context.Clients
-                .Include(c => c.Orders)
-                .ThenInclude(o => o.Products)
-                .Where(c => c.Id == clientId)
-                .SelectMany(c => c.Orders);
+            return _context.Orders
+                .Include(o => o.Products)
+                .Include(o => o.Client)
+                .Where(o => o.ClientId == clientId);
         }
     }
 }

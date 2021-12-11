@@ -26,18 +26,18 @@ namespace CleaningCompany.API.Controllers
             return Ok(orders);
         }
 
-        [HttpGet("Client/{clientId}")]
-        public async Task<ActionResult<IEnumerable<ClientOrderDto>>> GetClientOrders([FromRoute] string clientId)
+        [HttpGet("Client")]
+        public async Task<ActionResult<IEnumerable<ClientOrderDto>>> GetClientOrders()
         {
-            var orders = await _mediator.Send(new GetClientOrdersQuery() { ClientId = clientId });
+            var orders = await _mediator.Send(new GetClientOrdersQuery());
 
             return Ok(orders);
         }
 
-        [HttpGet("Employee/{employeeId}")]
-        public async Task<ActionResult<IEnumerable<EmployeeAssignedOrderDto>>> GetEmployeeAssignedOrders([FromRoute] string employeeId)
+        [HttpGet("Employee")]
+        public async Task<ActionResult<IEnumerable<EmployeeAssignedOrderDto>>> GetEmployeeAssignedOrders()
         {
-            var orders = await _mediator.Send(new GetEmployeeAssignedOrdersQuery() { EmployeeId = employeeId });
+            var orders = await _mediator.Send(new GetEmployeeAssignedOrdersQuery());
 
             return Ok(orders);
         }

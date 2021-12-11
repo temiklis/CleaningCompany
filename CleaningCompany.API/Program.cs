@@ -21,7 +21,9 @@ namespace CleaningCompany.API
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
                 ApplicationDbSeed.InitializeProducts(context);
+                ApplicationDbSeed.InitializeOrderRequests(context);
                 ApplicationDbSeed.InitializeUser(context, userManager, roleManager).Wait();
+                ApplicationDbSeed.InitializeOrders(context);
             }
 
             hostBuilder.Run();
