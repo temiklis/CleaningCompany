@@ -7,6 +7,9 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using CleaningCompany.Domain.Entities;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
@@ -17,6 +20,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
         public string Description { get; set; }
         public decimal BasePrice { get; set; }
         public string Difficulty { get; set; }
+        public List<int> MaterialsIds { get; set; }
     }
 
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Result<int>>
@@ -40,7 +44,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
                 return new ValidationErrorResult<int>("Validation error occured", validationResult);
             }
 
-            var product = await _unitOfWork.Products.GetSingleAsync(request.Id);
+            var product = await _unitOfWork.Products.GetProductWithMaterials(request.Id);
 
             if (product == null)
             {
@@ -48,6 +52,12 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             }
 
             _mapper.Map(request, product);
+
+            var result = await AssignMaterialsToProduct(request.MaterialsIds, product);
+
+            if (!result.Success)
+                return result;
+
             _unitOfWork.Products.Update(product);
 
             try
@@ -60,6 +70,33 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             }
 
             return new SuccessResult<int>(product.Id);
+        }
+
+        private async Task<Result<int>> AssignMaterialsToProduct(List<int> materialsIds, Product product)
+        {
+            IEnumerable<Material> materials = Enumerable.Empty<Material>();
+
+            if (materialsIds != null && materialsIds.Count > 0)
+            {
+                materials = await _unitOfWork.Materials.FindAsync(m => materialsIds.Contains(m.Id));
+            }
+
+            var isAllMaterialExist = materials.Count() == materialsIds.Count;
+
+            if (!isAllMaterialExist)
+            {
+                var notExistMaterials = materialsIds.Except(materials.Select(m => m.Id));
+                return new ErrorResult<int>($"Some meterials doesn't exist. Ids: {string.Join(',', notExistMaterials)}");
+            }
+
+            product.Materials.Clear();
+            foreach (var material in materials)
+            {
+                product.Materials.Add(material);
+            }
+
+
+            return new SuccessResult<int>(default);
         }
     }
 }

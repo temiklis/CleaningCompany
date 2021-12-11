@@ -24,30 +24,32 @@ namespace CleaningCompany.API.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateProductDto createProductDto)
         {
-            var id = await _mediator.Send(new CreateProductCommand()
+            var result = await _mediator.Send(new CreateProductCommand()
             {
                 Name = createProductDto.Name,
                 Description = createProductDto.Description,
                 BasePrice = createProductDto.BasePrice,
-                Difficulty = createProductDto.Difficulty
+                Difficulty = createProductDto.Difficulty,
+                MaterialsIds = createProductDto.MaterialsIds.ToList()
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
 
         [HttpPut]
         public async Task<ActionResult<int>> Update(UpdateProductDto updateProductDto)
         {
-            var id = await _mediator.Send(new UpdateProductCommand()
+            var result = await _mediator.Send(new UpdateProductCommand()
             {
                 Id = updateProductDto.Id,
                 Name = updateProductDto.Name,
                 Description = updateProductDto.Description,
                 BasePrice = updateProductDto.BasePrice,
-                Difficulty = updateProductDto.Difficulty
+                Difficulty = updateProductDto.Difficulty,
+                MaterialsIds = updateProductDto.MaterialsIds.ToList()
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
 
         [HttpGet]

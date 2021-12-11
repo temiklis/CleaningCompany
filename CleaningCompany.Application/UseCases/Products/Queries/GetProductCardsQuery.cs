@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Products.Queries
 {
-    [Authorize(Roles = "User")]
     public class GetProductCardsQuery : IRequest<IEnumerable<ProductCardDto>>
     {
 
