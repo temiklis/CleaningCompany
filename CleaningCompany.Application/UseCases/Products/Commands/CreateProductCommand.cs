@@ -8,6 +8,8 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
@@ -17,6 +19,7 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
         public string Description { get; set; }
         public decimal BasePrice { get; set; }
         public string Difficulty { get; set; }
+        public List<int> MaterialsIds { get; set; }
     }
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<int>>
@@ -48,6 +51,11 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
                 return new ErrorResult<int>("Product with the same name already exists");
             }
 
+            var result = await AssignMaterialsToProduct(request.MaterialsIds, product);
+            if (!result.Success)
+                return result;
+
+
             var createdProduct = await _unitOfWork.Products.CreateAsync(product);
 
             try
@@ -60,6 +68,34 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             }
 
             return new SuccessResult<int>(createdProduct.Id);
+        }
+
+
+        private async Task<Result<int>> AssignMaterialsToProduct(List<int> materialsIds, Product product)
+        {
+            IEnumerable<Material> materials = Enumerable.Empty<Material>();
+
+            if (materialsIds != null && materialsIds.Count > 0)
+            {
+                materials = await _unitOfWork.Materials.FindAsync(m => materialsIds.Contains(m.Id));          
+            }
+
+            var isAllMaterialExist = materials.Count() == materialsIds.Count;
+
+            if (!isAllMaterialExist)
+            {
+                var notExistMaterials = materialsIds.Except(materials.Select(m => m.Id));
+                return new ErrorResult<int>($"Some meterials doesn't exist. Ids: {string.Join(',', notExistMaterials)}");
+            }
+
+            product.Materials = new List<Material>();
+            foreach (var material in materials)
+            {
+                product.Materials.Add(material);
+            }
+
+
+            return new SuccessResult<int>(default);
         }
     }
 }

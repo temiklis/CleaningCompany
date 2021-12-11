@@ -1,4 +1,6 @@
-﻿namespace CleaningCompany.Application.UseCases.Products.DTOs
+﻿using System.Collections.Generic;
+
+namespace CleaningCompany.Application.UseCases.Products.DTOs
 {
     public class CreateProductDto
     {
@@ -6,5 +8,6 @@
         public string Description { get; set; }
         public decimal BasePrice { get; set; }
         public string Difficulty { get; set; }
+        public IEnumerable<int> MaterialsIds { get; set; }
     }
 }
