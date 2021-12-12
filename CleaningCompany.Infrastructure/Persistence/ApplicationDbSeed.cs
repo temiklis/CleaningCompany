@@ -1,6 +1,7 @@
 ﻿using CleaningCompany.Domain.Entities;
 using CleaningCompany.Domain.Entities.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,8 @@ namespace CleaningCompany.Infrastructure.Persistence
         {
             if (!context.OrderRequests.Any())
             {
-                await context.OrderRequests.AddRangeAsync(GetOrderRequests());
+                var products = context.Products.Take(6).ToList();
+                await context.OrderRequests.AddRangeAsync(GetOrderRequests(products));
                 context.SaveChanges();
             }
         }
@@ -34,7 +36,16 @@ namespace CleaningCompany.Infrastructure.Persistence
             {
                 var employees = context.Employees.Take(2).ToList();
 
-                await context.Orders.AddRangeAsync(GetOrders(employees));
+                var clients =  context.Clients
+                    .Take(5)
+                    .ToList();
+
+                var orderRequests = context.OrderRequests
+                    .Take(5)
+                    .Include(or => or.Products)
+                    .ToList();
+
+                await context.Orders.AddRangeAsync(GetOrders(employees, clients, orderRequests));
                 context.SaveChanges();
             }
         }
@@ -91,7 +102,19 @@ namespace CleaningCompany.Infrastructure.Persistence
 
         private static List<User> GetUsers()
         {
-            return new List<User>()
+            var users = new List<User>();
+
+            users.AddRange(GetClients());
+            users.AddRange(GetEmployees());
+            users.AddRange(GetAdmins());
+
+            return users;
+        }
+
+
+        private static List<Client> GetClients()
+        {
+            return new List<Client>()
             {
                 new Client()
                 {
@@ -122,7 +145,14 @@ namespace CleaningCompany.Infrastructure.Persistence
                     Birthday = new DateTime(1997, 01, 31),
                     Discount = Discount.VIP,
                     Gender = Gender.Female
-                },
+                }
+            };
+        }
+
+        private static List<Employee> GetEmployees()
+        {
+            return new List<Employee>()
+            {
                 new Employee()
                 {
                     Email = "testEmployeeNumber1@gmail.com",
@@ -144,7 +174,13 @@ namespace CleaningCompany.Infrastructure.Persistence
                     Gender = Gender.Male,
                     HireDate = new DateTime(2011, 06, 2),
                     PhoneNumber = "+375296603042"
-                },
+                }
+            };
+        }
+
+        private static List<User> GetAdmins()
+        {
+            return new List<User>() {
                 new User()
                 {
                     Email = "Admin@gmail.com",
@@ -250,7 +286,7 @@ namespace CleaningCompany.Infrastructure.Persistence
             };
         }
 
-        private static List<OrderRequest> GetOrderRequests()
+        private static List<OrderRequest> GetOrderRequests(List<Product> products)
         {
             return new List<OrderRequest>()
             {
@@ -259,7 +295,7 @@ namespace CleaningCompany.Infrastructure.Persistence
                     Email = "testUser2@gmail.com",
                     Address = "Lesi Ukrainki 4/1, 96",
                     FIO = "Test User 2",
-                    Products = GetProducts().TakeLast(3).ToList(),
+                    Products = products.TakeLast(3).ToList(),
                     RequestedDate = DateTime.Now
                 },
                 new OrderRequest()
@@ -267,24 +303,24 @@ namespace CleaningCompany.Infrastructure.Persistence
                     Email = "testUser2@gmail.com",
                     Address = "Lesi Ukrainki 4/1, 96",
                     FIO = "Test User 2",
-                    Products = GetProducts().Take(3).ToList(),
+                    Products =products.Take(3).ToList(),
                     RequestedDate = DateTime.Now
                 }
             };
         }
 
-        private static List<Order> GetOrders(List<Employee> employees)
+        private static List<Order> GetOrders(List<Employee> employees, List<Client> clients, List<OrderRequest> orderRequests)
         {
             return new List<Order>()
             {
                 new Order()
                 {
-                    ClientId = "55c3e6d8-90a4-4b13-8f33-cdebd0c8404b",
+                    ClientId = clients.First().Id,
                     OrderDate = DateTime.Now,
-                    OrderRequestId = GetOrderRequests().FirstOrDefault().Id,
+                    OrderRequestId = orderRequests.FirstOrDefault().Id,
                     TotalPrice = 200,
                     Status = Status.Pending,
-                    Products = GetProducts().TakeLast(3).ToList(),
+                    Products = orderRequests.FirstOrDefault().Products,
                     ResponsibleEmployees = employees,
                     RenderedDate = DateTime.Now
                 }

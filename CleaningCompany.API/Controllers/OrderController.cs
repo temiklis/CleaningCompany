@@ -1,4 +1,5 @@
 ﻿using CleaningCompany.Application.UseCases.Orders;
+using CleaningCompany.Application.UseCases.Orders.Commands;
 using CleaningCompany.Application.UseCases.Orders.DTOs;
 using CleaningCompany.Application.UseCases.Orders.Queries;
 using CleaningCompany.Results;
@@ -17,6 +18,20 @@ namespace CleaningCompany.API.Controllers
         public OrderController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Create(CreateOrderDto createOrderDto)
+        {
+            var command = new CreateOrderCommand()
+            {
+                OrderRequestId = createOrderDto.OrderRequestId,
+                Employees = createOrderDto.Employees
+            };
+
+            var result = await _mediator.Send(command);
+
+            return CreateResponseFromResult<int>(result);
         }
 
         [HttpGet]
