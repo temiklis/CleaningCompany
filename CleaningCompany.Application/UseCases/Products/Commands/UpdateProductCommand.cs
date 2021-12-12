@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using CleaningCompany.Domain.Entities;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
+    [Authorize(Roles = "Admin")]
     public class UpdateProductCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
@@ -80,13 +82,19 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             {
                 materials = await _unitOfWork.Materials.FindAsync(m => materialsIds.Contains(m.Id));
             }
+            else
+            {
+                product.Materials.Clear();
+
+                return new SuccessResult<int>(default);
+            }
 
             var isAllMaterialExist = materials.Count() == materialsIds.Count;
 
             if (!isAllMaterialExist)
             {
                 var notExistMaterials = materialsIds.Except(materials.Select(m => m.Id));
-                return new ErrorResult<int>($"Some meterials doesn't exist. Ids: {string.Join(',', notExistMaterials)}");
+                return new ErrorResult<int>($"Some materials doesn't exist. Ids: {string.Join(',', notExistMaterials)}");
             }
 
             product.Materials.Clear();

@@ -36,6 +36,29 @@ export class HelperService {
     return this.alertWithTitle("Error", message);
   }
 
+  confirmPopup(title: string, message: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      Swal.fire({
+        title: title,
+        text: message,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "YES",
+        cancelButtonText: "NO",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        buttonsStyling: false,
+      }).then((result) => {
+        if (result.value) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
   toDBDate(date: Date) {
     return moment(date).add(0 - date.getTimezoneOffset(), 'm').utc().toISOString();
   }

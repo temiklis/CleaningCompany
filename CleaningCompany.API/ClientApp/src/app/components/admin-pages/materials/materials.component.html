@@ -78,7 +78,7 @@
           <div class="col-md-6">
           </div>
           <div class="col-md-6">
-            <ngb-pagination [collectionSize]="materials?.length"
+            <ngb-pagination [collectionSize]="pagination?.TotalCount"
                             [pageSize]="searchParams.PageSize"
                             [(page)]="searchParams.PageNumber"
                             (pageChange)="updateResults($event)"></ngb-pagination>

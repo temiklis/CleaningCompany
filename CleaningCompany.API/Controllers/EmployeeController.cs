@@ -1,6 +1,7 @@
 ﻿using CleaningCompany.Application.UseCases.Employees;
 using CleaningCompany.Application.UseCases.Employees.DTOs;
 using CleaningCompany.Application.UseCases.Employees.Queries;
+using CleaningCompany.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -20,9 +21,11 @@ namespace CleaningCompany.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get([FromQuery]EmployeeParameters parameters)
         {
-            var employees = await _mediator.Send(new GetAllEmployeesQuery(parameters));
+            var result = await _mediator.Send(new GetAllEmployeesQuery(parameters));
 
-            return Ok(employees);
+            AddPaginationHeader(result);
+
+            return CreateResponseFromResult<PagedList<EmployeeDto>>(result);
         }
     }
 }

@@ -174,7 +174,8 @@ namespace CleaningCompany.Infrastructure.Persistence
                     "to the usual maintenance of order, the windows are also washed seasonally, the territory is put in order," +
                     " garages and baths are cleaned. If you are waiting for guests before the holiday, then most likely you will" +
                     " need a general cleaning. Cleaners from the special team will be able to bring global order to the house in 8-10 hours!",
-                    BasePrice = 400
+                    BasePrice = 400,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
@@ -190,12 +191,14 @@ namespace CleaningCompany.Infrastructure.Persistence
                     "The contract must always be drawn up at the request of the customer before starting work. " +
                     "If you are refused to draw up a contract, it is likely that the cleaning representatives " +
                     "are not confident in their abilities and do not want to be held responsible for the work performed.",
-                    BasePrice = 270
+                    BasePrice = 270,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
                     Name = "Cleaning of office premises",
-                    BasePrice = 270
+                    BasePrice = 270,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
@@ -207,7 +210,8 @@ namespace CleaningCompany.Infrastructure.Persistence
                     " but also in the fact that the employees do not spoil anything. Therefore, it is necessary that the entire responsibility " +
                     "of the cleaning company be spelled out in the contract. You are for? We, too! In fact, you get an apartment in which you will enjoy cleanliness and order," +
                     " without thinking about the safety of your property.",
-                    BasePrice = 120.90m
+                    BasePrice = 120.90m,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
@@ -219,7 +223,8 @@ namespace CleaningCompany.Infrastructure.Persistence
                     "but also in the fact that the employees do not spoil anything. Therefore, it is necessary that the entire responsibility " +
                     "of the cleaning company be spelled out in the contract. You are for? We, too! In fact, you get an apartment in which you will enjoy cleanliness and order, " +
                     "without thinking about the safety of your property.",
-                    BasePrice = 180.60m
+                    BasePrice = 180.60m,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
@@ -231,14 +236,16 @@ namespace CleaningCompany.Infrastructure.Persistence
                     "but also in the fact that the employees do not spoil anything. " +
                     "Therefore, it is necessary that the entire responsibility of the cleaning company be spelled out in the contract. " +
                     "You are for? We, too! In fact, you get an apartment in which you will enjoy cleanliness and order, without thinking about the safety of your property.",
-                    BasePrice = 270.50m
+                    BasePrice = 270.50m,
+                    Difficulty = Difficulty.Low
                 },
                 new Product()
                 {
                     Name = "Kitchen cleaning",
                     Description = "Cleaning the entire kitchen is a full 5-6 hour cleaning of everything in the kitchen." +
                     " All equipment is washed inside and out. Wipe down all the furniture, put things in order, throw out the trash and replace the trash bags.",
-                    BasePrice = 69.90m
+                    BasePrice = 69.90m,
+                    Difficulty = Difficulty.Low
                 }
             };
         }

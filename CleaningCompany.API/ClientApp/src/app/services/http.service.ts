@@ -19,23 +19,13 @@ export class HttpService {
         .get(this.apiBaseUrl + url, {
           headers: this.applyHeaders(),
           params: params,
+          observe: 'response'
+        }).subscribe(resp => {
+          var value = resp.headers.get('X-Pagination');
+          localStorage.setItem('X-Pagination', value);
+
+          success(resp.body as Promise<T>);
         })
-        .subscribe(
-          (results) => {
-            success(results as Promise<T>);
-          },
-          (error) => {
-            if (error.status === 401 || error.status === 403) {
-              this.redirectToLogin();
-            }
-            else if (error.status === 404) {
-              this.redirectToNotFound();
-            }
-            else {
-              fail(error);
-            }
-          }
-        );
     });
   }
 

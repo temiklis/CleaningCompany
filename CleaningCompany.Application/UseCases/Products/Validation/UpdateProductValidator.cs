@@ -10,7 +10,6 @@ namespace CleaningCompany.Application.UseCases.Products.Validation
         {
             RuleFor(p => p.Id).NotEmpty();
             RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.Description).NotEmpty();
             RuleFor(c => c.Difficulty).NotEmpty().IsEnumName(typeof(Difficulty));
             RuleFor(c => c.BasePrice).NotEmpty();
         }

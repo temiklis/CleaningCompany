@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MaterialSearchParams } from '../../../models/interfaces/Materials/MaterialSearchParams';
 import { MaterialWithProducts } from '../../../models/interfaces/Materials/MaterialWithProducts';
+import { XPagination } from '../../../models/interfaces/X-Pagination';
 import { MaterialsService } from '../../../services/materials.service';
 
 @Component({
@@ -19,7 +21,10 @@ export class MaterialsComponent implements OnInit {
     PageSize: 10
   }
 
-  constructor(private materialService: MaterialsService) { }
+  pagination: XPagination;
+
+  constructor(private materialService: MaterialsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.searchParams = { ...this.defaultSearchParams };
@@ -29,15 +34,16 @@ export class MaterialsComponent implements OnInit {
   getMaterials() {
     this.materialService.getAllMaterials(this.searchParams).then(results => {
       this.materials = results;
+      this.pagination = JSON.parse(localStorage.getItem('X-Pagination'));
     })
   }
 
   goToCreateMaterial() {
-
+    this.router.navigate(['admin/materials/create']);
   }
 
   goToMaterialDetails(id: number) {
-
+    this.router.navigate([`admin/materials/${id}`]);
   }
 
   updateResults(page: number) {

@@ -8,9 +8,11 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Materials.Commands
 {
+    [Authorize(Roles = "Admin")]
     public class CreateMaterialCommand : IRequest<Result<int>>
     {
         public string Name { get; set; }

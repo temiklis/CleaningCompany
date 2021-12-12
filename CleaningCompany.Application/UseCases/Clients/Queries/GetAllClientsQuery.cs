@@ -5,6 +5,7 @@ using CleaningCompany.Application.UseCases.Clients.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Domain.Entities.Enums;
 using CleaningCompany.Results;
+using CleaningCompany.Results.Implementations;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 namespace CleaningCompany.Application.UseCases.Clients.Queries
 {
     [Authorize(Roles = "Admin")]
-    public class GetAllClientsQuery : IRequest<IEnumerable<ClientDto>>
+    public class GetAllClientsQuery : IRequest<Result<PagedList<ClientDto>>>
     {
         public ClientParameters Parameters { get; private set; }
         public GetAllClientsQuery(ClientParameters parameters)
@@ -23,7 +24,7 @@ namespace CleaningCompany.Application.UseCases.Clients.Queries
         }
     }
 
-    public class GetAllClientsQueryHandler : IRequestHandler<GetAllClientsQuery, IEnumerable<ClientDto>>
+    public class GetAllClientsQueryHandler : IRequestHandler<GetAllClientsQuery, Result<PagedList<ClientDto>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -34,7 +35,7 @@ namespace CleaningCompany.Application.UseCases.Clients.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<ClientDto>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<ClientDto>>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
         {
             var query = _unitOfWork.Clients.GetAllClientsWithOrders();
 
@@ -43,7 +44,7 @@ namespace CleaningCompany.Application.UseCases.Clients.Queries
             var dtos = await PagedList<Client>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
                 _mapper.Map<IEnumerable<ClientDto>>);
 
-            return dtos;
+            return new SuccessResult<PagedList<ClientDto>>(dtos);
         }
 
         private static IQueryable<Client> GetFilters(IQueryable<Client> query, ClientParameters parameters)

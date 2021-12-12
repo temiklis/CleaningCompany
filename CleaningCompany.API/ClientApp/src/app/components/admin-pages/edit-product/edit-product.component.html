@@ -1,0 +1,92 @@
+<div>
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item pointer">
+      <a (click)="goToProducts()">Products</a>
+    </li>
+    <li class="breadcrumb-item active" *ngIf="!isCreate">{{product?.Name}}</li>
+    <li class="breadcrumb-item active" *ngIf="isCreate">Create</li>
+  </ul>
+  <h1 class="page-header mb-0" *ngIf="!isCreate">{{product?.Name}}</h1>
+  <h1 class="page-header mb-0" *ngIf="isCreate">New Product</h1>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">General</h4>
+          </div>
+          <div class="card-body" *ngIf="productForm">
+            <span class="float-end text-danger">* Required</span>
+            <form [formGroup]="productForm">
+              <div class="form-group">
+                <label>
+                  Name
+                  <span class="text-danger">*</span>
+                </label>
+                <input formControlName="Name" type="text" class="form-control" />
+                <div class="alert alert-danger"
+                     *ngIf="productForm.controls['Name'].invalid && productForm.controls['Name'].touched">
+                  Name is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label>
+                  Description
+                </label>
+                <textarea formControlName="Description" class="form-control" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label>
+                  Base Price
+                  <span class="text-danger">*</span>
+                </label>
+                <input formControlName="BasePrice" type="text" class="form-control" />
+                <div class="alert alert-danger"
+                     *ngIf="productForm.controls['BasePrice'].invalid && productForm.controls['BasePrice'].touched">
+                  Base Price is not valid or not provided
+                </div>
+              </div>
+              <div class="form-group">
+                <label>
+                  Difficulty
+                  <span class="text-danger">*</span>
+                </label>
+                <select formControlName="Difficulty" class="form-control">
+                  <option *ngFor="let difficulty of difficulties" [value]="difficulty.Name">{{difficulty.Name}}</option>
+                </select>
+                <div class="alert alert-danger"
+                     *ngIf="productForm.controls['Difficulty'].invalid && productForm.controls['Difficulty'].touched">
+                  Difficulty is required
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="productForm">
+          <button class="btn btn-lg btn-secondary cancel-btn" (click)="cancel()">Cancel</button>
+          <button class="btn btn-lg btn-success save-btn" (click)="save()" [disabled]="productForm.invalid">
+            <i class="fa fa-save me-1"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="!isCreate">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">Actions</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-outline-warning mb-2 delete-btn" (click)="deleteProduct()">Delete Product</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

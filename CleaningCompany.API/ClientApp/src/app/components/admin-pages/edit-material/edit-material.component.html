@@ -1,0 +1,73 @@
+<div>
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item pointer">
+      <a (click)="goToMaterials()">Materials</a>
+    </li>
+    <li class="breadcrumb-item active" *ngIf="!isCreate">{{material?.Name}}</li>
+    <li class="breadcrumb-item active" *ngIf="isCreate">Create</li>
+  </ul>
+  <h1 class="page-header mb-0" *ngIf="!isCreate">{{ material?.Name}}</h1>
+  <h1 class="page-header mb-0" *ngIf="isCreate">New Material</h1>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">General</h4>
+          </div>
+          <div class="card-body" *ngIf="materialForm">
+            <span class="float-end text-danger">* Required</span>
+            <form [formGroup]="materialForm">
+              <div class="form-group">
+                <label>
+                  Name
+                  <span class="text-danger">*</span>
+                </label>
+                <input formControlName="Name" type="text" class="form-control" />
+                <div class="alert alert-danger"
+                     *ngIf="materialForm.controls['Name'].invalid && materialForm.controls['Name'].touched">
+                  Name is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label>
+                  Price
+                  <span class="text-danger">*</span>
+                </label>
+                <input formControlName="Price" type="text" class="form-control" />
+                <div class="alert alert-danger"
+                     *ngIf="materialForm.controls['Price'].invalid && materialForm.controls['Price'].touched">
+                  Price is not valid or not provided
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="materialForm">
+          <button class="btn btn-lg btn-secondary cancel-btn" (click)="cancel()">Cancel</button>
+          <button class="btn btn-lg btn-success save-btn" (click)="save()" [disabled]="materialForm.invalid">
+            <i class="fa fa-save me-1"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="!isCreate">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">Actions</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-outline-warning mb-2 delete-btn" (click)="deleteMaterial()">Delete Material</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

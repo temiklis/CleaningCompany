@@ -2,9 +2,9 @@
 using CleaningCompany.Application.UseCases.Products.Commands;
 using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Application.UseCases.Products.Queries;
+using CleaningCompany.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +30,7 @@ namespace CleaningCompany.API.Controllers
                 Description = createProductDto.Description,
                 BasePrice = createProductDto.BasePrice,
                 Difficulty = createProductDto.Difficulty,
-                MaterialsIds = createProductDto.MaterialsIds.ToList()
+                MaterialsIds = createProductDto.Materials.ToList()
             });
 
             return CreateResponseFromResult<int>(result);
@@ -46,7 +46,7 @@ namespace CleaningCompany.API.Controllers
                 Description = updateProductDto.Description,
                 BasePrice = updateProductDto.BasePrice,
                 Difficulty = updateProductDto.Difficulty,
-                MaterialsIds = updateProductDto.MaterialsIds.ToList()
+                MaterialsIds = updateProductDto.Materials.ToList()
             });
 
             return CreateResponseFromResult<int>(result);
@@ -55,21 +55,23 @@ namespace CleaningCompany.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] ProductParameters parameters)
         {
-            var products = await _mediator.Send(new GetAllProductsQuery(parameters));
+            var result = await _mediator.Send(new GetAllProductsQuery(parameters));
 
-            return Ok(products);
+            AddPaginationHeader(result);
+
+            return CreateResponseFromResult<PagedList<ProductDto>>(result);
         }
 
         [HttpGet("Cards")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetCards()
+        public async Task<ActionResult<IEnumerable<ProductCardDto>>> GetCards()
         {
             var cards = await _mediator.Send(new GetProductCardsQuery());
 
             return Ok(cards);
         }
 
-        [HttpGet("id")]
-        public async Task<ActionResult<ProductDto>> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductWithMaterialsDto>> Get([FromRoute] int id)
         {
             var product = await _mediator.Send(new GetProductByIdQuery()
             {
@@ -79,15 +81,15 @@ namespace CleaningCompany.API.Controllers
             return Ok(product);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<int>> Delete(DeleteProductDto deleteProductDto)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> Delete([FromRoute] int id)
         {
-            var id = await _mediator.Send(new DeleteProductCommand()
+            var result = await _mediator.Send(new DeleteProductCommand()
             {
-                Id = deleteProductDto.Id
+                Id = id
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
     }
 }

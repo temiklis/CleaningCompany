@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderRequestSearchParams } from '../../../models/interfaces/OrderRequests/OrderRequestSearchParams';
 import { OrderRequestWithProducts } from '../../../models/interfaces/OrderRequests/OrderRequestWithProducts';
+import { XPagination } from '../../../models/interfaces/X-Pagination';
 import { OrderRequestsService } from '../../../services/order-requests.service';
 
 @Component({
@@ -21,6 +22,8 @@ export class OrderRequestsComponent implements OnInit {
     PageSize: 10
   }
 
+  pagination: XPagination;
+
   constructor(private orderREquestService: OrderRequestsService) { }
 
   ngOnInit(): void {
@@ -31,6 +34,7 @@ export class OrderRequestsComponent implements OnInit {
   getOrderRequests() {
     this.orderREquestService.getAllOrderRequests(this.searchParams).then(results => {
       this.orderRequests = results;
+      this.pagination = JSON.parse(localStorage.getItem('X-Pagination'));
     })
   }
 

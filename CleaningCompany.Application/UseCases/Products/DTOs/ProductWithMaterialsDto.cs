@@ -2,12 +2,14 @@
 
 namespace CleaningCompany.Application.UseCases.Products.DTOs
 {
-    public class CreateProductDto
+    public class ProductWithMaterialsDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal BasePrice { get; set; }
         public string Difficulty { get; set; }
+
         public IEnumerable<int> Materials { get; set; }
     }
 }

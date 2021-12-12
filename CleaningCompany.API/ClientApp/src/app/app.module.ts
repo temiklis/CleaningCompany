@@ -31,6 +31,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserInfoComponent } from './components/common-components/user-info/user-info.component';
 import { UserOrdersComponent } from './components/common-components/user-orders/user-orders.component';
+import { EditMaterialComponent } from './components/admin-pages/edit-material/edit-material.component';
+import { EditProductComponent } from './components/admin-pages/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { UserOrdersComponent } from './components/common-components/user-orders/
     ProfileComponent,
     UserInfoComponent,
     UserOrdersComponent,
+    EditMaterialComponent,
+    EditProductComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

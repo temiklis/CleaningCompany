@@ -1,6 +1,7 @@
 ﻿using CleaningCompany.Application.UseCases.Orders;
 using CleaningCompany.Application.UseCases.Orders.DTOs;
 using CleaningCompany.Application.UseCases.Orders.Queries;
+using CleaningCompany.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -21,9 +22,11 @@ namespace CleaningCompany.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDto>>> Get(OrderParameters parameters)
         {
-            var orders = await _mediator.Send(new GetAllOrdersQuery(parameters));
+            var result = await _mediator.Send(new GetAllOrdersQuery(parameters));
 
-            return Ok(orders);
+            AddPaginationHeader(result);
+
+            return CreateResponseFromResult<PagedList<OrderDto>>(result);
         }
 
         [HttpGet("Client")]

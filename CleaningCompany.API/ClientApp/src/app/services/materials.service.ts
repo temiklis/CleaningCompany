@@ -27,4 +27,20 @@ export class MaterialsService {
 
     return this.httpService.GET<MaterialWithProducts[]>('Material', validParameters)
   }
+
+  getMaterialById(id: number): Promise<Material> {
+    return this.httpService.GET<Material>(`Material/${id}`);
+  }
+
+  createMaterial(material: Material): Promise<any> {
+    return this.httpService.POST('Material', material);
+  }
+
+  updateMaterial(material: Material): Promise<any> {
+    return this.httpService.PUT('Material', material);
+  }
+
+  deleteMaterial(id: number): Promise<any> {
+    return this.httpService.DELETE(`Material/${id}`);
+  }
 }

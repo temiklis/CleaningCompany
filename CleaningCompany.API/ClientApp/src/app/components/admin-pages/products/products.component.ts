@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../../models/interfaces/Products/Product';
 import { ProductSearchParams } from '../../../models/interfaces/Products/ProductSearchParams';
+import { XPagination } from '../../../models/interfaces/X-Pagination';
 import { ProductsService } from '../../../services/products.service';
 
 @Component({
@@ -20,6 +21,8 @@ export class ProductsComponent implements OnInit {
     PageSize: 10
   }
 
+  pagination: XPagination;
+
   constructor(private productService: ProductsService,
     private router: Router) { }
 
@@ -31,15 +34,16 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.productService.getAllProducts(this.searchParams).then(results => {
       this.products = results;
+      this.pagination = JSON.parse(localStorage.getItem('X-Pagination'));
     })
   }
 
   goToCreateProduct() {
-
+    this.router.navigate(['admin/products/create']);
   }
 
   goToProductDetails(id: number) {
-
+    this.router.navigate([`admin/products/${id}`]);
   }
 
   updateResults(page: number) {

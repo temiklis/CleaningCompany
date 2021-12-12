@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../../models/interfaces/Employees/Employee';
 import { EmployeeSearchParams } from '../../../models/interfaces/Employees/EmployeeSearchParams';
+import { XPagination } from '../../../models/interfaces/X-Pagination';
 import { EmployeeService } from '../../../services/employee.service';
 
 @Component({
@@ -19,6 +20,8 @@ export class EmployeesComponent implements OnInit {
     PageSize: 10
   }
 
+  pagination: XPagination;
+
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class EmployeesComponent implements OnInit {
   getEmployees() {
     this.employeeService.getAllEmployees(this.searchParams).then(employees => {
       this.employees = employees;
+      this.pagination = JSON.parse(localStorage.getItem('X-Pagination'));
     })
   }
 

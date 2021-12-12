@@ -4,6 +4,7 @@ using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Employees.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
+using CleaningCompany.Results.Implementations;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace CleaningCompany.Application.UseCases.Employees.Queries
 {
     [Authorize(Roles = "Admin")]
-    public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
+    public class GetAllEmployeesQuery : IRequest<Result<PagedList<EmployeeDto>>>
     {
         public EmployeeParameters Parameters { get; private set; }
         public GetAllEmployeesQuery(EmployeeParameters parameters)
@@ -22,7 +23,7 @@ namespace CleaningCompany.Application.UseCases.Employees.Queries
         }
     }
 
-    public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeDto>>
+    public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, Result<PagedList<EmployeeDto>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -33,7 +34,7 @@ namespace CleaningCompany.Application.UseCases.Employees.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<EmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<EmployeeDto>>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
             var query = _unitOfWork.Employees.GetAllAsync();
 
@@ -42,7 +43,7 @@ namespace CleaningCompany.Application.UseCases.Employees.Queries
             var dtos = await PagedList<Employee>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
                 _mapper.Map<IEnumerable<EmployeeDto>>);
 
-            return dtos;
+            return new SuccessResult<PagedList<EmployeeDto>>(dtos);
         }
 
         private static IQueryable<Employee> GetFilters(IQueryable<Employee> query, EmployeeParameters parameters)

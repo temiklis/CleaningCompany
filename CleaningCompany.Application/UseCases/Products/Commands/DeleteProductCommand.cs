@@ -4,14 +4,13 @@ using CleaningCompany.Results;
 using CleaningCompany.Results.Implementations;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteProductCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }

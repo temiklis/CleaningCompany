@@ -2,6 +2,7 @@
 using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
 using CleaningCompany.Application.UseCases.Materials.Queries;
+using CleaningCompany.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,38 +25,40 @@ namespace CleaningCompany.API.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateMaterialDto createMaterialDto)
         {
-            var id = await _mediator.Send(new CreateMaterialCommand()
+            var result = await _mediator.Send(new CreateMaterialCommand()
             {
                 Name = createMaterialDto.Name,
                 Price = createMaterialDto.Price
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
 
         [HttpPut]
         public async Task<ActionResult<int>> Update(UpdateMaterialDto updateMaterialDto)
         {
-            var id = await _mediator.Send(new UpdateMaterialCommand()
+            var result = await _mediator.Send(new UpdateMaterialCommand()
             {
                 Id = updateMaterialDto.Id,
                 Name = updateMaterialDto.Name,
                 Price = updateMaterialDto.Price
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MaterialWithProductsStringDto>>> Get([FromQuery] MaterialParameters parameters)
         {
-            var materials = await _mediator.Send(new GetAllMaterialsQuery(parameters));
+            var result = await _mediator.Send(new GetAllMaterialsQuery(parameters));
 
-            return Ok(materials);
+            AddPaginationHeader(result);
+
+            return CreateResponseFromResult<PagedList<MaterialWithProductsStringDto>>(result);
         }
 
-        [HttpGet("id")]
-        public async Task<ActionResult<MaterialDto>> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MaterialDto>> Get([FromRoute] int id)
         {
             var material = await _mediator.Send(new GetMaterialByIdQuery()
             {
@@ -76,15 +79,15 @@ namespace CleaningCompany.API.Controllers
             return Ok(materials);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<int>> Delete(DeleteMaterialDto deleteMaterialDto)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> Delete([FromRoute] int id)
         {
-            var id = await _mediator.Send(new DeleteMaterialCommand()
+            var result = await _mediator.Send(new DeleteMaterialCommand()
             {
-                Id = deleteMaterialDto.Id
+                Id = id
             });
 
-            return Ok(id);
+            return CreateResponseFromResult<int>(result);
         }
     }
 }

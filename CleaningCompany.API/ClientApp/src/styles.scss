@@ -72,5 +72,51 @@ body {
   text-align: center;
 }
 
+.breadcrumb {
+  font-weight: 700;
+  font-size: 90%;
+  padding: 0;
+  background: 0 0;
+  border-radius: 0;
+  margin-bottom: 1rem;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-item.active {
+  color: #657eae;
+}
+
+.breadcrumb-item + .breadcrumb-item {
+  padding-left: .5rem;
+}
+
+.card {
+  border: 1px solid rgba(101,126,174,.25);
+  border-radius: 9px;
+}
+
+.card-header:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.card-header {
+  padding: .5rem 1rem;
+  margin-bottom: 0;
+  background-color: rgba(218,224,236,.25);
+  border-bottom: 1px solid rgba(101,126,174,.25);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.float-end {
+  float: right;
+}
+
+h1.page-header {
+  padding-bottom: 20px;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

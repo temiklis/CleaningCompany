@@ -75,7 +75,7 @@ namespace CleaningCompany.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(builder => builder.AllowAnyHeader().WithExposedHeaders("*").AllowAnyMethod().AllowAnyOrigin());
 
             //app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -96,6 +96,7 @@ export class UserInfoComponent implements OnInit {
 
     this.userService.updateUserProfile(updatedProfile).then(result => {
       this.userProfile = { ...userProfile, Birthday: new Date(birthday), Gender: this.userProfile.Gender };
+      this.helperService.alert("Your profile was successfully updated!");
     })
   }
 

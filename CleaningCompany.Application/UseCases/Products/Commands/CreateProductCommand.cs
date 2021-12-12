@@ -10,9 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Products.Commands
 {
+    [Authorize(Roles = "Admin")]
     public class CreateProductCommand : IRequest<Result<int>>
     {
         public string Name { get; set; }
@@ -78,6 +80,10 @@ namespace CleaningCompany.Application.UseCases.Products.Commands
             if (materialsIds != null && materialsIds.Count > 0)
             {
                 materials = await _unitOfWork.Materials.FindAsync(m => materialsIds.Contains(m.Id));          
+            }
+            else
+            {
+                return new SuccessResult<int>(default);
             }
 
             var isAllMaterialExist = materials.Count() == materialsIds.Count;

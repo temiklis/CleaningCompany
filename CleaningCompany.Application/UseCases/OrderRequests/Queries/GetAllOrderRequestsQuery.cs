@@ -4,6 +4,7 @@ using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.OrderRequests.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Results;
+using CleaningCompany.Results.Implementations;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
 {
     [Authorize(Roles = "Admin")]
-    public class GetAllOrderRequestsQuery : IRequest<IEnumerable<OrderRequestDto>>
+    public class GetAllOrderRequestsQuery : IRequest<Result<PagedList<OrderRequestDto>>>
     {
         public OrderRequestParameters Parameters { get; private set; }
 
@@ -23,7 +24,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
         }
     }
 
-    public class GetAllOrderRequestsQueryHandler : IRequestHandler<GetAllOrderRequestsQuery, IEnumerable<OrderRequestDto>>
+    public class GetAllOrderRequestsQueryHandler : IRequestHandler<GetAllOrderRequestsQuery, Result<PagedList<OrderRequestDto>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -34,7 +35,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<OrderRequestDto>> Handle(GetAllOrderRequestsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<OrderRequestDto>>> Handle(GetAllOrderRequestsQuery request, CancellationToken cancellationToken)
         {
             var query = _unitOfWork.OrderRequests.GetOrderRequestsWithProducts();
 
@@ -43,7 +44,7 @@ namespace CleaningCompany.Application.UseCases.OrderRequests.Queries
             var dtos = await PagedList<OrderRequest>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
                 _mapper.Map<IEnumerable<OrderRequestDto>>);
 
-            return dtos;
+            return new SuccessResult<PagedList<OrderRequestDto>>(dtos);
         }
 
         private static IQueryable<OrderRequest> GetFilters(IQueryable<OrderRequest> query, OrderRequestParameters parameters)

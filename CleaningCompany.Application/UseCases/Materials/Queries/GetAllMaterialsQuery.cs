@@ -9,11 +9,12 @@ using CleaningCompany.Domain.Entities;
 using System.Linq;
 using CleaningCompany.Results;
 using CleaningCompany.Application.Common.Security;
+using CleaningCompany.Results.Implementations;
 
 namespace CleaningCompany.Application.UseCases.Materials.Queries
 {
     [Authorize(Roles = "Admin")]
-    public class GetAllMaterialsQuery : IRequest<IEnumerable<MaterialWithProductsStringDto>>
+    public class GetAllMaterialsQuery : IRequest<Result<PagedList<MaterialWithProductsStringDto>>>
     {
         public MaterialParameters Parameters { get; private set; }
         public GetAllMaterialsQuery(MaterialParameters parameters)
@@ -22,7 +23,7 @@ namespace CleaningCompany.Application.UseCases.Materials.Queries
         }
     }
 
-    public class GetAllMaterialsQueryHandler : IRequestHandler<GetAllMaterialsQuery, IEnumerable<MaterialWithProductsStringDto>>
+    public class GetAllMaterialsQueryHandler : IRequestHandler<GetAllMaterialsQuery, Result<PagedList<MaterialWithProductsStringDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -33,7 +34,7 @@ namespace CleaningCompany.Application.UseCases.Materials.Queries
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<MaterialWithProductsStringDto>> Handle(GetAllMaterialsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<MaterialWithProductsStringDto>>> Handle(GetAllMaterialsQuery request, CancellationToken cancellationToken)
         {
             var query = _unitOfWork.Materials.GetMaterialsWithProducts();
 
@@ -42,7 +43,7 @@ namespace CleaningCompany.Application.UseCases.Materials.Queries
             var dtos = await PagedList<Material>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
                 _mapper.Map<IEnumerable<MaterialWithProductsStringDto>>);
 
-            return dtos;
+            return new SuccessResult<PagedList<MaterialWithProductsStringDto>>(dtos);
         }
 
         private static IQueryable<Material> GetFilters(IQueryable<Material> query, MaterialParameters parameters)

@@ -7,9 +7,11 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CleaningCompany.Application.Common.Security;
 
 namespace CleaningCompany.Application.UseCases.Materials.Commands
 {
+    [Authorize(Roles = "Admin")]
     public class UpdateMaterialCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }

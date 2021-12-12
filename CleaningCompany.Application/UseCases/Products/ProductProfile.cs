@@ -4,6 +4,7 @@ using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Domain.Entities.Enums;
 using System;
+using System.Linq;
 
 namespace CleaningCompany.Application.UseCases.Products
 {
@@ -23,7 +24,11 @@ namespace CleaningCompany.Application.UseCases.Products
             CreateMap<Product, ProductCardDto>()
                 .ForMember(d => d.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()))
                 .ForMember(d => d.DifficultyId, opt => opt.MapFrom(x => x.Difficulty))
-                .ForMember(m => m.BasePrice, s => s.MapFrom(x => (decimal)Math.Round(x.BasePrice, 2))); ;
+                .ForMember(m => m.BasePrice, s => s.MapFrom(x => (decimal)Math.Round(x.BasePrice, 2)));
+
+            CreateMap<Product, ProductWithMaterialsDto>()
+                .ForMember(p => p.Difficulty, opt => opt.MapFrom(x => ((Difficulty)x.Difficulty).ToString()))
+                .ForMember(p => p.Materials, opt => opt.MapFrom(p => p.Materials.Select(m => m.Id)));
         }
     }
 }

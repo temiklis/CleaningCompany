@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Materials.Queries
 {
-    public class GetMaterialByIdQuery : IRequest<MaterialWithProductsDto>
+    public class GetMaterialByIdQuery : IRequest<MaterialDto>
     {
         public int Id { get; set; }
     }
 
-    public class GetMaterialByIdQueryHandler : IRequestHandler<GetMaterialByIdQuery, MaterialWithProductsDto>
+    public class GetMaterialByIdQueryHandler : IRequestHandler<GetMaterialByIdQuery, MaterialDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -23,11 +23,11 @@ namespace CleaningCompany.Application.UseCases.Materials.Queries
             _mapper = mapper;
         }
 
-        public async Task<MaterialWithProductsDto> Handle(GetMaterialByIdQuery request, CancellationToken cancellationToken)
+        public async Task<MaterialDto> Handle(GetMaterialByIdQuery request, CancellationToken cancellationToken)
         {
             var dbMaterial = await _unitOfWork.Materials.GetSingleAsync(request.Id);
 
-            return _mapper.Map<MaterialWithProductsDto>(dbMaterial);
+            return _mapper.Map<MaterialDto>(dbMaterial);
         }
     }
 }

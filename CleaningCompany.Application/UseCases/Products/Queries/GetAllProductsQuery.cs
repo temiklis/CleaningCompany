@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Linq;
 using CleaningCompany.Results;
 using CleaningCompany.Application.Common.Security;
+using CleaningCompany.Results.Implementations;
 
 namespace CleaningCompany.Application.UseCases.Products.Queries
 {
     [Authorize(Roles = "Admin")]
-    public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>
+    public class GetAllProductsQuery : IRequest<Result<PagedList<ProductDto>>>
     {
         public ProductParameters Parameters { get; private set; }
         public GetAllProductsQuery(ProductParameters parameters)
@@ -22,7 +23,7 @@ namespace CleaningCompany.Application.UseCases.Products.Queries
         }
     }
 
-    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, IEnumerable<ProductDto>>
+    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, Result<PagedList<ProductDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -33,7 +34,7 @@ namespace CleaningCompany.Application.UseCases.Products.Queries
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<ProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var query = _unitOfWork.Products.GetAllAsync();
 
@@ -42,7 +43,7 @@ namespace CleaningCompany.Application.UseCases.Products.Queries
             var dtos = await PagedList<Product>.ToPagedList(query, request.Parameters.PageNumber, request.Parameters.PageSize,
                 _mapper.Map<IEnumerable<ProductDto>>);
 
-            return dtos;
+            return new SuccessResult<PagedList<ProductDto>>(dtos);
         }
 
         private static IQueryable<Product> GetFilters(IQueryable<Product> query, ProductParameters parameters)

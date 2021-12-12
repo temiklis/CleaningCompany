@@ -9,6 +9,6 @@ namespace CleaningCompany.Application.UseCases.Products.DTOs
         public string Description { get; set; }
         public decimal BasePrice { get; set; }
         public string Difficulty { get; set; }
-        public IEnumerable<int> MaterialsIds { get; set; }
+        public IEnumerable<int> Materials { get; set; }
     }
 }

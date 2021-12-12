@@ -14,6 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PricesServicesComponent } from './components/prices-services/prices-services.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionsAndAnswersComponent } from './components/questions-and-answers/questions-and-answers.component'
+import { EditMaterialComponent } from './components/admin-pages/edit-material/edit-material.component';
+import { EditProductComponent } from './components/admin-pages/edit-product/edit-product.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +31,10 @@ export const routes: Routes = [
       { path: "materials", component: MaterialsComponent },
       { path: "clients", component: ClientsComponent },
       { path: "employees", component: EmployeesComponent },
+      { path: "materials/:id", component: EditMaterialComponent },
+      { path: "materials/:create", component: EditMaterialComponent },
+      { path: "products/:id", component: EditProductComponent },
+      { path: "products/create", component: EditProductComponent },
     ]
   },
   {
