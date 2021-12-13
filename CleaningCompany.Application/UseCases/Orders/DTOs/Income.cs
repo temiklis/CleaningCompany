@@ -3,7 +3,7 @@
     public enum Income
     {
         Low = 10,
-        Meduim = 15,
+        Medium = 15,
         Hard = 20
     }
 }

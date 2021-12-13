@@ -22,6 +22,11 @@ namespace CleaningCompany.Application.UseCases.OrderRequests
             CreateMap<OrderRequest, UserOrderRequestDto>()
                 .ForMember(o => o.Products, s => s.MapFrom(or => string.Join(',', or.Products.Select(p => p.Name))));
 
+            CreateMap<OrderRequest, OrderRequestDetailsDto>()
+                .ForMember(o => o.UserAddress, s => s.MapFrom(p => p.Address))
+                .ForMember(o => o.UserEmail, s => s.MapFrom(p => p.Email))
+                .ForMember(o => o.UserFIO, s => s.MapFrom(p => p.FIO))
+                .ForMember(o => o.Products, s => s.MapFrom(or => or.Products.Select(p => p.Name)));
         }
     }
 }

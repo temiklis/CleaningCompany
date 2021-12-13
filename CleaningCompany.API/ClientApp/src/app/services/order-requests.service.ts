@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ClientOrderRequest } from "../models/interfaces/OrderRequests/ClientOrderRequest";
 import { OrderRequest } from "../models/interfaces/OrderRequests/OrderRequest";
+import { OrderRequestDetails } from "../models/interfaces/OrderRequests/OrderRequestDetails";
 import { OrderRequestSearchParams } from "../models/interfaces/OrderRequests/OrderRequestSearchParams";
 import { OrderRequestWithProducts } from "../models/interfaces/OrderRequests/OrderRequestWithProducts";
 import { HttpService } from "./http.service";
@@ -27,6 +28,10 @@ export class OrderRequestsService {
     })
 
     return this.httpService.GET<OrderRequestWithProducts[]>('OrderRequest', validParameters);
+  }
+
+  getOrderRequestById(id: number): Promise<OrderRequestDetails> {
+    return this.httpService.GET<OrderRequestDetails>(`OrderRequest/${id}`);
   }
 
   getClientOrderRequests(email: string): Promise<ClientOrderRequest[]> {

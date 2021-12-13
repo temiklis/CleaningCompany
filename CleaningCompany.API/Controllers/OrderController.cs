@@ -2,7 +2,7 @@
 using CleaningCompany.Application.UseCases.Orders.Commands;
 using CleaningCompany.Application.UseCases.Orders.DTOs;
 using CleaningCompany.Application.UseCases.Orders.Queries;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -34,8 +34,20 @@ namespace CleaningCompany.API.Controllers
             return CreateResponseFromResult<int>(result);
         }
 
+        [HttpPut("Status")]
+        public async Task<ActionResult<int>> Update([FromBody] UpdateOrderStatusDto updateOrderStatusDto)
+        {
+            var result = await _mediator.Send(new UpdateOrderStatusCommand()
+            {
+                Id = updateOrderStatusDto.Id,
+                Status = updateOrderStatusDto.Status
+            });
+
+            return CreateResponseFromResult<int>(result);
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDto>>> Get(OrderParameters parameters)
+        public async Task<ActionResult<IEnumerable<OrderDto>>> Get([FromQuery] OrderParameters parameters)
         {
             var result = await _mediator.Send(new GetAllOrdersQuery(parameters));
 
@@ -55,7 +67,7 @@ namespace CleaningCompany.API.Controllers
         [HttpGet("Employee")]
         public async Task<ActionResult<IEnumerable<EmployeeAssignedOrderDto>>> GetEmployeeAssignedOrders()
         {
-            var orders = await _mediator.Send(new GetEmployeeAssignedOrdersQuery());
+           var orders = await _mediator.Send(new GetEmployeeAssignedOrdersQuery());
 
             return Ok(orders);
         }

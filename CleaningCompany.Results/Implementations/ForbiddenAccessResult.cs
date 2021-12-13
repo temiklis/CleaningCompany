@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CleaningCompany.Results.Implementations
+namespace CleaningCompany.Result.Implementations
 {
     public class ForbiddenAccessResult : Result
     {

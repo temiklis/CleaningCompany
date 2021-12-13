@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ClientOrderRequest } from '../../../models/interfaces/OrderRequests/ClientOrderRequest';
 import { ClientOrder } from '../../../models/interfaces/Orders/ClientOrder';
 import { EmployeeOrder } from '../../../models/interfaces/Orders/EmployeeOrder';
+import { UpdateOrderStatus } from '../../../models/interfaces/Orders/UpdateOrderStatus';
 import { AuthorizeService, IUser } from '../../../services/authorization/authorize.service';
+import { HelperService } from '../../../services/helper.service';
 import { OrderRequestsService } from '../../../services/order-requests.service';
 import { OrdersService } from '../../../services/orders.service';
 import { UsersService } from '../../../services/users.service';
@@ -22,10 +24,15 @@ export class UserOrdersComponent implements OnInit {
 
   employeeOrders: EmployeeOrder[];
 
+  employeeUpdatedOrders: number[] = [];
+
+  statuses: string[] = ["NotStarted", "Pending", "Completed"];
+
   constructor(private userService: UsersService,
     private authorizeService: AuthorizeService,
     private orderService: OrdersService,
-    private orderRequestService: OrderRequestsService) { }
+    private orderRequestService: OrderRequestsService,
+    private helperService: HelperService) { }
 
   ngOnInit(): void {
     this.authorizeService.getUser().subscribe(user => {
@@ -65,6 +72,32 @@ export class UserOrdersComponent implements OnInit {
     this.orderService.getClientOrders().then(orders => {
       this.clientOrders = orders;
     })
+  }
+
+  updateStatus(id: number) {
+    let order = this.employeeOrders.find(o => o.Id == id);
+
+    let updateStatus: UpdateOrderStatus = {
+      Id: id,
+      Status: order.Status
+    }
+
+    this.orderService.updateOrderStatus(updateStatus).then(_ => {
+      this.helperService.alert("Order Status was successfully updated!");
+    })
+
+  }
+
+  statusChanged(id: number) {
+    let index = this.employeeUpdatedOrders.findIndex(o => o == id);
+
+    if (index == -1) {
+      this.employeeUpdatedOrders.push(id);
+    }
+  }
+
+  shouldBeUpdated(id: number): boolean {
+    return this.employeeUpdatedOrders.findIndex(o => o == id) != -1;
   }
 
 }

@@ -1,0 +1,93 @@
+<div>
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item pointer">
+      <a (click)="goToRequests()">Order Requests</a>
+    </li>
+    <li class="breadcrumb-item active">{{orderRequest?.Id}}</li>
+  </ul>
+  <h1 class="page-header mb-0">{{orderRequest?.Id}}</h1>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">General</h4>
+          </div>
+          <div class="card-body" *ngIf="orderRequest">
+            <span class="float-end text-danger">* Required</span>
+            <div>
+              <div class="form-group">
+                <label>
+                  Client FIO
+                </label>
+                <input type="text" class="form-control" [ngModel]="orderRequest.UserFIO" [readonly]="readonly" />
+              </div>
+              <div class="form-group">
+                <label>
+                  Client Email
+                </label>
+                <input type="text" class="form-control" [ngModel]="orderRequest.UserEmail" [readonly]="readonly" />
+              </div>
+              <div class="form-group">
+                <label>
+                  Client Address
+                </label>
+                <textarea class="form-control" rows="3" [ngModel]="orderRequest.UserAddress" [readonly]="readonly"></textarea>
+              </div>
+              <div class="form-group">
+                <label>
+                  Requested Date
+                </label>
+                <input class="form-control" type="text" [ngModel]="orderRequest.RequestedDate | date" [readonly]="readonly" />
+              </div>
+              <div class="form-group">
+                <label>Products</label>
+                <ul>
+                  <li *ngFor="let product of orderRequest.Products">
+                    {{product}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">Employees</h4>
+          </div>
+          <div class="card-body" *ngIf="employees.length">
+            <span class="float-end text-danger">* Required</span>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td></td>
+                  <td>Name</td>
+                  <td>Email</td>
+                  <td>Salary Per Hour</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let employee of employees">
+                  <td>
+                    <input type="checkbox" (change)="employeeChecked(employee.Id)"/>
+                  </td>
+                  <td>{{employee.FullName}}</td>
+                  <td>{{employee.Email}}</td>
+                  <td>{{employee.SalaryPerHour}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="orderRequest">
+          <button class="btn btn-lg btn-secondary cancel-btn" (click)="cancel()">Cancel</button>
+          <button class="btn btn-lg btn-success save-btn" (click)="save()" [disabled]="!selectedEmployees.length">
+            <i class="fa fa-save me-1"></i> Create Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionsAndAnswersComponent } from './components/questions-and-answers/questions-and-answers.component'
 import { EditMaterialComponent } from './components/admin-pages/edit-material/edit-material.component';
 import { EditProductComponent } from './components/admin-pages/edit-product/edit-product.component';
+import { EditOrderRequestComponent } from './components/admin-pages/edit-order-request/edit-order-request.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,16 +26,20 @@ export const routes: Routes = [
   {
     path: 'admin', children: [
       { path: "", redirectTo: "order-requests", pathMatch: "full" },
-      { path: "order-requests", component: OrderRequestsComponent },
       { path: "orders", component: OrdersComponent },
-      { path: "products", component: ProductsComponent },
-      { path: "materials", component: MaterialsComponent },
       { path: "clients", component: ClientsComponent },
       { path: "employees", component: EmployeesComponent },
+
+      { path: "materials", component: MaterialsComponent },
       { path: "materials/:id", component: EditMaterialComponent },
       { path: "materials/:create", component: EditMaterialComponent },
+
+      { path: "products", component: ProductsComponent },
       { path: "products/:id", component: EditProductComponent },
       { path: "products/create", component: EditProductComponent },
+
+      { path: "order-requests", component: OrderRequestsComponent },
+      { path: "order-requests/:id", component: EditOrderRequestComponent }
     ]
   },
   {

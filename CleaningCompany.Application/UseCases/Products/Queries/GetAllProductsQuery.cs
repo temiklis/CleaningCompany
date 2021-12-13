@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using CleaningCompany.Application.Common.Security;
-using CleaningCompany.Results.Implementations;
+using CleaningCompany.Result.Implementations;
 
 namespace CleaningCompany.Application.UseCases.Products.Queries
 {

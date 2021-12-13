@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MaterialIdName } from '../../../models/interfaces/Materials/MaterialIdName';
 import { ProductWithMaterials } from '../../../models/interfaces/Products/ProductWithMaterials';
 import { HelperService } from '../../../services/helper.service';
+import { MaterialsService } from '../../../services/materials.service';
 import { ProductsService } from '../../../services/products.service';
 
 @Component({
@@ -26,6 +28,7 @@ export class EditProductComponent implements OnInit {
 
   isCreate: boolean = false;
 
+  materials: MaterialIdName[] = [];
   difficulties: SelectList[] = [
     {
       Id: 1,
@@ -44,6 +47,7 @@ export class EditProductComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private productService: ProductsService,
+    private materialService: MaterialsService,
     private fb: FormBuilder,
     private helperService: HelperService) { }
 
@@ -66,12 +70,15 @@ export class EditProductComponent implements OnInit {
   getProduct() {
     this.productService.getProductById(this.id).then(product => {
       this.product = product;
+      console.log(this.product);
       this.fillForm();
     })
   }
 
   getMaterials() {
-
+    this.materialService.getAllIdNameMaterials().then(materials => {
+      this.materials = materials;
+    })
   }
 
   fillForm() {
@@ -91,12 +98,27 @@ export class EditProductComponent implements OnInit {
     this.goToProducts();
   }
 
+  isMaterialChecked(id: number): boolean {
+    return this.product.Materials.findIndex(m => m == id) != -1;
+  }
+
+  materialChanged(id: number) {
+    let index = this.product.Materials.findIndex(m => m == id);
+
+    if (index >= 0) {
+      this.product.Materials.splice(index, 1);
+    }
+    else {
+      this.product.Materials.push(id);
+    }
+  }
+
   save() {
     this.product = {
       ... this.productForm.value as ProductWithMaterials,
       Id: this.isCreate ? 0 : this.product.Id,
       BasePrice: Number(this.productForm.get('BasePrice').value),
-      Materials: []
+      Materials: this.product.Materials
     }
 
     if (this.isCreate) {

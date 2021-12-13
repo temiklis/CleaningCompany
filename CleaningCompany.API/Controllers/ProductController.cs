@@ -2,7 +2,7 @@
 using CleaningCompany.Application.UseCases.Products.Commands;
 using CleaningCompany.Application.UseCases.Products.DTOs;
 using CleaningCompany.Application.UseCases.Products.Queries;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Domain.Entities;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using System;
 using System.Threading;

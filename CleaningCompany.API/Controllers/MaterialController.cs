@@ -2,7 +2,7 @@
 using CleaningCompany.Application.UseCases.Materials.Commands;
 using CleaningCompany.Application.UseCases.Materials.DTOs;
 using CleaningCompany.Application.UseCases.Materials.Queries;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -77,6 +77,14 @@ namespace CleaningCompany.API.Controllers
             });
 
             return Ok(materials);
+        }
+
+        [HttpGet("All")]
+        public async Task<ActionResult<IEnumerable<MaterialIdNameDto>>> Get()
+        {
+            var result = await _mediator.Send(new GetAllIdNameMaterialsQuery());
+
+            return CreateResponseFromResult<IEnumerable<MaterialIdNameDto>>(result);
         }
 
         [HttpDelete("{id}")]

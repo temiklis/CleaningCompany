@@ -1,7 +1,7 @@
 ﻿using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Domain.Entities;
-using CleaningCompany.Results;
-using CleaningCompany.Results.Implementations;
+using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

@@ -19,7 +19,7 @@ export class LogoutComponent implements OnInit {
   constructor(
     private authorizeService: AuthorizeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,  ) { }
 
   async ngOnInit() {
     const action = this.activatedRoute.snapshot.url[1];
@@ -37,7 +37,8 @@ export class LogoutComponent implements OnInit {
         await this.processLogoutCallback();
         break;
       case LogoutActions.LoggedOut:
-        this.message.next('You successfully logged out!');
+        /*this.message.next('You successfully logged out!');*/
+        this.router.navigate(['/']);
         break;
       default:
         throw new Error(`Invalid action '${action}'`);

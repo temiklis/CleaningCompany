@@ -10,6 +10,9 @@ namespace CleaningCompany.Application.UseCases.Employees
         {
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(e => e.FullName, s => s.MapFrom(e => $"{e.FirstName} {e.LastName}"));
+
+            CreateMap<Employee, IdleEmployeeDto>()
+                .ForMember(e => e.FullName, s => s.MapFrom(e => $"{e.FirstName} {e.LastName}"));
         }
     }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Material } from "../models/interfaces/Materials/Material";
+import { MaterialIdName } from "../models/interfaces/Materials/MaterialIdName";
 import { MaterialSearchParams } from "../models/interfaces/Materials/MaterialSearchParams";
 import { MaterialWithProducts } from "../models/interfaces/Materials/MaterialWithProducts";
 import { HttpService } from "./http.service";
@@ -26,6 +27,10 @@ export class MaterialsService {
     })
 
     return this.httpService.GET<MaterialWithProducts[]>('Material', validParameters)
+  }
+
+  getAllIdNameMaterials(): Promise<MaterialIdName[]> {
+    return this.httpService.GET<MaterialIdName[]>(`Material/All`);
   }
 
   getMaterialById(id: number): Promise<Material> {

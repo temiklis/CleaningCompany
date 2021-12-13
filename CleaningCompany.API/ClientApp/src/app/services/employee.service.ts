@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Employee } from "../models/interfaces/Employees/Employee";
 import { EmployeeSearchParams } from "../models/interfaces/Employees/EmployeeSearchParams";
+import { IdleEmployee } from "../models/interfaces/Employees/IdleEmployee";
 import { HttpService } from "./http.service";
 
 @Injectable({
@@ -22,5 +23,9 @@ export class EmployeeService {
     })
 
     return this.httpService.GET<Employee[]>(`Employee`, validParameters);
+  }
+
+  getIdleEmployees(date: Date): Promise<IdleEmployee[]> {
+    return this.httpService.GET<IdleEmployee[]>(`Employee/Idle?date=${date}`);
   }
 }

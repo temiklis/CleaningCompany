@@ -63,17 +63,25 @@
           <td>Rendered Date</td>
           <td>Status</td>
           <td>Total Income</td>
+          <td>Action</td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of employeeOrders">
-          <td>{{order.Products}}</td>
+          <td width="250px">{{order.Products}}</td>
           <td>{{order.Address}}</td>
           <td>{{order.RenderedDate | date}}</td>
-          <td>{{order.Status}}</td>
+          <td>
+            <select [(ngModel)]="order.Status" class="form-control" (change)="statusChanged(order.Id)">
+              <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+            </select>
+          </td>
           <td>
             <span *ngIf="order.Status == 'Completed'">{{order.TotalIncome}}</span>
             <span *ngIf="order.Status != 'Completed'">-</span>
+          </td>
+          <td>
+            <button (click)="updateStatus(order.Id)" [disabled]="!shouldBeUpdated(order.Id)">Update</button>
           </td>
         </tr>
       </tbody>

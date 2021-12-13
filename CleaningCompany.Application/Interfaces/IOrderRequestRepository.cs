@@ -7,6 +7,7 @@ namespace CleaningCompany.Application.Interfaces
     public interface IOrderRequestRepository : IRepository<OrderRequest>
     {
         IQueryable<OrderRequest> GetOrderRequestsWithProducts();
+        Task<OrderRequest> GetOrderRequestWithProductsAndMaterials(int id);
         Task<OrderRequest> GetOrderRequestWithProducts(int id);
         IQueryable<OrderRequest> GetUserOrderRequests(string email);
     }

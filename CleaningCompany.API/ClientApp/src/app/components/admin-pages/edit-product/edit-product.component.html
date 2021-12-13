@@ -61,6 +61,12 @@
                   Difficulty is required
                 </div>
               </div>
+              <div class="form-group" *ngIf="materials">
+                <div *ngFor="let material of materials">
+                  <input type="checkbox" [checked]="isMaterialChecked(material.Id)" (change)="materialChanged(material.Id)" />
+                  <label>{{material.Name}}</label>
+                </div>
+              </div>
             </form>
           </div>
         </div>

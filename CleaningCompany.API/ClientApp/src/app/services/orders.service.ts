@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { ClientOrder } from "../models/interfaces/Orders/ClientOrder";
+import { CreateOrder } from "../models/interfaces/Orders/CreateOrder";
 import { EmployeeOrder } from "../models/interfaces/Orders/EmployeeOrder";
 import { Order } from "../models/interfaces/Orders/Order";
 import { OrderSearchParams } from "../models/interfaces/Orders/OrderSearchParams";
+import { UpdateOrderStatus } from "../models/interfaces/Orders/UpdateOrderStatus";
 import { HttpService } from "./http.service";
 
 @Injectable({
@@ -31,5 +33,13 @@ export class OrdersService {
 
   getEmployeeAssignedOrders(): Promise<EmployeeOrder[]> {
     return this.httpService.GET<EmployeeOrder[]>(`Order/Employee`);
+  }
+
+  createOrder(order: CreateOrder): Promise<any> {
+    return this.httpService.POST(`Order`, order);
+  }
+
+  updateOrderStatus(status: UpdateOrderStatus): Promise<any> {
+    return this.httpService.PUT(`Order/Status`, status);
   }
 }

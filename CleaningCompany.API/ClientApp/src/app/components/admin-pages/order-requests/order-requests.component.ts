@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderRequestSearchParams } from '../../../models/interfaces/OrderRequests/OrderRequestSearchParams';
 import { OrderRequestWithProducts } from '../../../models/interfaces/OrderRequests/OrderRequestWithProducts';
 import { XPagination } from '../../../models/interfaces/X-Pagination';
@@ -24,7 +25,8 @@ export class OrderRequestsComponent implements OnInit {
 
   pagination: XPagination;
 
-  constructor(private orderREquestService: OrderRequestsService) { }
+  constructor(private orderREquestService: OrderRequestsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.searchParams = { ...this.defaultSearchParams };
@@ -39,7 +41,7 @@ export class OrderRequestsComponent implements OnInit {
   }
 
   goToOrderRequestDetails(id: number) {
-
+    this.router.navigate([`admin/order-requests/${id}`]);
   }
 
   updateResults(page: number) {

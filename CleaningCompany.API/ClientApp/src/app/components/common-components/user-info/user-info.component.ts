@@ -84,7 +84,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   save() {
-    debugger;
     var userProfile = this.userProfileForm.getRawValue() as UserProfile;
 
     let date = userProfile.Birthday as any;

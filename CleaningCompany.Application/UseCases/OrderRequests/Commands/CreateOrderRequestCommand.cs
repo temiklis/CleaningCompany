@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using CleaningCompany.Application.Common.Security;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.OrderRequests.Validation;
 using CleaningCompany.Domain.Entities;
-using CleaningCompany.Results;
-using CleaningCompany.Results.Implementations;
+using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.OrderRequests.Commands
 {
+    [Authorize(Roles = "User")]
     public class CreateOrderRequestCommand : IRequest<Result<int>>
     {
         public string Email { get; set; }

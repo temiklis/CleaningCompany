@@ -22,7 +22,15 @@
           <div class="price-block">
             <span>From {{product.BasePrice}} BYN</span>
           </div>
-          <button class="btn btn-secondary select-product-btn" (click)="selectProduct(product, i)">Select</button>
+          <button *ngIf="isAuthenticated" class="btn btn-secondary select-product-btn" (click)="selectProduct(product, i)">
+            Select
+          </button>
+          <div [ngbTooltip]="orderTooltip" #t1="ngbTooltip" *ngIf="!isAuthenticated">
+            <button class="btn btn-secondary select-product-btn" [disabled]="true">
+              Select
+            </button>
+          </div>
+          <ng-template #orderTooltip>Please, login to make order</ng-template>
         </div>
       </div>
     </div>

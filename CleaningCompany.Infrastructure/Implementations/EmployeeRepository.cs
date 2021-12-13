@@ -22,9 +22,10 @@ namespace CleaningCompany.Infrastructure.Implementations
         {
             var employees = _context.Employees
                 .Include(emp => emp.AssignedOrders)
-                .Where(emp =>  !emp.AssignedOrders.Any()
-                || emp.AssignedOrders.Any(o => o.RenderedDate.Date >= DateTime.Now.Date && o.RenderedDate.Date != date.Date));
-            
+                .Where(emp => !emp.AssignedOrders.Any()
+                || emp.AssignedOrders.Any(o => o.RenderedDate.Date != date.Date))
+                .Where(emp => !emp.IsFired);
+
             return await employees.ToListAsync();
         }
     }

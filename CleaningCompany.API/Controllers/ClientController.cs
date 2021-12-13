@@ -1,7 +1,7 @@
 ﻿using CleaningCompany.Application.UseCases.Clients;
 using CleaningCompany.Application.UseCases.Clients.DTOs;
 using CleaningCompany.Application.UseCases.Clients.Queries;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

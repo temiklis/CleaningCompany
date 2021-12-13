@@ -25,6 +25,14 @@ namespace CleaningCompany.Infrastructure.Implementations
         {
             return await _context.OrderRequests
                 .Include(or => or.Products)
+                .Where(or => or.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<OrderRequest> GetOrderRequestWithProductsAndMaterials(int id)
+        {
+            return await _context.OrderRequests
+                .Include(or => or.Products)
                 .ThenInclude(prod => prod.Materials)
                 .Where(or => or.Id == id)
                 .FirstOrDefaultAsync();

@@ -33,6 +33,7 @@ import { UserInfoComponent } from './components/common-components/user-info/user
 import { UserOrdersComponent } from './components/common-components/user-orders/user-orders.component';
 import { EditMaterialComponent } from './components/admin-pages/edit-material/edit-material.component';
 import { EditProductComponent } from './components/admin-pages/edit-product/edit-product.component';
+import { EditOrderRequestComponent } from './components/admin-pages/edit-order-request/edit-order-request.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { EditProductComponent } from './components/admin-pages/edit-product/edit
     UserOrdersComponent,
     EditMaterialComponent,
     EditProductComponent,
+    EditOrderRequestComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

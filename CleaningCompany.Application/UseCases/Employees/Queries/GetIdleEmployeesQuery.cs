@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Application.UseCases.Employees.DTOs;
-using CleaningCompany.Results;
-using CleaningCompany.Results.Implementations;
+using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.UseCases.Employees.Queries
 {
-    public class GetIdleEmployeesQuery : IRequest<Result<IEnumerable<EmployeeDto>>>
+    public class GetIdleEmployeesQuery : IRequest<Result<IEnumerable<IdleEmployeeDto>>>
     {
         public DateTime Date { get; set; }
     }
 
 
-    public class GetIdleEmployeesQueryHandler : IRequestHandler<GetIdleEmployeesQuery, Result<IEnumerable<EmployeeDto>>>
+    public class GetIdleEmployeesQueryHandler : IRequestHandler<GetIdleEmployeesQuery, Result<IEnumerable<IdleEmployeeDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -27,13 +27,13 @@ namespace CleaningCompany.Application.UseCases.Employees.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<IEnumerable<EmployeeDto>>> Handle(GetIdleEmployeesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<IdleEmployeeDto>>> Handle(GetIdleEmployeesQuery request, CancellationToken cancellationToken)
         {
             var idleEmployeesFromDb = await _unitOfWork.Employees.GetIdleEmployeesByOrderDate(request.Date);
 
-            var idleEmployees = _mapper.Map<IEnumerable<EmployeeDto>>(idleEmployeesFromDb);
+            var idleEmployees = _mapper.Map<IEnumerable<IdleEmployeeDto>>(idleEmployeesFromDb);
 
-            return new SuccessResult<IEnumerable<EmployeeDto>>(idleEmployees);
+            return new SuccessResult<IEnumerable<IdleEmployeeDto>>(idleEmployees);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using CleaningCompany.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CleaningCompany.Application.Interfaces
 {
@@ -10,5 +11,7 @@ namespace CleaningCompany.Application.Interfaces
         IQueryable<Order> GetClientOrders(string clientId);
 
         IQueryable<Order> GetEmployeeAssignedOrders(string employeeId);
+
+        Task<Order> GetOrderWithClient(int id);
     }
 }

@@ -32,6 +32,7 @@ export class PricesServicesComponent implements OnInit, OnDestroy {
   orderingVisible: boolean = false;
 
   userEmail: string;
+  isAuthenticated: boolean = false;
 
   constructor(private productsService: ProductsService,
     private helperService: HelperService,
@@ -45,6 +46,10 @@ export class PricesServicesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authorizeService.getUser().pipe(map(u => u && u.name)).subscribe(userEmail => {
       this.userEmail = userEmail;
+    });
+
+    this.authorizeService.isAuthenticated().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
     });
 
     this.getProductCards();

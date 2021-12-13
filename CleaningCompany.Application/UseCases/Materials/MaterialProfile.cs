@@ -20,6 +20,8 @@ namespace CleaningCompany.Application.UseCases.Materials
 
             CreateMap<CreateMaterialCommand, Material>();
             CreateMap<UpdateMaterialCommand, Material>();
+
+            CreateMap<Material, MaterialIdNameDto>();
         }
     }
 }

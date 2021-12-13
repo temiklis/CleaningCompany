@@ -2,8 +2,8 @@
 using CleaningCompany.Application.UseCases.Materials.Validation;
 using CleaningCompany.Domain.Entities;
 using CleaningCompany.Application.Interfaces;
-using CleaningCompany.Results;
-using CleaningCompany.Results.Implementations;
+using CleaningCompany.Result;
+using CleaningCompany.Result.Implementations;
 using MediatR;
 using System;
 using System.Threading;

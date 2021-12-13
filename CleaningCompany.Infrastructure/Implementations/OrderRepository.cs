@@ -3,6 +3,7 @@ using CleaningCompany.Application.Interfaces;
 using CleaningCompany.Infrastructure.Persistence;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace CleaningCompany.Infrastructure.Implementations
 {
@@ -37,6 +38,14 @@ namespace CleaningCompany.Infrastructure.Implementations
                 .Include(o => o.Products)
                 .Include(o => o.Client)
                 .Where(o => o.ClientId == clientId);
+        }
+
+        public async Task<Order> GetOrderWithClient(int id)
+        {
+            return await _context.Orders
+                .Include(o => o.Client)
+                .Where(o => o.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }

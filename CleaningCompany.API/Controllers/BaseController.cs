@@ -1,5 +1,5 @@
-﻿using CleaningCompany.Results.Implementations;
-using CleaningCompany.Results;
+﻿using CleaningCompany.Result.Implementations;
+using CleaningCompany.Result;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -30,7 +30,7 @@ namespace CleaningCompany.API.Controllers
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
         }
 
-        protected ActionResult CreateResponseFromResult<T>(Result result)
+        protected ActionResult CreateResponseFromResult<T>(Result.Result result)
         {
             return result switch
             {
@@ -42,7 +42,7 @@ namespace CleaningCompany.API.Controllers
             };
         }
 
-        protected ActionResult CreateResponseFromResult(Result result)
+        protected ActionResult CreateResponseFromResult(Result.Result result)
         {
             return result switch
             {

@@ -1,4 +1,4 @@
-﻿namespace CleaningCompany.Results.Implementations
+﻿namespace CleaningCompany.Result.Implementations
 {
     public class UnauthorizedAccessResult : Result
     {

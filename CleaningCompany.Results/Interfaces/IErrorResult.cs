@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CleaningCompany.Results.Interfaces
+namespace CleaningCompany.Result.Interfaces
 {
     internal interface IErrorResult
     {

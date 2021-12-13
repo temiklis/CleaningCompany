@@ -2,7 +2,7 @@
 using CleaningCompany.Application.UseCases.OrderRequests.Commands;
 using CleaningCompany.Application.UseCases.OrderRequests.DTOs;
 using CleaningCompany.Application.UseCases.OrderRequests.Queries;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -44,6 +44,14 @@ namespace CleaningCompany.API.Controllers
             AddPaginationHeader(result);
 
             return CreateResponseFromResult<PagedList<OrderRequestDto>>(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OrderRequestDetailsDto>> Get([FromRoute] int id)
+        {
+            var result = await _mediator.Send(new GetOrderRequestByIdQuery() { Id = id });
+
+            return CreateResponseFromResult<OrderRequestDetailsDto>(result);
         }
 
         [HttpGet("Client")]

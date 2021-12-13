@@ -1,5 +1,5 @@
 ﻿using CleaningCompany.Domain.Entities;
-using CleaningCompany.Results;
+using CleaningCompany.Result;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
