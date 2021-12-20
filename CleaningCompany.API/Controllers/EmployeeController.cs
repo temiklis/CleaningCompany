@@ -20,7 +20,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get([FromQuery]EmployeeParameters parameters)
+        public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetAllEmployees([FromQuery]EmployeeParameters parameters)
         {
             var result = await _mediator.Send(new GetAllEmployeesQuery(parameters));
 
@@ -30,7 +30,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("Idle")]
-        public async Task<ActionResult<IEnumerable<IdleEmployeeDto>>> Get(DateTime date)
+        public async Task<ActionResult<IEnumerable<IdleEmployeeDto>>> GetIdleEmployees(DateTime date)
         {
             var result = await _mediator.Send(new GetIdleEmployeesQuery()
             {

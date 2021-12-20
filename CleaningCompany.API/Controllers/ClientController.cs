@@ -20,7 +20,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClientDto>>> Get([FromQuery] ClientParameters parameters)
+        public async Task<ActionResult<IEnumerable<ClientDto>>> GetAllClients([FromQuery] ClientParameters parameters)
         {
             var result = await _mediator.Send(new GetAllClientsQuery(parameters));
 

@@ -35,7 +35,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpPut("Status")]
-        public async Task<ActionResult<int>> Update([FromBody] UpdateOrderStatusDto updateOrderStatusDto)
+        public async Task<ActionResult<int>> UpdateOrderStatus([FromBody] UpdateOrderStatusDto updateOrderStatusDto)
         {
             var result = await _mediator.Send(new UpdateOrderStatusCommand()
             {
@@ -47,7 +47,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDto>>> Get([FromQuery] OrderParameters parameters)
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllOrders([FromQuery] OrderParameters parameters)
         {
             var result = await _mediator.Send(new GetAllOrdersQuery(parameters));
 

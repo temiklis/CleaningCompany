@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="CleaningCompany.Domain.Entities.Entity">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.Product">
+    <Position X="13.75" Y="3" Width="3.25" />
+    <AssociationLine Name="OrderRequests" Type="CleaningCompany.Domain.Entities.OrderRequest" FixedFromPoint="true">
+      <Path>
+        <Point X="13.75" Y="4.186" />
+        <Point X="9.75" Y="4.186" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Orders" Type="CleaningCompany.Domain.Entities.Order" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.562" Y="4.81" />
+        <Point X="15.562" Y="5.97" />
+        <Point X="3.438" Y="5.97" />
+        <Point X="3.438" Y="5.194" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.998" Y="0.468" Height="0.182" Width="2.168" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BEEAAAIAAAAgAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Materials" />
+      <Property Name="OrderRequests" />
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.Material">
+    <Position X="20.5" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Products" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.OrderRequest">
+    <Position X="7" Y="3" Width="2.75" />
+    <InheritanceLine Type="CleaningCompany.Domain.Entities.Entity" ManuallyRouted="true">
+      <Path>
+        <Point X="8.375" Y="1.603" />
+        <Point X="8.375" Y="2.684" />
+        <Point X="8.375" Y="2.684" />
+        <Point X="8.375" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AgEAAAAAACABAAAAAAAAAAAAAAAAAAACAAAAEAAAAAQ=</HashCode>
+      <FileName>Entities\OrderRequest.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Order" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Products" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.Order">
+    <Position X="1" Y="3" Width="3.25" />
+    <AssociationLine Name="Client" Type="CleaningCompany.Domain.Entities.Client" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.188" Y="5.194" />
+        <Point X="1.188" Y="7.866" />
+        <Point X="5" Y="7.866" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ResponsibleEmployees" Type="CleaningCompany.Domain.Entities.Employee" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1" Y="4.062" />
+        <Point X="0.625" Y="4.062" />
+        <Point X="0.625" Y="10.059" />
+        <Point X="4.75" Y="10.059" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Products" Type="CleaningCompany.Domain.Entities.Product" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.194" />
+        <Point X="3.75" Y="5.425" />
+        <Point X="14.562" Y="5.425" />
+        <Point X="14.562" Y="4.81" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAEAAAMAAABAAAAgAAAAAAAABAAQAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+      <Property Name="OrderRequest" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ResponsibleEmployees" />
+      <Property Name="Products" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.User">
+    <Position X="10.5" Y="7" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAEABAAAAAACIAAAAAAAAAAAIAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.Employee">
+    <Position X="4.75" Y="9.25" Width="3" />
+    <InheritanceLine Type="CleaningCompany.Domain.Entities.User" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="11.375" Y="8.041" />
+        <Point X="11.375" Y="8.875" />
+        <Point X="6.25" Y="8.875" />
+        <Point X="6.25" Y="9.25" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="AssignedOrders" Type="CleaningCompany.Domain.Entities.Order" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.562" Y="10.867" />
+        <Point X="5.562" Y="11.242" />
+        <Point X="0.127" Y="11.242" />
+        <Point X="0.127" Y="3.625" />
+        <Point X="1" Y="3.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAACAAACQAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Employee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="AssignedOrders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CleaningCompany.Domain.Entities.Client">
+    <Position X="5" Y="7.25" Width="2.25" />
+    <AssociationLine Name="Orders" Type="CleaningCompany.Domain.Entities.Order" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.969" Y="7.25" />
+        <Point X="5.969" Y="6.263" />
+        <Point X="1.812" Y="6.263" />
+        <Point X="1.812" Y="5.194" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Entities\Client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

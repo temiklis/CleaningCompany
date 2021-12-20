@@ -53,7 +53,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] ProductParameters parameters)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts([FromQuery] ProductParameters parameters)
         {
             var result = await _mediator.Send(new GetAllProductsQuery(parameters));
 
@@ -63,7 +63,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("Cards")]
-        public async Task<ActionResult<IEnumerable<ProductCardDto>>> GetCards()
+        public async Task<ActionResult<IEnumerable<ProductCardDto>>> GetProductCards()
         {
             var cards = await _mediator.Send(new GetProductCardsQuery());
 
@@ -71,7 +71,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductWithMaterialsDto>> Get([FromRoute] int id)
+        public async Task<ActionResult<ProductWithMaterialsDto>> GetProductById([FromRoute] int id)
         {
             var product = await _mediator.Send(new GetProductByIdQuery()
             {

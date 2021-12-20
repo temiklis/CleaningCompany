@@ -37,7 +37,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderRequestDto>>> Get([FromQuery] OrderRequestParameters parameters)
+        public async Task<ActionResult<IEnumerable<OrderRequestDto>>> GetAllOrderRequests([FromQuery] OrderRequestParameters parameters)
         {
             var result = await _mediator.Send(new GetAllOrderRequestsQuery(parameters));
 
@@ -47,7 +47,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderRequestDetailsDto>> Get([FromRoute] int id)
+        public async Task<ActionResult<OrderRequestDetailsDto>> GetOrderRequestById([FromRoute] int id)
         {
             var result = await _mediator.Send(new GetOrderRequestByIdQuery() { Id = id });
 

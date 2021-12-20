@@ -44,7 +44,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserProfileDto>> Get()
+        public async Task<ActionResult<UserProfileDto>> GetCurrentUserProfile()
         {
             var query = new GetUserProfileQuery();
 

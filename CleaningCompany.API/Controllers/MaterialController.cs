@@ -48,7 +48,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MaterialWithProductsStringDto>>> Get([FromQuery] MaterialParameters parameters)
+        public async Task<ActionResult<IEnumerable<MaterialWithProductsStringDto>>> GetAllMaterials([FromQuery] MaterialParameters parameters)
         {
             var result = await _mediator.Send(new GetAllMaterialsQuery(parameters));
 
@@ -58,7 +58,7 @@ namespace CleaningCompany.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<MaterialDto>> Get([FromRoute] int id)
+        public async Task<ActionResult<MaterialDto>> GetMaterialById([FromRoute] int id)
         {
             var material = await _mediator.Send(new GetMaterialByIdQuery()
             {
